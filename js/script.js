@@ -6,7 +6,7 @@ const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
 addEventListener("load",()=>setTimeout(()=>$("#loader").classList.add("done"),900));setTimeout(()=>$("#loader").classList.add("done"),3200);
 const ldMsgs=["Loading chunks…","Brewing potions…","Pinging Discord…","Polishing pixels…"];let ldI=0;const ldT=setInterval(()=>{const e=$("#ldStatus");if(!e||$("#loader").classList.contains("done")){clearInterval(ldT);return}e.textContent=ldMsgs[++ldI%ldMsgs.length]},450);
 /* progress + nav + top */
-const fill=$("#pfill"),topBtn=$("#top"),nav=$("#nav"),secs=["about","skills","projects","services","packs","journey","faq","contact"].map(id=>document.getElementById(id));
+const fill=$("#pfill"),topBtn=$("#top"),nav=$("#nav"),secs=["about","skills","projects","services","packs","videos","journey","faq","contact"].map(id=>document.getElementById(id));
 function onScroll(){const h=document.documentElement,m=h.scrollHeight-h.clientHeight;fill.style.width=(m?h.scrollTop/m*100:0)+"%";nav.classList.toggle("small",scrollY>30);topBtn.classList.toggle("show",scrollY>600);
 let cur="";secs.forEach(s=>{if(s&&scrollY>s.offsetTop-200)cur=s.id});$$("#links a").forEach(a=>a.classList.toggle("on",a.hash==="#"+cur));
 const tl=$("#tl");if(tl){const r=tl.getBoundingClientRect(),p=Math.min(1,Math.max(0,(innerHeight*.7-r.top)/r.height));$("#tlfill").style.height=(p*100)+"%";}
