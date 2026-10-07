@@ -33,7 +33,7 @@ html[data-theme="light"] .space-bg .day-img,html[data-theme="light"] .scroll-bg 
 html[data-theme="light"]{--bg:#EFE8FA;--ink:#1E1544;--mut:#57508E;--line:rgba(90,33,182,.28);--surface:rgba(255,255,255,.66);--grad:linear-gradient(135deg,#2a0a5e,#5b21b6 60%,#7c3aed);--p300:#6d28d9;--p100:#3b1478;color-scheme:light}
 html[data-theme="light"] body{background-color:var(--bg);background-image:linear-gradient(rgba(90,33,182,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(90,33,182,.07) 1px,transparent 1px)}
 html[data-theme="light"] a{color:#4c1d95}
-html[data-theme="light"] header{background:rgba(239,232,250,.85)}
+html[data-theme="light"] header{background:rgba(239,232,250,.6)}
 html[data-theme="light"] .glass{box-shadow:0 8px 30px rgba(90,33,182,.14)}
 html[data-theme="light"] .grad-border>div{background:#fff}
 html[data-theme="light"] .btn-p{background:#5b21b6;animation:none;box-shadow:0 6px 20px rgba(91,33,182,.35)}
@@ -82,7 +82,7 @@ html[data-theme="light"] .links{background:#fff}
 .b3{width:420px;height:420px;left:20%;bottom:-160px;background:radial-gradient(circle,#8b5cf6,transparent 65%);opacity:.28;animation-delay:-10s}
 @keyframes drift{to{transform:translate(60px,40px) scale(1.12)}}
 /* ============ 2. NAV ============ */
-header{position:sticky;top:0;z-index:100;backdrop-filter:blur(14px);background:rgba(7,3,15,.72);border-bottom:1px solid var(--line);transition:padding .25s}
+header{position:sticky;top:12px;z-index:100;width:calc(100% - 24px);max-width:1136px;margin:12px auto 0;border:1px solid var(--line);border-radius:18px;backdrop-filter:blur(14px);background:rgba(7,3,15,.55);box-shadow:0 10px 30px rgba(0,0,0,.35);transition:padding .25s,background .25s}
 .nav{display:flex;align-items:center;gap:18px;padding:16px 20px;max-width:1160px;margin:0 auto}
 header.small .nav{padding:10px 20px}
 .logo{font-family:var(--font-p);font-size:12px;color:#fff;text-decoration:none;display:flex;align-items:center;gap:10px}
