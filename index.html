@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shardy — Minecraft dev learning Roblox</title>
+<meta name="description" content="Shardy (ItzShardy) builds Minecraft plugins and servers, now learning Roblox Studio and Luau." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%236BC24A'/><rect x='3' y='3' width='10' height='4' fill='%230A0C10'/><rect x='3' y='9' width='4' height='4' fill='%23FFC53D'/></svg>" />
+</head>
+<body>
+<a class="skip" href="#builds">Skip to builds</a>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="logo" href="#top" aria-label="Shardy home">
+      <span class="logo-cube" aria-hidden="true"></span>
+      <span>shardy.log</span>
+    </a>
+    <nav aria-label="Sections">
+      <a href="#skills">Skills</a>
+      <a href="#builds">Builds</a>
+      <a href="#quest">Now learning</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="status" href="https://github.com/ItzShardy" target="_blank" rel="noreferrer">
+      <span class="dot" aria-hidden="true"></span> ItzShardy on GitHub
+    </a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div class="hero-text">
+      <p class="kicker"><span class="kicker-block" aria-hidden="true"></span> Spawn point — Minecraft + Roblox dev</p>
+      <h1>I build blocky multiplayer worlds.</h1>
+      <p class="lede">I'm <strong>Shardy</strong>. I make Minecraft plugins, minigames and servers — and I'm now learning <strong>Roblox Studio + Luau</strong> to ship my first obby and tycoon. This page is my public save file.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#builds">See my builds</a>
+        <a class="btn ghost" href="https://github.com/ItzShardy" target="_blank" rel="noreferrer">GitHub profile</a>
+      </div>
+      <dl class="stats" aria-label="Quick stats">
+        <div><dt>Minecraft focus</dt><dd>Plugins · minigames · config</dd></div>
+        <div><dt>Roblox focus</dt><dd>Luau · Studio · DataStores</dd></div>
+        <div><dt>Live site</dt><dd><a href="https://itzshardy.github.io/">itzshardy.github.io</a></dd></div>
+      </dl>
+      <p class="hint">TODO: replace stats with your real numbers — e.g. “3 plugins released · 120 downloads”.</p>
+    </div>
+
+    <div class="hero-build" aria-hidden="true">
+      <div class="iso-scene">
+        <div class="cube c1"><i class="top"></i><i class="left"></i><i class="right"></i></div>
+        <div class="cube c2"><i class="top"></i><i class="left"></i><i class="right"></i></div>
+        <div class="cube c3"><i class="top"></i><i class="left"></i><i class="right"></i></div>
+        <div class="cube c4"><i class="top"></i><i class="left"></i><i class="right"></i></div>
+        <div class="shadow"></div>
+      </div>
+      <div class="xp-wrap" aria-hidden="true">
+        <div class="xp-label"><span>Luau XP</span><span>lvl 7</span></div>
+        <div class="xp-bar"><span></span></div>
+        <p>Currently grinding: RemoteEvents + DataStores</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS = hotbar -->
+  <section id="skills" class="section wrap">
+    <div class="section-head">
+      <h2>Loadout</h2>
+      <p>Click a hotbar slot. This is what I actually use — green bar is comfort level, not a fake 98% skill chart.</p>
+    </div>
+
+    <div class="hotbar" role="tablist" aria-label="Skills hotbar">
+      <button role="tab" aria-selected="true" data-skill="paper" class="slot selected"><span class="slot-key">1</span><span class="slot-icon">⛏</span><span class="slot-name">Paper / Spigot</span><span class="xp"><i style="width:72%"></i></span></button>
+      <button role="tab" aria-selected="false" data-skill="java" class="slot"><span class="slot-key">2</span><span class="slot-icon">☕</span><span class="slot-name">Java</span><span class="xp"><i style="width:65%"></i></span></button>
+      <button role="tab" aria-selected="false" data-skill="luau" class="slot"><span class="slot-key">3</span><span class="slot-icon">◈</span><span class="slot-name">Luau</span><span class="xp"><i style="width:38%"></i></span></button>
+      <button role="tab" aria-selected="false" data-skill="studio" class="slot"><span class="slot-key">4</span><span class="slot-icon">▣</span><span class="slot-name">Roblox Studio</span><span class="xp"><i style="width:42%"></i></span></button>
+      <button role="tab" aria-selected="false" data-skill="yaml" class="slot"><span class="slot-key">5</span><span class="slot-icon">≡</span><span class="slot-name">YAML / Config</span><span class="xp"><i style="width:80%"></i></span></button>
+      <button role="tab" aria-selected="false" data-skill="web" class="slot"><span class="slot-key">6</span><span class="slot-icon">&lt;&gt;</span><span class="slot-name">HTML / CSS</span><span class="xp"><i style="width:58%"></i></span></button>
+      <button role="tab" aria-selected="false" data-skill="git" class="slot"><span class="slot-key">7</span><span class="slot-icon">⑂</span><span class="slot-name">Git + GitHub</span><span class="xp"><i style="width:52%"></i></span></button>
+    </div>
+
+    <div class="loadout-detail" id="skill-detail" role="tabpanel" tabindex="0">
+      <h3 id="skill-title">Paper / Spigot plugins</h3>
+      <p id="skill-body">Events, commands, permissions with LuckPerms, configs that server owners can actually edit. TODO: link your best plugin repo here.</p>
+      <ul id="skill-tags" class="tags"><li>Java 17</li><li>Paper API</li><li>Minigames</li></ul>
+    </div>
+  </section>
+
+  <!-- PROJECTS = server list -->
+  <section id="builds" class="section wrap">
+    <div class="section-head split">
+      <div>
+        <h2>Server list</h2>
+        <p>My projects, shown the way players would see them. Ping = status. Join = repo or demo.</p>
+      </div>
+      <div class="filter-row" role="group" aria-label="Filter builds">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="minecraft">Minecraft</button>
+        <button class="chip" data-filter="roblox">Roblox</button>
+        <button class="chip" data-filter="web">Web</button>
+      </div>
+    </div>
+
+    <div class="server-list">
+      <!-- TODO: replace these 4 rows with your real projects. Keep the structure. -->
+      <article class="server" data-cat="minecraft">
+        <div class="server-icon mc" aria-hidden="true">S</div>
+        <div class="server-main">
+          <div class="server-top"><h3>Shardwork — survival spawn + minigame kit</h3><span class="ping good"><i></i><i></i><i></i><i></i> online</span></div>
+          <p class="motd">Paper 1.21 · custom join kit, daily quests, shop GUI. Built for friends, now public.</p>
+          <div class="meta"><span>Java · Paper</span><span>TODO: add download count</span></div>
+        </div>
+        <div class="server-join">
+          <span class="players">12/100</span>
+          <a href="https://github.com/ItzShardy/Shardwork" target="_blank" rel="noreferrer">Open repo</a>
+        </div>
+      </article>
+
+      <article class="server" data-cat="web minecraft">
+        <div class="server-icon web" aria-hidden="true">W</div>
+        <div class="server-main">
+          <div class="server-top"><h3>shardworks-site — server website</h3><span class="ping good"><i></i><i></i><i></i><i></i> online</span></div>
+          <p class="motd">Rules, ranks, vote links and status widget. Plain HTML/CSS so it loads on any host.</p>
+          <div class="meta"><span>HTML · CSS</span><span>GitHub Pages ready</span></div>
+        </div>
+        <div class="server-join">
+          <span class="players">web</span>
+          <a href="https://github.com/ItzShardy/shardworks-site" target="_blank" rel="noreferrer">Open repo</a>
+        </div>
+      </article>
+
+      <article class="server" data-cat="roblox">
+        <div class="server-icon rbx" aria-hidden="true">R</div>
+        <div class="server-main">
+          <div class="server-top"><h3>My first obby — 25 stages [WIP]</h3><span class="ping mid"><i></i><i></i><i></i><i class="off"></i> building</span></div>
+          <p class="motd">Learning project: checkpoints, kill bricks, DataStore saves, coin shop. Studio file in repo soon.</p>
+          <div class="meta"><span>Luau · Roblox Studio</span><span>TODO: add .rbxl link</span></div>
+        </div>
+        <div class="server-join">
+          <span class="players">0/20</span>
+          <a href="https://github.com/ItzShardy" target="_blank" rel="noreferrer">Follow progress</a>
+        </div>
+      </article>
+
+      <article class="server" data-cat="roblox minecraft">
+        <div class="server-icon both" aria-hidden="true">+</div>
+        <div class="server-main">
+          <div class="server-top"><h3>Blocky utils — shared practice repo</h3><span class="ping mid"><i></i><i></i><i></i><i class="off"></i> ideas</span></div>
+          <p class="motd">Small systems I rebuild in both games: coins, shops, daily rewards. Compare Java vs Luau.</p>
+          <div class="meta"><span>Java · Luau</span><span>TODO: push first script</span></div>
+        </div>
+        <div class="server-join">
+          <span class="players">solo</span>
+          <a href="https://github.com/ItzShardy?tab=repositories" target="_blank" rel="noreferrer">All repos</a>
+        </div>
+      </article>
+    </div>
+    <p class="hint">How to add a build: duplicate one <code>&lt;article class="server"&gt;</code> block, change <code>data-cat</code> to minecraft / roblox / web.</p>
+  </section>
+
+  <!-- LEARNING + CONTACT -->
+  <section id="quest" class="section wrap two-col">
+    <div>
+      <div class="section-head">
+        <h2>Current questline</h2>
+        <p>What I'm learning in Roblox right now. Checked = done in Studio, not just watched.</p>
+      </div>
+      <ol class="quest">
+        <li class="done"><span class="qbox" aria-hidden="true"></span><div><strong>Studio basics + obby kit</strong><span>Parts, anchored vs unanchored, Toolbox done right</span></div></li>
+        <li class="done"><span class="qbox" aria-hidden="true"></span><div><strong>Luau fundamentals</strong><span>Variables, functions, events, leaderstats coins</span></div></li>
+        <li class="active"><span class="qbox" aria-hidden="true"></span><div><strong>Checkpoints + DataStores</strong><span>Saving stage + coins with pcall retries — in progress</span></div></li>
+        <li><span class="qbox" aria-hidden="true"></span><div><strong>RemoteEvents + shop GUI</strong><span>Client buys speed coil, server validates — TODO next</span></div></li>
+        <li><span class="qbox" aria-hidden="true"></span><div><strong>Publish + feedback</strong><span>Playtest with friends, fix spawn-kill bugs, post link here</span></div></li>
+      </ol>
+    </div>
+
+    <div id="contact" class="contact-card">
+      <h2>Ping me</h2>
+      <p>I take small Minecraft jobs — spawn setup, plugin config, minigame ideas — and I'm looking for Roblox feedback partners.</p>
+      <ul class="contact-list">
+        <li><span>GitHub</span><a href="https://github.com/ItzShardy" target="_blank" rel="noreferrer">github.com/ItzShardy</a></li>
+        <li><span>Site</span><a href="https://itzshardy.github.io/">itzshardy.github.io</a></li>
+        <!-- TODO: add your Discord + Roblox profile links -->
+        <li><span>Discord</span><span class="todo">TODO: your-discord-handle</span></li>
+        <li><span>Roblox</span><span class="todo">TODO: your Roblox profile URL</span></li>
+      </ul>
+      <a class="btn primary block" href="https://github.com/ItzShardy?tab=repositories" target="_blank" rel="noreferrer">Browse all code</a>
+      <p class="small">Beginner-friendly: every repo has a README explaining how to run it. If one doesn't, open an issue and I'll fix it.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <p>© <span id="year">2026</span> Shardy · Built with plain HTML/CSS, hosted free on GitHub Pages.</p>
+    <p class="small">Minecraft + Roblox fan project. Not affiliated with Mojang or Roblox.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
