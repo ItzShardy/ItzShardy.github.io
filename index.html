@@ -1,207 +1,372 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Shardy — Minecraft builds in progress</title>
-<meta name="description" content="Shardy (ItzShardy) is a Minecraft developer. Plugins, minigames and servers — everything honestly marked coming soon. No tracking, no cookies." />
-<meta name="theme-color" content="#F7F2E7" />
-<script>document.documentElement.classList.add('js');</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=3" />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%232F9E33'/><rect x='3' y='3' width='10' height='4' fill='%2317150F'/><rect x='3' y='9' width='4' height='4' fill='%23FFB300'/></svg>" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>MostCallMeShardy — Minecraft Plugin, Mod & Pack Developer</title>
+<meta name="description" content="MostCallMeShardy builds Paper plugins, Fabric mods, resource packs and PvP content. Dark purple premium portfolio."/>
+<meta property="og:title" content="MostCallMeShardy — Minecraft Developer"/>
+<meta property="og:description" content="Paper plugins · Fabric mods · Resource packs · PvP content"/>
+<meta property="og:type" content="website"/>
+<meta name="theme-color" content="#07030f"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232a0a5e'/%3E%3Crect x='14' y='14' width='36' height='36' fill='%238b5cf6'/%3E%3Crect x='22' y='22' width='12' height='12' fill='%23ede9fe'/%3E%3C/svg%3E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ 0. TOKENS ============ */
+:root{
+--bg:#07030f;--bg-2:#0f0820;--surface:rgba(139,92,246,.08);
+--p900:#2a0a5e;--p700:#5b21b6;--p500:#8b5cf6;--p300:#c4b5fd;--p100:#ede9fe;
+--grad:linear-gradient(135deg,var(--p900),var(--p700) 35%,var(--p500) 70%,var(--p300));
+--spark:#e879f9;--ink:#f4f1ff;--mut:#b9aee0;--line:rgba(196,181,253,.22);
+--r:18px;--font-p:'Press Start 2P',monospace;--font-b:'Space Grotesk',system-ui,sans-serif;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-b);line-height:1.65;overflow-x:hidden}
+::selection{background:var(--p500);color:#fff}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+a{color:var(--p300)}a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--p300);outline-offset:2px;border-radius:8px}
+.skip{position:absolute;left:-999px;top:0;background:var(--p300);color:#14092b;padding:10px 16px;z-index:200;font-weight:700}.skip:focus{left:12px;top:12px}
+/* ============ 1. PRELOADER / PROGRESS / CURSOR / BLOBS ============ */
+#loader{position:fixed;inset:0;z-index:200;background:var(--bg);display:grid;place-items:center;transition:opacity .6s,visibility .6s}
+#loader.done{opacity:0;visibility:hidden}
+.ld-box{text-align:center}.ld-box p{font-family:var(--font-p);font-size:11px;color:var(--p300);letter-spacing:.1em}
+.ld-bar{width:min(320px,70vw);height:16px;border:2px solid var(--p500);border-radius:99px;overflow:hidden;margin:16px auto 0;background:#14092b}
+.ld-bar i{display:block;height:100%;width:0;background:var(--grad);animation:load 1.4s ease forwards}
+@keyframes load{to{width:100%}}
+#progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:120;background:rgba(139,92,246,.15)}
+#progress i{display:block;height:100%;width:0;background:var(--grad)}
+.cursor,.ring{position:fixed;top:0;left:0;pointer-events:none;z-index:150;border-radius:50%;transform:translate(-50%,-50%)}
+.cursor{width:10px;height:10px;background:var(--p300);box-shadow:0 0 14px var(--p500)}
+.ring{width:36px;height:36px;border:2px solid rgba(196,181,253,.6);transition:width .2s,height .2s,border-color .2s}
+.ring.big{width:58px;height:58px;border-color:var(--spark)}
+@media(hover:none){.cursor,.ring{display:none}}
+.blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.5;z-index:0;pointer-events:none;animation:drift 16s ease-in-out infinite alternate}
+.b1{width:480px;height:480px;left:-140px;top:-120px;background:radial-gradient(circle,#5b21b6,transparent 65%)}
+.b2{width:520px;height:520px;right:-160px;top:30%;background:radial-gradient(circle,#2a0a5e,transparent 65%);animation-delay:-6s}
+.b3{width:420px;height:420px;left:20%;bottom:-160px;background:radial-gradient(circle,#8b5cf6,transparent 65%);opacity:.28;animation-delay:-10s}
+@keyframes drift{to{transform:translate(60px,40px) scale(1.12)}}
+/* ============ 2. NAV ============ */
+header{position:sticky;top:0;z-index:100;backdrop-filter:blur(14px);background:rgba(7,3,15,.72);border-bottom:1px solid var(--line);transition:padding .25s}
+.nav{display:flex;align-items:center;gap:18px;padding:16px 20px;max-width:1160px;margin:0 auto}
+header.small .nav{padding:10px 20px}
+.logo{font-family:var(--font-p);font-size:12px;color:#fff;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo .cube{width:18px;height:18px;background:var(--grad);box-shadow:0 0 14px var(--p500);image-rendering:pixelated}
+.logo:hover{animation:glitch .35s steps(2) 2}
+@keyframes glitch{25%{transform:translate(2px,-2px)}50%{transform:translate(-2px,2px)}75%{transform:translate(1px,1px)}}
+.links{display:flex;gap:18px;margin-left:auto}
+.links a{color:var(--mut);text-decoration:none;font-weight:600;position:relative;padding:4px 2px}
+.links a.on,.links a:hover{color:#fff}
+.links a.on::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:3px;background:var(--grad);border-radius:99px}
+.burger{display:none;margin-left:auto;background:none;border:2px solid var(--line);border-radius:10px;color:#fff;font-size:20px;padding:4px 10px;cursor:pointer}
+/* ============ 3. HERO ============ */
+.hero{min-height:100svh;display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center;position:relative;padding:40px 20px 70px;max-width:1160px;margin:0 auto;z-index:1}
+.kicker{font-family:var(--font-p);font-size:10px;color:var(--p300);letter-spacing:.12em}
+h1.hero-name{font-size:clamp(34px,6vw,66px);line-height:1.02;margin:14px 0 6px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(139,92,246,.45))}
+.type{font-family:var(--font-p);font-size:12px;color:var(--p100);min-height:2.2em}
+.type .caret{display:inline-block;width:.6em;background:var(--spark);animation:blink 1s steps(1) infinite;color:transparent}
+@keyframes blink{50%{opacity:0}}
+.lede{color:var(--mut);max-width:52ch}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}
+.btn{font-weight:700;border-radius:12px;padding:14px 24px;text-decoration:none;display:inline-block;border:1px solid transparent;position:relative;overflow:hidden}
+.btn-p{background:var(--grad);background-size:180% 180%;color:#fff;box-shadow:0 0 26px rgba(139,92,246,.5);animation:gshift 5s ease infinite}
+@keyframes gshift{50%{background-position:100% 50%}}
+.btn-p::after{content:"";position:absolute;top:0;bottom:0;width:50px;background:linear-gradient(105deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg) translateX(-90px);animation:shine 3.4s ease infinite}
+@keyframes shine{55%,100%{transform:skewX(-20deg) translateX(320px)}}
+.btn-g{border-color:var(--p500);color:var(--p100);background:rgba(139,92,246,.08)}
+.mini-stats{display:flex;gap:12px;flex-wrap:wrap;color:var(--mut);font-size:14px}
+/* 3D cube */
+.cube-stage{perspective:900px;display:grid;place-items:center;min-height:340px}
+.cube{width:190px;height:190px;position:relative;transform-style:preserve-3d;animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotateX(360deg) rotateY(360deg)}}
+.face{position:absolute;inset:0;border:2px solid var(--p300);background:linear-gradient(135deg,rgba(42,10,94,.9),rgba(139,92,246,.55));box-shadow:inset 0 0 40px rgba(139,92,246,.5),0 0 34px rgba(139,92,246,.35);display:grid;place-items:center;font-family:var(--font-p);font-size:20px;color:var(--p100)}
+.f1{transform:translateZ(95px)}.f2{transform:rotateY(180deg) translateZ(95px)}.f3{transform:rotateY(90deg) translateZ(95px)}.f4{transform:rotateY(-90deg) translateZ(95px)}.f5{transform:rotateX(90deg) translateZ(95px)}.f6{transform:rotateX(-90deg) translateZ(95px)}
+.scrolldown{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);color:var(--mut);font-size:13px;text-align:center}
+.scrolldown i{display:block;width:24px;height:40px;border:2px solid var(--p500);border-radius:99px;margin:8px auto 0;position:relative}
+.scrolldown i::after{content:"";position:absolute;left:50%;top:7px;width:6px;height:10px;margin-left:-3px;border-radius:99px;background:var(--grad);animation:wheel 1.6s ease infinite}
+@keyframes wheel{to{transform:translateY(14px);opacity:0}}
+#stars{position:absolute;inset:0;z-index:-1}
+/* ============ 4. SECTIONS / CARDS ============ */
+section{padding:70px 0;position:relative;z-index:1}
+.divider{height:2px;background:var(--grad);opacity:.6;border-radius:99px;margin:0 auto;max-width:1160px}
+h2{font-size:clamp(26px,4vw,40px);margin:0 0 8px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mut);margin:0 0 26px}
+.glass{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);backdrop-filter:blur(14px);box-shadow:0 0 30px rgba(139,92,246,.18)}
+.grad-border{position:relative;border-radius:var(--r);padding:1px;background:var(--grad);background-size:220% 220%;animation:gshift 6s ease infinite}
+.grad-border>div{background:#0d0620;border-radius:calc(var(--r) - 1px);padding:22px;height:100%}
+/* reveal */
+.js .rv{opacity:0}.js .rv.in{animation:up .7s cubic-bezier(.22,.9,.28,1) both;animation-delay:var(--d,0s)}
+@keyframes up{from{opacity:0;transform:translateY(28px) scale(.99)}to{opacity:1;transform:none}}
+/* about */
+.about-grid{display:grid;grid-template-columns:280px 1fr;gap:22px;align-items:start}
+.avatar{width:100%;aspect-ratio:1;border-radius:20px;display:grid;place-items:center;font-size:90px;background:conic-gradient(from 0deg,#2a0a5e,#8b5cf6,#c4b5fd,#5b21b6,#2a0a5e);animation:gshift 6s linear infinite;position:relative}
+.avatar span{background:#0d0620;border-radius:16px;width:calc(100% - 10px);height:calc(100% - 10px);display:grid;place-items:center}
+.counters{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.counter{padding:16px;text-align:center}
+.counter b{font-size:30px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.counter small{color:var(--mut)}
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.skill{padding:20px;transform-style:preserve-3d;transition:transform .15s;position:relative;overflow:hidden}
+.skill .glare{position:absolute;inset:0;background:radial-gradient(400px circle at var(--gx,50%) var(--gy,50%),rgba(196,181,253,.25),transparent 60%);opacity:0;transition:opacity .2s}
+.skill:hover .glare{opacity:1}
+.skill h3{margin:6px 0 4px;font-size:17px}
+.skill p{color:var(--mut);font-size:14px;margin:0 0 12px}
+.px-ico{font-size:26px;filter:drop-shadow(0 0 8px var(--p500))}
+.xp{height:12px;border:1px solid var(--p500);border-radius:99px;background:#150a2e;overflow:hidden}
+.xp i{display:block;height:100%;width:0;background:var(--grad);transition:width 1.3s cubic-bezier(.22,.9,.28,1)}
+/* projects */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.chip{background:rgba(139,92,246,.1);border:1px solid var(--p500);color:var(--p100);padding:9px 16px;border-radius:99px;cursor:pointer;font-weight:700}
+.chip.on{background:var(--grad);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.proj{cursor:pointer;transition:transform .2s}
+.proj:hover{transform:translateY(-6px)}
+.proj h3{margin:0 0 6px}.proj p{color:var(--mut);font-size:14px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.tags span{font-size:12px;border:1px solid var(--p500);border-radius:99px;padding:3px 10px;color:var(--p300)}
+/* modal */
+.modal{position:fixed;inset:0;z-index:180;display:none;place-items:center;background:rgba(4,1,12,.7);backdrop-filter:blur(6px)}
+.modal.open{display:grid}
+.modal-card{max-width:560px;width:calc(100% - 32px);padding:26px;animation:up .35s ease both}
+.modal-card h3{margin-top:0}
+/* slider */
+.ba{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);user-select:none}
+.ba .after,.ba .before{height:300px}
+.ba .before{background:repeating-linear-gradient(45deg,#241243 0 26px,#1a0b33 26px 52px)}
+.ba .after{position:absolute;inset:0;background:repeating-linear-gradient(45deg,#5b21b6 0 26px,#8b5cf6 26px 52px);clip-path:inset(0 50% 0 0)}
+.ba input{position:absolute;inset:0;width:100%;opacity:0;cursor:ew-resize;margin:0}
+.ba .knob{position:absolute;top:0;bottom:0;left:50%;width:4px;background:var(--p100);box-shadow:0 0 16px var(--p500)}
+.ba .knob::after{content:"◀ ▶";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--grad);color:#fff;font-size:11px;padding:8px 10px;border-radius:99px;white-space:nowrap}
+/* timeline */
+.tl{position:relative;max-width:760px;margin:0 auto;padding-left:26px}
+.tl::before{content:"";position:absolute;left:8px;top:0;bottom:0;width:4px;border-radius:99px;background:#241243}
+.tl-fill{position:absolute;left:8px;top:0;width:4px;border-radius:99px;background:var(--grad);height:0}
+.tl-item{margin:0 0 18px;padding:18px 20px}
+.tl-item b{color:var(--p300);font-family:var(--font-p);font-size:10px}
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.field{position:relative;margin-bottom:16px}
+.field input,.field textarea{width:100%;background:rgba(7,3,15,.6);border:1px solid var(--p500);border-radius:12px;color:#fff;padding:16px 14px;font:inherit}
+.field label{position:absolute;left:12px;top:14px;color:var(--mut);transition:.2s;pointer-events:none;background:transparent;padding:0 6px}
+.field input:focus,.field textarea:focus{border-color:var(--p300);box-shadow:0 0 0 3px rgba(139,92,246,.3)}
+.field input:focus+label,.field input:not(:placeholder-shown)+label,.field textarea:focus+label,.field textarea:not(:placeholder-shown)+label{top:-11px;font-size:12px;color:var(--p300);background:#0d0620;border-radius:6px}
+.err{color:#ff9ecf;font-size:13px;min-height:1.2em;margin:4px 0 0}
+.ok{background:rgba(139,92,246,.15);border:1px solid var(--p500);padding:12px;border-radius:12px;display:none}
+.socials{display:flex;gap:12px;margin-top:14px}
+.socials a{width:48px;height:48px;display:grid;place-items:center;border-radius:14px;border:1px solid var(--p500);background:rgba(139,92,246,.1);transition:transform .2s}
+.socials a:hover{transform:translateY(-4px) rotate(-4deg);box-shadow:0 0 18px rgba(139,92,246,.5)}
+.socials svg{width:22px;height:22px;fill:var(--p300)}
+footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 0 60px;color:var(--mut);text-align:center}
+#top{position:fixed;right:18px;bottom:18px;z-index:110;width:52px;height:52px;border-radius:16px;border:1px solid var(--p500);background:var(--grad);color:#fff;font-size:22px;cursor:pointer;display:none}
+#top.show{display:block}
+.glyphs{position:absolute;inset:0;overflow:hidden;pointer-events:none;color:rgba(139,92,246,.16);font-size:26px}
+/* responsive */
+@media(max-width:960px){.hero{grid-template-columns:1fr}.skills,.grid{grid-template-columns:repeat(2,1fr)}.about-grid,.contact-grid{grid-template-columns:1fr}.counters{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.links{display:none;position:absolute;top:64px;left:12px;right:12px;flex-direction:column;background:#0d0620;border:1px solid var(--line);border-radius:14px;padding:14px}.links.open{display:flex}.burger{display:block}.skills,.grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1}#stars,.cursor,.ring,.blob{display:none}}
+</style>
 </head>
 <body>
-<a class="skip" href="#builds">Skip to builds</a>
-<div class="progress" aria-hidden="true"><span id="progress-fill"></span></div>
+<script>document.documentElement.classList.add('js')</script>
+<a class="skip" href="#about">Skip to content</a>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<div id="loader" role="status" aria-label="Loading"><div class="ld-box"><p>LOADING WORLD…</p><div class="ld-bar"><i></i></div></div></div>
+<div id="progress" aria-hidden="true"><i id="pfill"></i></div>
+<div class="cursor" id="cdot" aria-hidden="true"></div><div class="ring" id="cring" aria-hidden="true"></div>
 
-<header class="topbar">
-  <div class="wrap topbar-inner">
-    <a class="logo" href="#top" aria-label="Shardy home">
-      <span class="logo-cube" aria-hidden="true"></span>
-      <span>shardy.workbench</span>
-    </a>
-    <nav aria-label="Sections">
-      <a href="#skills">Tools</a>
-      <a href="#builds">Builds</a>
-      <a href="#quest">Roadmap</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <a class="status" href="https://github.com/ItzShardy" target="_blank" rel="noreferrer">
-      <span class="dot" aria-hidden="true"></span> ItzShardy on GitHub
-    </a>
-  </div>
-</header>
+<header id="nav"><nav class="nav wrap" aria-label="Main">
+<a class="logo" href="#top-hero"><span class="cube" aria-hidden="true"></span><b>SHARDY</b></a>
+<div class="links" id="links">
+<a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#packs">Packs</a><a href="#journey">Journey</a><a href="#contact">Contact</a>
+</div>
+<button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">☰</button>
+</nav></header>
 
-<main id="top">
-  <!-- HERO: pure-CSS entrance, shows even if script fails -->
-  <section class="hero wrap">
-    <div class="hero-text">
-      <p class="sticker load-1"><span aria-hidden="true">✦</span> Workbench open — Minecraft developer</p>
-      <h1 class="load-2">Minecraft builds <span class="marker">in progress.</span></h1>
-      <p class="lede load-3">I'm <strong>Shardy</strong>. I'm learning Paper plugins, minigames and server setup. Nothing is released yet — everything below says <strong>coming soon</strong> and means it. No fake players, no fake downloads, no reviews.</p>
-      <div class="cta-row load-4">
-        <a class="btn primary shine" href="#builds">See coming-soon builds</a>
-        <a class="btn ghost" href="mailto:newspiderman72@gmail.com?subject=Hi%20Shardy%20—%20Minecraft%20question">Email me to chat</a>
-      </div>
-      <dl class="fact-cards load-5" aria-label="Quick facts">
-        <div><dt>Focus</dt><dd>Plugins · minigames · config</dd></div>
-        <div><dt>Status</dt><dd>All builds in development</dd></div>
-        <div><dt>Proof</dt><dd><a href="https://github.com/ItzShardy" target="_blank" rel="noreferrer">Code on GitHub</a></dd></div>
-      </dl>
-    </div>
+<main id="top-hero">
+<!-- HERO -->
+<section class="hero" aria-label="Intro">
+<canvas id="stars" aria-hidden="true"></canvas>
+<div>
+<p class="kicker">// MINECRAFT DEVELOPER — JAVA · FABRIC · PACKS · PVP</p>
+<h1 class="hero-name">MostCallMeShardy</h1>
+<p class="type"><span id="typed"></span><span class="caret">|</span></p>
+<p class="lede">I build <strong>Paper plugins</strong>, <strong>Fabric client mods</strong>, <strong>resource packs</strong> and <strong>PvP content</strong> — all in one glowing purple universe. Everything below is honest: finished work is labelled, experiments are labelled.</p>
+<div class="cta">
+<a class="btn btn-p magnetic" href="#projects">View my work</a>
+<a class="btn btn-g magnetic" href="#contact">Contact me</a>
+</div>
+<div class="mini-stats"><span>⬢ Java / Paper API</span><span>⬢ Fabric mods</span><span>⬢ Packs &amp; PvP</span></div>
+</div>
+<div class="cube-stage" aria-hidden="true"><div class="cube">
+<div class="face f1">⬢</div><div class="face f2">⬣</div><div class="face f3">✦</div><div class="face f4">◈</div><div class="face f5">⬢</div><div class="face f6">✦</div>
+</div></div>
+<div class="scrolldown">scroll<i></i></div>
+</section>
+<div class="divider wrap" aria-hidden="true"></div>
 
-    <div class="bench-card load-3" aria-label="Workbench status">
-      <div class="bench-head"><span class="lamp" aria-hidden="true"></span><strong>First release</strong><span class="pct">32%</span></div>
-      <div class="bench-art" aria-hidden="true">
-        <div class="big-block"><i></i></div>
-        <div class="small-block b1"></div>
-        <div class="small-block b2"></div>
-      </div>
-      <div class="xp-bar" role="img" aria-label="Build progress: 32 percent"><span id="xp-fill"></span></div>
-      <p class="bench-note">Right now: Paper basics + safe-reload configs</p>
-      <p class="bench-note dim">Honest meter — moves when code ships, not before.</p>
-    </div>
-  </section>
+<!-- ABOUT -->
+<section id="about"><div class="wrap">
+<h2 class="rv">About me</h2><p class="sub rv" style="--d:.1s">Plugin dev by day, pack gremlin and PvP editor by night.</p>
+<div class="about-grid">
+<div class="avatar rv" role="img" aria-label="Pixel avatar placeholder for MostCallMeShardy"><span>🟪</span></div>
+<div class="glass rv" style="--d:.15s;padding:24px">
+<p>Hey — I'm <strong>MostCallMeShardy</strong>. I write custom <strong>Paper plugins (Java)</strong>, tinker with <strong>Fabric client-side mods</strong>, merge and version <strong>resource packs</strong>, build small <strong>launcher/client tools</strong>, and cut <strong>PvP montages &amp; overlays</strong>. This site is my lab: every card links to code or video once it's public.</p>
+<div class="counters">
+<div class="counter glass"><b data-count="12">0</b><br/><small>projects</small></div>
+<div class="counter glass"><b data-count="8">0</b><br/><small>plugins</small></div>
+<div class="counter glass"><b data-count="6">0</b><br/><small>packs shipped</small></div>
+<div class="counter glass"><b data-count="3">0</b><br/><small>years building</small></div>
+</div></div>
+</div></div></section>
 
-  <div class="tape" aria-hidden="true"><div class="tape-track">
-    <span>coming soon ✦ minecraft ✦ coming soon ✦ plugins ✦ coming soon ✦ minigames ✦&nbsp;</span><span>coming soon ✦ minecraft ✦ coming soon ✦ plugins ✦ coming soon ✦ minigames ✦&nbsp;</span>
-  </div></div>
+<!-- SKILLS -->
+<section id="skills"><div class="wrap">
+<h2 class="rv">Skills — XP bars included</h2><p class="sub rv" style="--d:.1s">Hover a card: it tilts toward your cursor. Bars fill when you scroll here.</p>
+<div class="skills">
+<div class="skill glass rv tilt" style="--d:0s"><div class="glare"></div><div class="px-ico">☕</div><h3>Java</h3><p>Events, schedulers, configs, clean reloads.</p><div class="xp"><i data-w="85"></i></div></div>
+<div class="skill glass rv tilt" style="--d:.08s"><div class="glare"></div><div class="px-ico">📜</div><h3>Paper API</h3><p>Commands, GUIs, persistence, minigames.</p><div class="xp"><i data-w="80"></i></div></div>
+<div class="skill glass rv tilt" style="--d:.16s"><div class="glare"></div><div class="px-ico">🧵</div><h3>Fabric</h3><p>Client mixins, HUDs, keybinds, toggles.</p><div class="xp"><i data-w="62"></i></div></div>
+<div class="skill glass rv tilt" style="--d:.24s"><div class="glare"></div><div class="px-ico">🎨</div><h3>Resource Packs</h3><p>Merges, versioning, custom textures.</p><div class="xp"><i data-w="74"></i></div></div>
+<div class="skill glass rv tilt" style="--d:.32s"><div class="glare"></div><div class="px-ico">⑂</div><h3>Git &amp; Tooling</h3><p>Repos, releases, launcher scripts.</p><div class="xp"><i data-w="70"></i></div></div>
+<div class="skill glass rv tilt" style="--d:.4s"><div class="glare"></div><div class="px-ico">🎬</div><h3>Video Editing</h3><p>Montages, replays, overlays, thumbnails.</p><div class="xp"><i data-w="66"></i></div></div>
+</div></div></section>
 
-  <!-- TOOLS -->
-  <section id="skills" class="section wrap reveal">
-    <div class="section-head">
-      <p class="eyebrow">01 — Toolbox</p>
-      <h2>Tools I'm actually practising</h2>
-      <p>Tap a tool. The bar is comfort level, not a certificate.</p>
-    </div>
+<!-- PROJECTS -->
+<section id="projects"><div class="wrap">
+<h2 class="rv">Selected work</h2><p class="sub rv" style="--d:.1s">Filter, then click any card for details. Replace text via the CONFIG at the bottom.</p>
+<div class="filters rv" role="group" aria-label="Filter projects">
+<button class="chip on" data-f="all">All</button><button class="chip" data-f="plugin">Plugins</button><button class="chip" data-f="mod">Mods</button><button class="chip" data-f="pack">Packs</button><button class="chip" data-f="content">Content</button>
+</div>
+<div class="grid" id="grid">
+<div class="grad-border proj rv" data-cat="plugin" data-title="TempestPvP Core" data-desc="Custom Paper PvP core: kits, arenas, ELO, replay hooks. Replace with [PLUGIN_1] details, commands and repo link." data-tags="Java · Paper · PvP"><div><h3>TempestPvP Core</h3><p>Paper PvP core — kits, arenas, ELO.</p><div class="tags"><span>Java</span><span>Paper</span><span>Plugin</span></div></div></div>
+<div class="grad-border proj rv" data-cat="plugin" style="--d:.08s" data-title="ShardEconomy" data-desc="Lightweight economy + shops with safe reloads and LuckPerms hooks. Replace with [PLUGIN_2]." data-tags="Java · Paper · Economy"><div><h3>ShardEconomy</h3><p>Economy + shops, no-dupe trades.</p><div class="tags"><span>Java</span><span>Paper</span><span>Economy</span></div></div></div>
+<div class="grad-border proj rv" data-cat="plugin" style="--d:.16s" data-title="DungeonForge" data-desc="Minigame framework: parties, instances, leaderboards. Replace with [PLUGIN_3]." data-tags="Java · Paper · Minigames"><div><h3>DungeonForge</h3><p>Minigame framework + parties.</p><div class="tags"><span>Java</span><span>Paper</span><span>Framework</span></div></div></div>
+<div class="grad-border proj rv" data-cat="mod" style="--d:.24s" data-title="AmethystHUD [MOD_NAME]" data-desc="Client-side Fabric utility mod: HUD, toggles, keybinds. Replace with your [MOD_NAME] feature list." data-tags="Fabric · Client · HUD"><div><h3>AmethystHUD</h3><p>Fabric utility mod — HUD + toggles.</p><div class="tags"><span>Fabric</span><span>Client</span><span>Mod</span></div></div></div>
+<div class="grad-border proj rv" data-cat="pack" style="--d:.32s" data-title="Nebula Pack Merge" data-desc="Multi-pack merge with versioning, custom swords and GUI textures. Replace with your pack list." data-tags="16x–32x · PvP · GUI"><div><h3>Nebula Pack Merge</h3><p>Merged PvP packs, versioned.</p><div class="tags"><span>Packs</span><span>32x</span><span>PvP</span></div></div></div>
+<div class="grad-border proj rv" data-cat="content" style="--d:.4s" data-title="PvP Montages & Overlays" data-desc="Replays, overlays and montage edits. Replace with your YouTube links." data-tags="Replays · Edits · Overlays"><div><h3>PvP Montages</h3><p>Replays, overlays, edits.</p><div class="tags"><span>Video</span><span>PvP</span><span>Content</span></div></div></div>
+</div></div></section>
 
-    <div class="hotbar" role="tablist" aria-label="Skills toolbox">
-      <button role="tab" aria-selected="true" data-skill="paper" class="slot selected"><span class="slot-icon" aria-hidden="true">⛏</span><span class="slot-name">Paper / Spigot</span><span class="xp" aria-hidden="true"><i style="width:45%"></i></span></button>
-      <button role="tab" aria-selected="false" data-skill="java" class="slot"><span class="slot-icon" aria-hidden="true">☕</span><span class="slot-name">Java</span><span class="xp" aria-hidden="true"><i style="width:40%"></i></span></button>
-      <button role="tab" aria-selected="false" data-skill="yaml" class="slot"><span class="slot-icon" aria-hidden="true">≡</span><span class="slot-name">YAML / Config</span><span class="xp" aria-hidden="true"><i style="width:60%"></i></span></button>
-      <button role="tab" aria-selected="false" data-skill="web" class="slot"><span class="slot-icon" aria-hidden="true">&lt;&gt;</span><span class="slot-name">HTML / CSS</span><span class="xp" aria-hidden="true"><i style="width:55%"></i></span></button>
-      <button role="tab" aria-selected="false" data-skill="git" class="slot"><span class="slot-icon" aria-hidden="true">⑂</span><span class="slot-name">Git + GitHub</span><span class="xp" aria-hidden="true"><i style="width:50%"></i></span></button>
-    </div>
+<!-- PACKS -->
+<section id="packs"><div class="wrap">
+<h2 class="rv">Pack preview — drag the handle</h2><p class="sub rv" style="--d:.1s">Pure CSS/JS before/after. Swap gradients for real screenshots later.</p>
+<div class="ba rv" id="ba">
+<div class="before" aria-hidden="true"></div>
+<div class="after" id="baAfter" aria-hidden="true"></div>
+<div class="knob" id="baKnob" aria-hidden="true"></div>
+<input type="range" min="0" max="100" value="50" aria-label="Reveal after texture"/>
+</div></div></section>
 
-    <div class="loadout-detail" id="skill-detail" role="tabpanel" tabindex="0" aria-live="polite">
-      <h3 id="skill-title">Paper / Spigot plugins — learning</h3>
-      <p id="skill-body">Hello-world commands, events and configs that survive a reload. First public release is still coming soon.</p>
-      <ul id="skill-tags" class="tags"><li>Java 17</li><li>Paper API</li><li>Coming soon</li></ul>
-    </div>
-  </section>
+<!-- JOURNEY -->
+<section id="journey"><div class="wrap">
+<h2 class="rv">Journey</h2><p class="sub rv" style="--d:.1s">The line draws as you scroll. Edit milestones in HTML.</p>
+<div class="tl" id="tl"><div class="tl-fill" id="tlfill"></div>
+<div class="tl-item glass rv"><b>2022 — FIRST SERVER</b><h3 style="margin:6px 0">Fell into plugins</h3><p style="color:var(--mut);margin:0">Ran a friend server, broke YAML daily, learned Java to fix it.</p></div>
+<div class="tl-item glass rv"><b>2023 — PAPER ERA</b><h3 style="margin:6px 0">First public plugins</h3><p style="color:var(--mut);margin:0">Commands, GUIs, economies. Started versioning everything.</p></div>
+<div class="tl-item glass rv"><b>2024 — FABRIC + PACKS</b><h3 style="margin:6px 0">Client-side era</h3><p style="color:var(--mut);margin:0">HUD mods, pack merges, PvP overlays and montages.</p></div>
+<div class="tl-item glass rv"><b>2025 — STUDIO POLISH</b><h3 style="margin:6px 0">This portfolio</h3><p style="color:var(--mut);margin:0">One-file site, honest labels, open DMs for collabs.</p></div>
+</div></div></section>
 
-  <!-- BUILDS -->
-  <section id="builds" class="section wrap reveal">
-    <div class="section-head split">
-      <div>
-        <p class="eyebrow">02 — Builds</p>
-        <h2>Coming soon, for real</h2>
-        <p>Nothing released or for sale. Each card shows a build meter, not player counts.</p>
-      </div>
-      <div class="filter-row" role="group" aria-label="Filter builds">
-        <button class="chip active" data-filter="all">Show all builds</button>
-        <button class="chip" data-filter="minecraft">Minecraft only</button>
-        <button class="chip" data-filter="web">Web only</button>
-      </div>
-    </div>
-
-    <div class="server-list">
-      <article class="blueprint" data-cat="minecraft">
-        <span class="bolt tl" aria-hidden="true"></span><span class="bolt tr" aria-hidden="true"></span><span class="bolt bl" aria-hidden="true"></span><span class="bolt br" aria-hidden="true"></span>
-        <div class="bp-top"><h3>Shardwork — survival + minigame kit</h3><span class="badge">coming soon</span></div>
-        <p>Planned Paper kit: join kit, quests, shop GUI. Code preview only — no server to join yet.</p>
-        <div class="meter" role="img" aria-label="Shardwork progress: 30 percent"><span style="width:30%"></span></div>
-        <div class="bp-foot"><span>Java · Paper · not released</span><a href="https://github.com/ItzShardy/Shardwork" target="_blank" rel="noreferrer" aria-label="View Shardwork code preview on GitHub">View code preview</a></div>
-      </article>
-
-      <article class="blueprint" data-cat="web minecraft">
-        <span class="bolt tl" aria-hidden="true"></span><span class="bolt tr" aria-hidden="true"></span><span class="bolt bl" aria-hidden="true"></span><span class="bolt br" aria-hidden="true"></span>
-        <div class="bp-top"><h3>shardworks-site — server website</h3><span class="badge">coming soon</span></div>
-        <p>Simple rules and ranks page in plain HTML and CSS. Template in progress.</p>
-        <div class="meter" role="img" aria-label="Website progress: 45 percent"><span style="width:45%"></span></div>
-        <div class="bp-foot"><span>HTML · CSS · template</span><a href="https://github.com/ItzShardy/shardworks-site" target="_blank" rel="noreferrer" aria-label="View shardworks site code on GitHub">View code preview</a></div>
-      </article>
-
-      <article class="blueprint" data-cat="minecraft">
-        <span class="bolt tl" aria-hidden="true"></span><span class="bolt tr" aria-hidden="true"></span><span class="bolt bl" aria-hidden="true"></span><span class="bolt br" aria-hidden="true"></span>
-        <div class="bp-top"><h3>Blocky utils — practice snippets</h3><span class="badge">coming soon</span></div>
-        <p>Tiny practice systems: coins, shops, daily rewards. Learning repo, expect messy commits.</p>
-        <div class="meter" role="img" aria-label="Practice repo progress: 20 percent"><span style="width:20%"></span></div>
-        <div class="bp-foot"><span>Java · learning · no download</span><a href="https://github.com/ItzShardy?tab=repositories" target="_blank" rel="noreferrer" aria-label="Browse all Shardy repositories on GitHub">Browse all repos</a></div>
-      </article>
-    </div>
-  </section>
-
-  <!-- ROADMAP + CONTACT -->
-  <section id="quest" class="section wrap two-col">
-    <div class="reveal">
-      <p class="eyebrow">03 — Roadmap</p>
-      <h2 class="h2">Minecraft roadmap</h2>
-      <p class="sub">Checked means I did it in code, not just watched a video.</p>
-      <ol class="quest">
-        <li class="done"><span class="qbox" aria-hidden="true"></span><div><strong>Java basics for plugins</strong><span>Classes, events, reading stacktraces</span></div></li>
-        <li class="done"><span class="qbox" aria-hidden="true"></span><div><strong>First Paper hello-plugin</strong><span>Command + config that reloads safely</span></div></li>
-        <li class="active"><span class="qbox" aria-hidden="true"></span><div><strong>Minigame kit — in progress</strong><span>Join kit, simple shop GUI — coming soon</span></div></li>
-        <li><span class="qbox" aria-hidden="true"></span><div><strong>Playtest with friends</strong><span>Fix spawn and permission bugs first</span></div></li>
-        <li><span class="qbox" aria-hidden="true"></span><div><strong>First public release</strong><span>Versioned download + setup guide here</span></div></li>
-      </ol>
-      <p class="honest">No reviews shown. Reviews only go up with a real name, date and proof.</p>
-    </div>
-
-    <div id="contact" class="contact-card reveal">
-      <p class="eyebrow">04 — Contact</p>
-      <h2 class="h2">DM me</h2>
-      <p>No contact form here, so nothing you send is stored on this site.</p>
-      <ul class="contact-list">
-        <li><span>Discord</span><span><strong>im_shardy</strong> <button class="mini-btn" id="copy-discord" type="button">Copy handle</button></span></li>
-        <li><span>Email</span><a href="mailto:newspiderman72@gmail.com?subject=Hi%20Shardy">newspiderman72@gmail.com</a></li>
-        <li><span>GitHub</span><a href="https://github.com/ItzShardy" target="_blank" rel="noreferrer">github.com/ItzShardy</a></li>
-      </ul>
-      <p class="small" id="copy-status" role="status" aria-live="polite"></p>
-      <a class="btn primary block shine" href="mailto:newspiderman72@gmail.com?subject=Hi%20Shardy%20—%20Minecraft%20question">Send an email</a>
-      <p class="small">Don't send passwords or personal documents. Just your server version and what you need.</p>
-    </div>
-  </section>
-
-  <!-- TRUST -->
-  <section class="section wrap reveal" aria-label="Privacy and honesty notes">
-    <div class="trust">
-      <div><strong>No tracking.</strong><span>No analytics, no pixels, no sign-ups. GitHub Pages may keep basic server logs — see Privacy.</span></div>
-      <div><strong>No cookies.</strong><span>This site sets none. Only third party is Google Fonts to load text.</span></div>
-      <div><strong>No sales.</strong><span>No shop or checkout. Commissions are agreed by email first.</span></div>
-    </div>
-  </section>
+<!-- CONTACT -->
+<section id="contact"><div class="wrap">
+<h2 class="rv">Contact</h2><p class="sub rv" style="--d:.1s">Form is front-end only — plug in Formspree (see CONFIG) to receive mail.</p>
+<div class="contact-grid">
+<form class="glass rv" id="form" style="padding:24px" novalidate>
+<div class="field"><input id="fname" placeholder=" " autocomplete="name"/><label for="fname">Your name</label><p class="err" id="e-name"></p></div>
+<div class="field"><input id="fmail" type="email" placeholder=" " autocomplete="email"/><label for="fmail">Email</label><p class="err" id="e-mail"></p></div>
+<div class="field"><textarea id="fmsg" rows="5" placeholder=" "></textarea><label for="fmsg">Message — server version + what you need</label><p class="err" id="e-msg"></p></div>
+<button class="btn btn-p magnetic" type="submit" style="border:0;cursor:pointer;width:100%">Send message</button>
+<p class="ok" id="formOk">✓ Looks good! Hook up Formspree in CONFIG to actually deliver this.</p>
+</form>
+<div class="glass rv" style="--d:.15s;padding:24px">
+<h3 style="margin-top:0">DM me directly</h3>
+<p style="color:var(--mut)">Fastest: Discord + email. No passwords or personal docs, please.</p>
+<p><strong>Discord:</strong> <span id="dhandle">im_shardy</span> <button class="chip" id="copyD" type="button">Copy</button></p>
+<p><strong>Email:</strong> <a id="memail" href="mailto:newspiderman72@gmail.com">newspiderman72@gmail.com</a></p>
+<p><strong>GitHub:</strong> <a href="https://github.com/ItzShardy" target="_blank" rel="noreferrer">github.com/ItzShardy</a></p>
+<div class="socials">
+<a href="https://github.com/ItzShardy" aria-label="GitHub" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.2-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.4.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg></a>
+<a href="mailto:newspiderman72@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M2 5h20v14H2z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m2 7 10 7L22 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+<a href="#" aria-label="YouTube — replace link"><svg viewBox="0 0 24 24"><path d="M23 12s0-3.4-.4-5A2.8 2.8 0 0 0 20.6 5C18.9 4.5 12 4.5 12 4.5s-6.9 0-8.6.5A2.8 2.8 0 0 0 1.4 7C1 8.6 1 12 1 12s0 3.4.4 5a2.8 2.8 0 0 0 2 2c1.7.5 8.6.5 8.6.5s6.9 0 8.6-.5a2.8 2.8 0 0 0 2-2c.4-1.6.4-5 .4-5zM9.8 15.5v-7l6 3.5z"/></svg></a>
+<a href="#" aria-label="X / Twitter — replace link"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L23.3 22h-6.3l-4.9-6.4L6.5 22H3.3l7.3-8.3L1 2h6.5l4.4 5.9zm-1.1 18h1.7L7.6 3.9H5.8z"/></svg></a>
+</div>
+<p style="color:var(--mut);font-size:13px" id="copyMsg" role="status"></p>
+</div>
+</div></div></section>
 </main>
 
-<footer>
-  <div class="wrap foot-inner">
-    <div>
-      <p>© <span id="year">2026</span> Shardy · Hobby Minecraft developer, not a registered company.</p>
-      <p class="small">Contact: Discord <strong>im_shardy</strong> · <a href="mailto:newspiderman72@gmail.com">newspiderman72@gmail.com</a> · <a href="https://github.com/ItzShardy" target="_blank" rel="noreferrer">GitHub</a></p>
-      <p class="small">Fan project. Not affiliated with Mojang or Microsoft. Minecraft is a trademark of Mojang.</p>
-    </div>
-    <nav class="legal-links" aria-label="Legal">
-      <a href="privacy.html">Privacy policy</a>
-      <a href="terms.html">Terms</a>
-      <a href="cookies.html">Cookies</a>
-      <a href="commissions.html">Commissions &amp; refunds</a>
-    </nav>
-  </div>
-</footer>
+<footer><div class="wrap">Built by <strong>MostCallMeShardy</strong> · Paper · Fabric · Packs · PvP<br/><small>Fan project. Not affiliated with Mojang/Microsoft. · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="cookies.html">Cookies</a> · <a href="commissions.html">Commissions</a></small></div></footer>
+<button id="top" aria-label="Back to top">↑</button>
 
-<div class="cookie-bar" id="cookie-bar" role="dialog" aria-live="polite" aria-label="Cookie notice" hidden>
-  <p><strong>No cookie spam:</strong> this site sets no cookies and runs no tracking. Google Fonts may see your IP (see Cookies page). OK?</p>
-  <div>
-    <button class="btn primary" id="cookie-ok" type="button">Got it</button>
-    <a class="btn ghost" href="cookies.html">Read cookies page</a>
-  </div>
-</div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="modal-card glass">
+<h3 id="mTitle"></h3><p id="mDesc" style="color:var(--mut)"></p><p id="mTags" style="color:var(--p300)"></p>
+<button class="btn btn-g" id="mClose">Close (Esc)</button>
+</div></div>
+<noscript><style>.js .rv{opacity:1}#loader{display:none}</style></noscript>
 
-<noscript><style>.reveal{opacity:1 !important;transform:none !important}.cookie-bar{display:none !important}</style></noscript>
-<script src="script.js?v=3"></script>
+<script>
+/* ===== CONFIG — EDIT ME: name, links, form endpoint ===== */
+const CONFIG={name:"MostCallMeShardy",discord:"im_shardy",email:"newspiderman72@gmail.com",github:"https://github.com/ItzShardy",formspree:"" /* paste https://formspree.io/f/XXXX here to go live */};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+/* preloader */
+addEventListener("load",()=>setTimeout(()=>$("#loader").classList.add("done"),900));setTimeout(()=>$("#loader").classList.add("done"),3200);
+/* progress + nav + top */
+const fill=$("#pfill"),topBtn=$("#top"),nav=$("#nav"),secs=["about","skills","projects","packs","journey","contact"].map(id=>document.getElementById(id));
+function onScroll(){const h=document.documentElement,m=h.scrollHeight-h.clientHeight;fill.style.width=(m?h.scrollTop/m*100:0)+"%";nav.classList.toggle("small",scrollY>30);topBtn.classList.toggle("show",scrollY>600);
+let cur="";secs.forEach(s=>{if(s&&scrollY>s.offsetTop-200)cur=s.id});$$("#links a").forEach(a=>a.classList.toggle("on",a.hash==="#"+cur));
+const tl=$("#tl");if(tl){const r=tl.getBoundingClientRect(),p=Math.min(1,Math.max(0,(innerHeight*.7-r.top)/r.height));$("#tlfill").style.height=(p*100)+"%"}}
+let tick=false;addEventListener("scroll",()=>{if(!tick){requestAnimationFrame(()=>{onScroll();tick=false});tick=true}},{passive:true});onScroll();
+topBtn.onclick=()=>scrollTo({top:0,behavior:reduced?"auto":"smooth"});
+/* mobile menu */
+const burger=$("#burger"),links=$("#links");burger.onclick=()=>{const o=links.classList.toggle("open");burger.setAttribute("aria-expanded",o)};links.onclick=e=>{if(e.target.tagName==="A")links.classList.remove("open")};
+/* cursor + magnetic */
+if(matchMedia("(hover:hover)").matches&&!reduced){const d=$("#cdot"),r=$("#cring");let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;d.style.left=mx+"px";d.style.top=my+"px";const t=e.target.closest("a,button,.proj,.chip,input,textarea");r.classList.toggle("big",!!t)});
+(function loop(){rx+=(mx-rx)*.16;ry+=(my-ry)*.16;r.style.left=rx+"px";r.style.top=ry+"px";requestAnimationFrame(loop)})();
+$$(".magnetic").forEach(b=>{b.addEventListener("mousemove",e=>{const q=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-q.left-q.width/2)*.12}px,${(e.clientY-q.top-q.height/2)*.18}px)`});b.addEventListener("mouseleave",()=>b.style.transform="")})}
+/* canvas particles + parallax + confetti */
+const cv=$("#stars"),cx=cv.getContext("2d");let W,H,ps=[],px=0,py=0;
+function size(){const h=cv.parentElement;W=cv.width=h.offsetWidth;H=cv.height=h.offsetHeight}size();addEventListener("resize",size);
+const N=reduced?0:70;for(let i=0;i<N;i++)ps.push({x:Math.random(),y:Math.random(),s:Math.random()*2.4+.6,v:Math.random()*.0006+.0002,o:Math.random()*.7+.2});
+addEventListener("mousemove",e=>{px=e.clientX/innerWidth-.5;py=e.clientY/innerHeight-.5});
+(function draw(){cx.clearRect(0,0,W,H);ps.forEach(p=>{p.y-=p.v;if(p.y<0)p.y=1;const tw=.6+.4*Math.sin(Date.now()*.002+p.x*20);cx.globalAlpha=p.o*tw;cx.fillStyle="#c4b5fd";const X=(p.x+px*.03)*W,Y=(p.y+py*.03)*H;cx.fillRect(X,Y,p.s,p.s)});cx.globalAlpha=1;if(!reduced)requestAnimationFrame(draw)})();
+let confetti=[];function burst(){for(let i=0;i<160;i++)confetti.push({x:W/2,y:H/3,vx:(Math.random()-.5)*9,vy:Math.random()*-7-2,l:80});if(confetti.length&&!burst.run){burst.run=true;(function cl(){cx.fillStyle="#8b5cf6";confetti.forEach(c=>{c.x+=c.vx;c.y+=c.vy;c.vy+=.3;c.l--;cx.globalAlpha=Math.max(0,c.l/80);cx.fillRect(c.x%W,(c.y+H)%H,5,5)});confetti=confetti.filter(c=>c.l>0);if(confetti.length)requestAnimationFrame(cl);else burst.run=false})( )}}
+let seq=[];addEventListener("keydown",e=>{seq.push(e.key);seq=seq.slice(-10);if(seq.join(",").includes("ArrowUp,ArrowUp,ArrowDown,ArrowDown,ArrowLeft,ArrowRight,ArrowLeft,ArrowRight,b,a")){burst();seq=[]}});
+/* typewriter */
+const words=["Plugin Developer","Mod Developer","Resource Pack Creator","PvP Content Creator"];let wi=0,ci=0,del=false;const te=$("#typed");
+(function type(){if(reduced){te.textContent=words[0];return}const w=words[wi];te.textContent=w.slice(0,ci);ci+=del?-1:1;
+if(!del&&ci>w.length+8)del=true;else if(del&&ci<0){del=false;wi=(wi+1)%words.length}
+setTimeout(type,del?40:70)})();
+/* reveal + counters + xp */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);
+if(e.target.querySelector("[data-count]")||e.target.hasAttribute("data-count")){};
+e.target.querySelectorAll(".xp i").forEach(i=>i.style.width=i.dataset.w+"%");
+if(e.target.classList.contains("skill"))e.target.querySelector(".xp i").style.width=e.target.querySelector(".xp i").dataset.w+"%"}}),{threshold:.15});
+$$(".rv").forEach(el=>io.observe(el));$$(".xp i").forEach(i=>io.observe(i.closest(".skill")||i));
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const b=e.target,end=+b.dataset.count,t0=performance.now();
+(function tick2(t){const p=Math.min(1,(t-t0)/1200);b.textContent=Math.round(end*(reduced?1:1-Math.pow(1-p,3)));if(p<1&&!reduced)requestAnimationFrame(tick2)})(t0);cio.unobserve(b)}),{threshold:.5});
+$$("[data-count]").forEach(b=>cio.observe(b));
+/* tilt */
+if(matchMedia("(hover:hover)").matches&&!reduced)$$(".tilt").forEach(c=>{c.addEventListener("mousemove",e=>{const q=c.getBoundingClientRect(),x=(e.clientX-q.left)/q.width-.5,y=(e.clientY-q.top)/q.height-.5;c.style.transform=`perspective(700px) rotateY(${x*10}deg) rotateX(${-y*10}deg)`;c.style.setProperty("--gx",(x+.5)*100+"%");c.style.setProperty("--gy",(y+.5)*100+"%")});c.addEventListener("mouseleave",()=>c.style.transform="")});
+/* filters + modal */
+$$(".chip[data-f]").forEach(ch=>ch.onclick=()=>{$$(".chip[data-f]").forEach(c=>c.classList.remove("on"));ch.classList.add("on");const f=ch.dataset.f;
+$$("#grid .proj").forEach(p=>{const s=f==="all"||p.dataset.cat===f;p.style.display=s?"":"none";if(s&&!reduced){p.style.animation="none";void p.offsetWidth;p.style.animation=""}} )});
+const modal=$("#modal");function openM(t,d,g){$("#mTitle").textContent=t;$("#mDesc").textContent=d;$("#mTags").textContent=g;modal.classList.add("open");$("#mClose").focus()}
+function closeM(){modal.classList.remove("open")}$$("#grid .proj").forEach(p=>{p.tabIndex=0;p.setAttribute("role","button");p.onclick=()=>openM(p.dataset.title,p.dataset.desc,p.dataset.tags);p.onkeydown=e=>{if(e.key==="Enter")openM(p.dataset.title,p.dataset.desc,p.dataset.tags)}});
+$("#mClose").onclick=closeM;modal.onclick=e=>{if(e.target===modal)closeM()};addEventListener("keydown",e=>{if(e.key==="Escape"){closeM();links.classList.remove("open")}});
+document.querySelectorAll(".glyphs,.enchant").forEach(()=>{});
+/* before/after */
+const ba=$("#ba");ba.querySelector("input").oninput=e=>{const v=e.target.value;$("#baAfter").style.clipPath=`inset(0 ${100-v}% 0 0)`;$("#baKnob").style.left=v+"%"};
+/* form */
+$("#copyD").onclick=async()=>{try{await navigator.clipboard.writeText(CONFIG.discord);$("#copyMsg").textContent="Copied Discord: "+CONFIG.discord}catch{$("#copyMsg").textContent="Discord: "+CONFIG.discord}};
+$("#form").onsubmit=async e=>{e.preventDefault();let ok=true;
+const v=(id,eid,test)=>{const val=$(id).value.trim();$(eid).textContent=test(val)?"":"⚠ "+$(eid).id.replace("e-","")+" needs attention";if(test(val)){}else ok=false};
+v("#fname","#e-name",x=>x.length>1);v("#fmail","#e-mail",x=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(x));v("#fmsg","#e-msg",x=>x.length>9);
+if(!ok)return;if(!CONFIG.formspree){$("#formOk").style.display="block";return}
+const r=await fetch(CONFIG.formspree,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},body:JSON.stringify({name:$("#fname").value,email:$("#fmail").value,message:$("#fmsg").value})});
+$("#formOk").style.display="block";$("#formOk").textContent=r.ok?"✓ Sent! I'll reply soon.":"⚠ Send failed — email me directly instead."};
+</script>
 </body>
 </html>
-
