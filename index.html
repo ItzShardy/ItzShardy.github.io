@@ -73,7 +73,12 @@ header.small .nav{padding:10px 20px}
 /* ============ 3. HERO ============ */
 .hero{min-height:100svh;display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center;position:relative;padding:40px 20px 70px;max-width:1160px;margin:0 auto;z-index:1}
 .kicker{font-family:var(--font-p);font-size:10px;color:var(--p300);letter-spacing:.12em;display:inline-block;border:1px solid var(--p500);border-radius:99px;padding:9px 18px;background:rgba(139,92,246,.08)}
-h1.hero-name{font-size:clamp(34px,6vw,66px);line-height:1.02;margin:14px 0 6px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(139,92,246,.45));background-size:220% auto;animation:hshine 9s ease-in-out infinite alternate}
+h1.hero-name{font-size:clamp(30px,6vw,66px);line-height:1.04;margin:14px 0 6px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(139,92,246,.45));background-size:220% auto;animation:hshine 9s ease-in-out infinite alternate;overflow-wrap:anywhere;min-width:0}
+.ch{display:inline-block;white-space:pre}
+.hero-name .ch{opacity:0;animation:charIn .55s cubic-bezier(.22,.9,.28,1) both;animation-delay:calc(var(--i)*30ms + .35s)}
+.js .rv .ch{opacity:0}
+.js .rv.in .ch{animation:charIn .5s cubic-bezier(.22,.9,.28,1) both;animation-delay:calc(var(--i)*24ms)}
+@keyframes charIn{from{opacity:0;transform:translateY(.35em) rotate(5deg)}to{opacity:1;transform:none}}
 @keyframes hshine{to{background-position:100% 50%}}
 .type{font-family:var(--font-p);font-size:12px;color:var(--p100);min-height:2.2em}
 .role-cycle{display:inline-block;height:1.7em;overflow:hidden;vertical-align:bottom}
@@ -112,7 +117,11 @@ h1.hero-name{font-size:clamp(34px,6vw,66px);line-height:1.02;margin:14px 0 6px;b
 .scrolldown i{display:block;width:24px;height:40px;border:2px solid var(--p500);border-radius:99px;margin:8px auto 0;position:relative}
 .scrolldown i::after{content:"";position:absolute;left:50%;top:7px;width:6px;height:10px;margin-left:-3px;border-radius:99px;background:var(--grad);animation:wheel 1.6s ease infinite}
 @keyframes wheel{to{transform:translateY(14px);opacity:0}}
-#stars{position:absolute;inset:0;z-index:-1}
+#stars{position:absolute;inset:0;z-index:0}
+.space-bg{position:absolute;inset:-4%;z-index:-2;overflow:hidden}
+.space-bg img{width:100%;height:100%;object-fit:cover;opacity:.5;animation:spacedrift 46s ease-in-out infinite alternate}
+@keyframes spacedrift{from{transform:scale(1.02)}to{transform:scale(1.14) translate(-1.5%,1%)}}
+.space-veil{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,3,15,.5),rgba(7,3,15,.86))}
 /* ============ 4. SECTIONS / CARDS ============ */
 section{padding:70px 0;position:relative;z-index:1}
 .divider{height:2px;background:var(--grad);opacity:.6;border-radius:99px;margin:0 auto;max-width:1160px}
@@ -251,6 +260,8 @@ footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 
 <main id="top-hero">
 <!-- HERO -->
 <section class="hero" aria-label="Intro">
+<div class="space-bg" id="spaceBg" aria-hidden="true"><img id="spaceImg" src="space-bg.png" alt="" onerror="document.getElementById('spaceBg').style.display='none';document.getElementById('spaceVeil').style.display='none'"/></div>
+<div class="space-veil" id="spaceVeil" aria-hidden="true"></div>
 <canvas id="stars" aria-hidden="true"></canvas>
 <div>
 <p class="kicker">// MINECRAFT DEVELOPER — JAVA · FABRIC · PACKS · PVP</p>
@@ -328,7 +339,7 @@ footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 
 <div class="glass svc rv"><h3>Mini plugins</h3><p>Commands, GUIs, configs that survive reloads.</p><span class="tags"><span>Java 17 · Paper</span></span><br/><a href="commissions.html">How commissions work →</a></div>
 <div class="glass svc rv" style="--d:.08s"><h3>Pack work</h3><p>Retextures, merges, versioning. See the slider for proof.</p><span class="tags"><span>16x–32x · PvP</span></span><br/><a href="#packs">See the showdown →</a></div>
 <div class="glass svc rv" style="--d:.16s"><h3>Server setup</h3><p>Configs, permissions, ranks — the unglamorous stuff that holds a server together.</p><span class="tags"><span>Paper · LuckPerms</span></span><br/><a href="commissions.html">How commissions work →</a></div>
-<div class="glass svc rv" style="--d:.24s"><h3>Overlays &amp; edits</h3><p>PvP overlays, thumbnails, montage cuts.</p><span class="tags"><span>Video · Design</span></span><br/><a href="#contact">Ask me directly →</a></div>
+<div class="glass svc rv" style="--d:.24s"><h3>Overlays &amp; edits</h3><p>PvP overlays, thumbnails, montage cuts.</p><span class="tags"><span>Video · Design</span></span><br/><a href="#contact">Contact me →</a></div>
 </div></div></section>
 
 <!-- PACKS -->
@@ -415,7 +426,8 @@ const ldMsgs=["Loading chunks…","Brewing potions…","Pinging Discord…","Pol
 const fill=$("#pfill"),topBtn=$("#top"),nav=$("#nav"),secs=["about","skills","projects","services","packs","journey","faq","contact"].map(id=>document.getElementById(id));
 function onScroll(){const h=document.documentElement,m=h.scrollHeight-h.clientHeight;fill.style.width=(m?h.scrollTop/m*100:0)+"%";nav.classList.toggle("small",scrollY>30);topBtn.classList.toggle("show",scrollY>600);
 let cur="";secs.forEach(s=>{if(s&&scrollY>s.offsetTop-200)cur=s.id});$$("#links a").forEach(a=>a.classList.toggle("on",a.hash==="#"+cur));
-const tl=$("#tl");if(tl){const r=tl.getBoundingClientRect(),p=Math.min(1,Math.max(0,(innerHeight*.7-r.top)/r.height));$("#tlfill").style.height=(p*100)+"%"}}
+const tl=$("#tl");if(tl){const r=tl.getBoundingClientRect(),p=Math.min(1,Math.max(0,(innerHeight*.7-r.top)/r.height));$("#tlfill").style.height=(p*100)+"%";}
+const spBg=$("#spaceBg");if(spBg&&!reduced&&scrollY<innerHeight*1.2){spBg.style.transform=`translateY(${scrollY*.15}px)`}}
 let tick=false;addEventListener("scroll",()=>{if(!tick){requestAnimationFrame(()=>{onScroll();tick=false});tick=true}},{passive:true});onScroll();
 topBtn.onclick=()=>scrollTo({top:0,behavior:reduced?"auto":"smooth"});
 /* mobile menu */
@@ -441,7 +453,10 @@ if(i===n){list.addEventListener("transitionend",function rst(){list.removeEventL
 /* view transitions wrapper (gallery-style morphs, instant fallback elsewhere) */
 const vt=fn=>{if(document.startViewTransition&&!reduced){document.startViewTransition(fn)}else{fn()}};
 /* reveal + counters + xp */
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);
+/* split-text reveals (chars cascade when their heading scrolls in; skipped under reduced motion) */
+function split(el){const t=el.textContent;el.setAttribute("aria-label",t);el.textContent="";[...t].forEach((c,i)=>{const s=document.createElement("span");s.className="ch";s.style.setProperty("--i",i);s.textContent=c;s.setAttribute("aria-hidden","true");el.appendChild(s)})}
+if(!reduced){const heroH=document.querySelector(".hero-name");if(heroH)split(heroH)}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){if(e.target.tagName==="H2"&&!e.target.dataset.split&&!reduced){split(e.target);e.target.dataset.split=1}e.target.classList.add("in");io.unobserve(e.target);
 if(e.target.querySelector("[data-count]")||e.target.hasAttribute("data-count")){};
 e.target.querySelectorAll(".xp i").forEach(i=>i.style.width=i.dataset.w+"%");
 if(e.target.classList.contains("skill"))e.target.querySelector(".xp i").style.width=e.target.querySelector(".xp i").dataset.w+"%"}}),{threshold:.15});
