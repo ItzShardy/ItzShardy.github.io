@@ -84,6 +84,19 @@ background:linear-gradient(170deg,#4c1d95 0%,#7c3aed 55%,#b794f6 100%)}
 .wide .btn{padding:13px 60px;background:#fff}
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(80px);background:var(--p900);color:#fff;padding:12px 22px;border-radius:99px;transition:transform .3s;z-index:50}
 #toast.show{transform:translateX(-50%)}
+.creator{display:flex;gap:16px;align-items:center;background:var(--card);border-radius:20px;padding:18px 20px;box-shadow:var(--sh);margin-top:26px;flex-wrap:wrap}
+.creator .p-ava{position:relative;flex:none}
+.creator .p-ava img{width:60px;height:60px;border-radius:50%;border:3px solid var(--p700);display:block;object-fit:cover}
+#qDot{position:absolute;right:0;bottom:0;width:18px;height:18px;border-radius:50%;border:3px solid #fff}
+.dot-online{background:#43b581}.dot-idle{background:#faa61a}.dot-dnd{background:#f04747}.dot-offline{background:#9a8fc4}
+.creator .p-who strong{font-size:18px}
+.creator .p-who span{color:var(--mut);font-size:13px;display:block}
+.creator .socials{margin-left:auto;display:flex;gap:10px;align-items:center}
+.creator .socials a{width:44px;height:44px;border-radius:12px;background:var(--p700);display:grid;place-items:center}
+.creator .socials svg{width:20px;height:20px;fill:#fff}
+#copyQ{border-radius:99px;padding:10px 18px;background:var(--grad);color:#fff}
+#music{position:fixed;left:18px;bottom:18px;z-index:60;width:52px;height:52px;border-radius:16px;border:2px solid var(--p700);background:#fff;color:var(--p700);font-size:22px;cursor:pointer;box-shadow:var(--sh)}
+#music.on{background:var(--grad);color:#fff}
 footer{text-align:center;color:var(--mut);font-size:13px;padding:34px 0 50px}
 footer a{color:var(--p700)}
 @media(max-width:1100px){.prev{left:6px}.next{right:6px}}
@@ -162,8 +175,21 @@ footer a{color:var(--p700)}
 <div class="info"><div class="em">❖</div><div><h3>Akademiya</h3><p>The Sumeru Akademiya is Sumeru's main governing body, as well as the most prestigious institute in all of Teyvat.</p></div></div>
 </div>
 </div>
+
+<div class="creator" aria-label="Page creator">
+<div class="p-ava"><img id="qAvatar" src="https://cdn.discordapp.com/embed/avatars/1.png" alt="Shardy Discord profile picture" width="60" height="60"/><span id="qDot" class="dot-offline" aria-hidden="true"></span></div>
+<div class="p-who"><strong id="qName">MostCallMeShardy</strong><span id="qStatus">connecting…</span><span id="qActivity"></span></div>
+<div class="socials">
+<a href="https://www.tiktok.com/@mc_shardy" aria-label="TikTok — mc_shardy" target="_blank" rel="noreferrer"><svg viewBox="0 0 448 512"><path d="M448 209.9a210.1 210.1 0 0 1-122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2 122.2 122.2 0 0 0 54.2 45.2 121.5 121.5 0 0 0 66.7 20.2z"/></svg></a>
+<a href="https://www.youtube.com/@itz_DevShardy/featured" aria-label="YouTube — itz_DevShardy" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24"><path d="M23 12s0-3.4-.4-5A2.8 2.8 0 0 0 20.6 5C18.9 4.5 12 4.5 12 4.5s-6.9 0-8.6.5A2.8 2.8 0 0 0 1.4 7C1 8.6 1 12 1 12s0 3.4.4 5a2.8 2.8 0 0 0 2 2c1.7.5 8.6.5 8.6.5s6.9 0 8.6-.5a2.8 2.8 0 0 0 2-2c.4-1.6.4-5 .4-5zM9.8 15.5v-7l6 3.5z"/></svg></a>
+<a href="https://github.com/ItzShardy" aria-label="GitHub — ItzShardy" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.2-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.4.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg></a>
+<button class="btn solid" id="copyQ" type="button">im_shardy ⧉</button>
+</div>
+</div>
 </main>
-<footer>Fan layout demo in purple by <a href="index.html">MostCallMeShardy</a> · character © its game · <a href="index.html">← back to portfolio</a></footer>
+<footer>Fan layout demo in purple by <a href="index.html">MostCallMeShardy</a> · character © its game · <a href="index.html">← back to portfolio</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="cookies.html">Cookies</a></footer>
+<audio id="theme" src="theme.mp3" loop preload="none"></audio>
+<button id="music" aria-label="Play site music" aria-pressed="false" title="Play music">♪</button>
 <div id="toast" role="status"></div>
 <noscript><style>.slide{display:grid}.slide+.slide{margin-top:16px}</style></noscript>
 <script>
@@ -179,6 +205,21 @@ document.querySelectorAll('.more').forEach(b=>b.onclick=()=>say(b.dataset.more))
 document.querySelectorAll('.pill').forEach(p=>p.onclick=()=>say('Demo search: '+p.textContent.trim()));
 document.querySelectorAll('.sticker button').forEach(b=>b.onclick=e=>{e.target.closest('.sticker').style.display='none';say('Sticker removed (demo only)')});
 document.getElementById('viewMore').onclick=()=>say('Gallery is a demo — add your art cards here');
+/* portfolio things: live Discord presence (same Lanyard ID), music toggle, copy handle */
+async function presence(){const st=document.getElementById('qStatus'),act=document.getElementById('qActivity'),dot=document.getElementById('qDot'),img=document.getElementById('qAvatar'),nm=document.getElementById('qName');if(!st)return;
+try{const r=await fetch('https://api.lanyard.rest/v1/users/1126831477783527434');const j=await r.json();if(!j.success)throw 0;
+const u=j.data.discord_user,s=j.data.discord_status;
+img.src=u.avatar?`https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=128`:`https://cdn.discordapp.com/embed/avatars/${(+u.discriminator||0)%5}.png`;
+nm.textContent=(u.global_name||u.username)+' · '+s;st.textContent='@'+u.username;dot.className='dot-'+s;
+const sp=j.data.listening_to_spotify&&j.data.spotify,game=(j.data.activities||[]).find(a=>a.type===0);
+if(sp)act.textContent='♪ '+j.data.spotify.song+' — '+j.data.spotify.artist;
+else if(game)act.textContent='▶ '+game.name+(game.details?' — '+game.details:'');
+else act.textContent=s==='offline'?'Offline — DMs still open.':'Online — say hi.';
+}catch{st.textContent='status unavailable';act.textContent='DMs open: im_shardy'}}
+presence();setInterval(presence,30000);
+const theme=document.getElementById('theme'),mus=document.getElementById('music');
+mus.onclick=()=>{if(theme.paused){theme.play().catch(()=>{});mus.classList.add('on');mus.setAttribute('aria-pressed','true')}else{theme.pause();mus.classList.remove('on');mus.setAttribute('aria-pressed','false')}};
+document.getElementById('copyQ').onclick=async()=>{try{await navigator.clipboard.writeText('im_shardy');say('Copied Discord: im_shardy')}catch{say('Discord: im_shardy')}};
 auto();
 </script>
 </body>
