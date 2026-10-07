@@ -10,7 +10,8 @@ const fill=$("#pfill"),topBtn=$("#top"),nav=$("#nav"),secs=["about","skills","pr
 function onScroll(){const h=document.documentElement,m=h.scrollHeight-h.clientHeight;fill.style.width=(m?h.scrollTop/m*100:0)+"%";nav.classList.toggle("small",scrollY>30);topBtn.classList.toggle("show",scrollY>600);
 let cur="";secs.forEach(s=>{if(s&&scrollY>s.offsetTop-200)cur=s.id});$$("#links a").forEach(a=>a.classList.toggle("on",a.hash==="#"+cur));
 const tl=$("#tl");if(tl){const r=tl.getBoundingClientRect(),p=Math.min(1,Math.max(0,(innerHeight*.7-r.top)/r.height));$("#tlfill").style.height=(p*100)+"%";}
-const spBg=$("#spaceBg");if(spBg&&!reduced&&scrollY<innerHeight*1.2){spBg.style.transform=`translateY(${scrollY*.15}px)`}}
+const spBg=$("#spaceBg");if(spBg&&!reduced&&scrollY<innerHeight*1.2){spBg.style.transform=`translateY(${scrollY*.15}px)`}
+const scBg=$("#scrollBg");if(scBg){scBg.classList.toggle("lit",scrollY>innerHeight*.55);if(!reduced)scBg.style.transform=`translateY(${scrollY*-.05}px)`}}
 let tick=false;addEventListener("scroll",()=>{if(!tick){requestAnimationFrame(()=>{onScroll();tick=false});tick=true}},{passive:true});onScroll();
 topBtn.onclick=()=>scrollTo({top:0,behavior:reduced?"auto":"smooth"});
 /* mobile menu */

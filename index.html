@@ -11,13 +11,14 @@
 <meta name="theme-color" content="#07030f"/>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232a0a5e'/%3E%3Crect x='14' y='14' width='36' height='36' fill='%238b5cf6'/%3E%3Crect x='22' y='22' width='12' height='12' fill='%23ede9fe'/%3E%3C/svg%3E"/>
 <!-- system fonts only: zero external font requests -->
-<link rel="stylesheet" href="css/style.css?v=8" />
+<link rel="stylesheet" href="css/style.css?v=9" />
 </head>
 <body>
 <script>document.documentElement.classList.add('js')</script>
 <a class="skip" href="#about">Skip to content</a>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
 <div class="grain" aria-hidden="true"></div>
+<div class="scroll-bg" id="scrollBg" aria-hidden="true"><img src="assets/second.jpg" alt="" onerror="document.getElementById('scrollBg').style.display='none'"/></div>
 <div id="loader" role="status" aria-label="Loading"><div class="ld-box"><p>LOADING WORLD…</p><p class="ld-status" id="ldStatus">Loading chunks…</p><div class="ld-bar"><i></i></div></div></div>
 <div id="progress" aria-hidden="true"><i id="pfill"></i></div>
 <div class="cursor" id="cdot" aria-hidden="true"></div><div class="ring" id="cring" aria-hidden="true"></div>
@@ -66,7 +67,7 @@
 <section id="about"><div class="wrap">
 <h2 class="rv">About me</h2><p class="sub rv" style="--d:.1s">Plugin dev by day, pack gremlin and PvP editor by night.</p>
 <div class="about-grid">
-<div class="avatar rv" role="img" aria-label="Pixel avatar placeholder for MostCallMeShardy"><span>🟪</span></div>
+<div class="avatar rv" role="img" aria-label="MostCallMeShardy profile picture"><img src="assets/pfp.png" alt="MostCallMeShardy profile picture" width="280" height="280" loading="lazy"/></div>
 <div class="glass rv" style="--d:.15s;padding:24px">
 <p>Hey — I'm <strong>MostCallMeShardy</strong>. I write custom <strong>Paper plugins (Java)</strong>, tinker with <strong>Fabric client-side mods</strong>, merge and version <strong>resource packs</strong>, build small <strong>launcher/client tools</strong>, and cut <strong>PvP montages &amp; overlays</strong>. This site is my lab: every card links to code or video once it's public.</p>
 <div class="counters">
@@ -187,9 +188,10 @@
 </div></div>
 <noscript><style>.js .rv{opacity:1}#loader{display:none}</style></noscript>
 
-<script src="js/script.js?v=8"></script>
+<script src="js/script.js?v=9"></script>
 </body>
 </html>
+
 
 
 
