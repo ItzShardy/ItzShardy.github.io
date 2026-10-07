@@ -65,6 +65,7 @@ const mcR=$("#mcRange");if(mcR){const top=$("#mcTop"),knob=$("#mcKnob"),fb=$("#m
 const upd=()=>{const v=mcR.value;top.style.clipPath=`inset(0 ${100-v}% 0 0)`;knob.style.left=v+"%"};mcR.oninput=upd;upd();
 ["mcOn","mcOff"].forEach(id=>{const im=document.getElementById(id);if(!im)return;const dead=()=>{failed++;im.style.display="none";if(failed>=2){fb.style.display="block";mcR.style.display="none";knob.style.display="none"}};if(im.complete&&!im.naturalWidth)dead();im.onerror=dead})};
 /* form */
+const ann=$("#announce"),annX=$("#announceX");try{if(localStorage.getItem("shardy-ann")==="1"&&ann)ann.style.display="none"}catch{}if(annX)annX.onclick=()=>{try{localStorage.setItem("shardy-ann","1")}catch{}ann.style.display="none"};
 $("#copyD").onclick=async()=>{try{await navigator.clipboard.writeText(CONFIG.discord);$("#copyMsg").textContent="Copied Discord: "+CONFIG.discord}catch{$("#copyMsg").textContent="Discord: "+CONFIG.discord}};
 /* live Discord presence via Lanyard (guns.lol-style). Needs CONFIG.discordId + user in lanyard server */
 async function presence(){const st=$("#pStatus"),act=$("#pActivity"),dot=$("#pDot"),img=$("#pAvatar"),nm=$("#pName"),live=$("#pLive");if(!st)return;
