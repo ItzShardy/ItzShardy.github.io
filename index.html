@@ -169,6 +169,12 @@ h2{font-size:clamp(26px,4vw,40px);margin:0 0 8px;background:var(--grad);-webkit-
 .p-who span{color:var(--mut);font-size:13px}
 .p-live{margin-left:auto;font-family:var(--font-p);font-size:9px;color:#fff;background:var(--grad);padding:6px 9px;border-radius:8px;animation:blink 1.6s ease infinite}
 .p-act{margin:10px 0 0;color:var(--p100);font-size:14px}
+.hero-p{align-self:center;padding:20px}
+.hero-p .p-ava img{width:72px;height:72px}
+.hero-p .p-who strong{font-size:22px}
+.hero-p .p-act{font-size:15px}
+.p-cta{margin-top:14px}
+.p-cta .btn{padding:11px 20px;font-size:14px}
 footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 0 60px;color:var(--mut);text-align:center}
 #top{position:fixed;right:18px;bottom:18px;z-index:110;width:52px;height:52px;border-radius:16px;border:1px solid var(--p500);background:var(--grad);color:#fff;font-size:22px;cursor:pointer;display:none}
 #top.show{display:block}
@@ -212,9 +218,15 @@ footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 
 </div>
 <div class="mini-stats"><span>⬢ Java / Paper API</span><span>⬢ Fabric mods</span><span>⬢ Packs &amp; PvP</span></div>
 </div>
-<div class="cube-stage" aria-hidden="true"><div class="cube">
-<div class="face f1">⬢</div><div class="face f2">⬣</div><div class="face f3">✦</div><div class="face f4">◈</div><div class="face f5">⬢</div><div class="face f6">✦</div>
-</div></div>
+<div class="presence hero-p load-3" id="presence">
+<div class="p-head">
+<div class="p-ava"><img id="pAvatar" src="https://cdn.discordapp.com/embed/avatars/1.png" alt="Shardy Discord profile picture" width="72" height="72"/><span id="pDot" class="dot-offline" aria-hidden="true"></span></div>
+<div class="p-who"><strong id="pName">im_shardy</strong><span id="pStatus">connecting…</span></div>
+<span class="p-live" id="pLive" style="display:none">LIVE</span>
+</div>
+<p class="p-act" id="pActivity"></p>
+<div class="p-cta"><a class="btn btn-p" href="https://discord.com/users/1126831477783527434" target="_blank" rel="noreferrer">Open Discord profile</a></div>
+</div>
 <div class="scrolldown">scroll<i></i></div>
 </section>
 <div class="divider wrap" aria-hidden="true"></div>
@@ -294,15 +306,7 @@ footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 
 </form>
 <div class="glass rv" style="--d:.15s;padding:24px">
 <h3 style="margin-top:0">DM me directly</h3>
-<div class="presence" id="presence">
-<div class="p-head">
-<div class="p-ava"><img id="pAvatar" src="https://cdn.discordapp.com/embed/avatars/1.png" alt="Shardy Discord profile picture" width="56" height="56"/><span id="pDot" class="dot-offline" aria-hidden="true"></span></div>
-<div class="p-who"><strong id="pName">im_shardy</strong><span id="pStatus">connecting…</span></div>
-<span class="p-live" id="pLive" style="display:none">LIVE</span>
-</div>
-<p class="p-act" id="pActivity"></p>
-</div>
-<p style="color:var(--mut)">Fastest: Discord + email. No passwords or personal docs, please.</p>
+<p style="color:var(--mut)">See my live status up top — or reach me here. No passwords or personal docs, please.</p>
 <p><strong>Discord:</strong> <span id="dhandle">im_shardy</span> <button class="chip" id="copyD" type="button">Copy</button></p>
 <p><strong>Email:</strong> <a id="memail" href="mailto:newspiderman72@gmail.com">newspiderman72@gmail.com</a></p>
 <p><strong>GitHub:</strong> <a href="https://github.com/ItzShardy" target="_blank" rel="noreferrer">github.com/ItzShardy</a></p>
