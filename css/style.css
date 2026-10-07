@@ -29,6 +29,12 @@ a{color:var(--p300)}a:focus-visible,button:focus-visible,input:focus-visible,tex
 .grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .wordmark{font-weight:700;font-size:clamp(64px,17vw,220px);letter-spacing:-.04em;line-height:.9;margin-top:26px;background:linear-gradient(180deg,rgba(244,241,255,.4),rgba(244,241,255,.02));-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none}
 .ld-status{font-size:12px;color:var(--mut);margin:10px 0 0;min-height:1.2em}
+.legal-card{max-width:800px;margin:44px auto 70px;padding:clamp(22px,4vw,42px)}
+.legal-card h1{font-size:clamp(30px,5vw,44px);line-height:1.05;margin:0 0 8px;background:var(--grad);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:hshine 9s ease-in-out infinite alternate}
+.legal-card .updated{color:var(--mut);font-size:14px}
+.legal-card h2{margin-top:30px}
+.legal-card ul{padding-left:22px}
+.legal-card li{margin-bottom:10px}
 @keyframes load{to{width:100%}}
 #progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:120;background:rgba(139,92,246,.15)}
 #progress i{display:block;height:100%;width:0;background:var(--grad)}
@@ -73,7 +79,8 @@ h1.hero-name{font-size:clamp(30px,6vw,66px);line-height:1.04;margin:14px 0 6px;b
 @keyframes blink{50%{opacity:0}}
 .lede{color:var(--mut);max-width:52ch}
 .cta{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}
-.btn{font-weight:700;border-radius:12px;padding:14px 24px;text-decoration:none;display:inline-block;border:1px solid transparent;position:relative;overflow:hidden}
+.btn{font-weight:700;border-radius:12px;padding:14px 24px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid transparent;position:relative;overflow:hidden}
+.btn:active{transform:translateY(1px) scale(.98)}
 .btn-p{background:var(--grad);background-size:180% 180%;color:#fff;box-shadow:0 0 26px rgba(139,92,246,.5);animation:gshift 5s ease infinite}
 @keyframes gshift{50%{background-position:100% 50%}}
 .btn-p::after{content:"";position:absolute;top:0;bottom:0;width:50px;background:linear-gradient(105deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg) translateX(-90px);animation:shine 3.4s ease infinite}
@@ -139,7 +146,9 @@ h2{font-size:clamp(26px,4vw,40px);margin:0 0 8px;background:var(--grad);backgrou
 .xp i{display:block;height:100%;width:0;background:var(--grad);transition:width 1.3s cubic-bezier(.22,.9,.28,1)}
 /* projects */
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-.chip{background:rgba(139,92,246,.1);border:1px solid var(--p500);color:var(--p100);padding:9px 16px;border-radius:99px;cursor:pointer;font-weight:700}
+.chip{background:rgba(139,92,246,.1);border:1px solid var(--p500);color:var(--p100);padding:9px 16px;min-height:44px;border-radius:99px;cursor:pointer;font-weight:700}
+.chip:active{transform:scale(.97)}
+.mc-compare:focus-within{outline:3px solid var(--p300);outline-offset:3px}
 .chip.on{background:var(--grad);color:#fff}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .proj{cursor:pointer;transition:transform .2s}
@@ -199,6 +208,7 @@ h2{font-size:clamp(26px,4vw,40px);margin:0 0 8px;background:var(--grad);backgrou
 footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 0 60px;color:var(--mut);text-align:center}
 #top{position:fixed;right:18px;bottom:18px;z-index:110;width:52px;height:52px;border-radius:16px;border:1px solid var(--p500);background:var(--grad);color:#fff;font-size:22px;cursor:pointer;display:none}
 #top.show{display:block}
+.vtag{font-size:11px;color:var(--mut);border:1px solid var(--line);border-radius:6px;padding:1px 7px;white-space:nowrap}
 #music{position:fixed;left:18px;bottom:18px;z-index:110;width:52px;height:52px;border-radius:16px;border:1px solid var(--p500);background:rgba(13,6,32,.85);color:var(--p300);font-size:22px;cursor:pointer;backdrop-filter:blur(8px)}
 #music.on{background:var(--grad);color:#fff;border-color:var(--p300);box-shadow:0 0 18px rgba(139,92,246,.6)}
 /* human touches: marker, tape, tilt, sticky notes, wobble */
