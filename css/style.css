@@ -51,7 +51,7 @@ html[data-theme="light"] #pDot{border-color:#fff}
 html[data-theme="light"] .mc-compare{background:#e3d9f8}
 html[data-theme="light"] .err{color:#a4005c}
 html[data-theme="light"] .wordmark{background:linear-gradient(180deg,rgba(90,33,182,.4),rgba(90,33,182,.02));-webkit-background-clip:text;background-clip:text}
-html[data-theme="light"] .space-veil{background:linear-gradient(180deg,rgba(43,16,84,.3),rgba(43,16,84,.52))}
+html[data-theme="light"] .space-veil{background:linear-gradient(180deg,rgba(43,16,84,.16),rgba(43,16,84,.3))}
 html[data-theme="light"] .scroll-bg::after{background:linear-gradient(180deg,rgba(239,232,250,.72),rgba(239,232,250,.35) 45%,rgba(239,232,250,.88))}
 html[data-theme="light"] .blob{opacity:.28}
 html[data-theme="light"] .cookie-bar{background:#fff;color:var(--ink)}
@@ -146,7 +146,7 @@ h1.hero-name{font-size:clamp(30px,6vw,66px);line-height:1.04;margin:14px 0 6px;b
 @keyframes wheel{to{transform:translateY(14px);opacity:0}}
 #stars{position:absolute;inset:0;z-index:0}
 .space-bg{position:absolute;inset:-4%;z-index:-2;overflow:hidden}
-.space-bg img{width:100%;height:100%;object-fit:cover;opacity:.5;animation:spacedrift 46s ease-in-out infinite alternate}
+.space-bg img{width:100%;height:100%;object-fit:cover;object-position:center 35%;opacity:.5;animation:spacedrift 46s ease-in-out infinite alternate}
 @keyframes spacedrift{from{transform:scale(1.02)}to{transform:scale(1.14) translate(-1.5%,1%)}}
 .space-veil{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,3,15,.5),rgba(7,3,15,.86))}
 /* ============ 4. SECTIONS / CARDS ============ */
