@@ -11,14 +11,14 @@
 <meta name="theme-color" content="#07030f"/>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232a0a5e'/%3E%3Crect x='14' y='14' width='36' height='36' fill='%238b5cf6'/%3E%3Crect x='22' y='22' width='12' height='12' fill='%23ede9fe'/%3E%3C/svg%3E"/>
 <!-- system fonts only: zero external font requests -->
-<link rel="stylesheet" href="css/style.css?v=9" />
+<link rel="stylesheet" href="css/style.css?v=10" />
 </head>
 <body>
 <script>document.documentElement.classList.add('js')</script>
 <a class="skip" href="#about">Skip to content</a>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
 <div class="grain" aria-hidden="true"></div>
-<div class="scroll-bg" id="scrollBg" aria-hidden="true"><img src="assets/second.jpg" alt="" onerror="document.getElementById('scrollBg').style.display='none'"/></div>
+<div class="scroll-bg" id="scrollBg" aria-hidden="true"><img src="assets/second.jpg" alt="" onerror="this.remove()"/><img class="day-img" src="assets/day-mountain.jpg" alt="" loading="lazy" onerror="this.remove()"/></div>
 <div id="loader" role="status" aria-label="Loading"><div class="ld-box"><p>LOADING WORLD…</p><p class="ld-status" id="ldStatus">Loading chunks…</p><div class="ld-bar"><i></i></div></div></div>
 <div id="progress" aria-hidden="true"><i id="pfill"></i></div>
 <div class="cursor" id="cdot" aria-hidden="true"></div><div class="ring" id="cring" aria-hidden="true"></div>
@@ -28,13 +28,14 @@
 <div class="links" id="links">
 <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#services">Services</a><a href="#packs">Packs</a><a href="#journey">Journey</a><a href="#contact">Contact</a>
 </div>
+<button class="chip" id="themeBtn" type="button" aria-pressed="false" aria-label="Switch to light mode" title="Day / night">☾</button>
 <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">☰</button>
 </nav></header>
 
 <main id="top-hero">
 <!-- HERO -->
 <section class="hero" aria-label="Intro">
-<div class="space-bg" id="spaceBg" aria-hidden="true"><img id="spaceImg" src="assets/space-bg.png" alt="" onerror="document.getElementById('spaceBg').style.display='none';document.getElementById('spaceVeil').style.display='none'"/></div>
+<div class="space-bg" id="spaceBg" aria-hidden="true"><img id="spaceImg" src="assets/space-bg.png" alt="" onerror="this.remove()"/><img class="day-img" src="assets/day-sky.jpg" alt="" loading="lazy" onerror="this.remove()"/></div>
 <div class="space-veil" id="spaceVeil" aria-hidden="true"></div>
 <canvas id="stars" aria-hidden="true"></canvas>
 <div>
@@ -188,9 +189,10 @@
 </div></div>
 <noscript><style>.js .rv{opacity:1}#loader{display:none}</style></noscript>
 
-<script src="js/script.js?v=9"></script>
+<script src="js/script.js?v=10"></script>
 </body>
 </html>
+
 
 
 

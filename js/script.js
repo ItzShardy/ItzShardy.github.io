@@ -16,6 +16,9 @@ let tick=false;addEventListener("scroll",()=>{if(!tick){requestAnimationFrame(()
 topBtn.onclick=()=>scrollTo({top:0,behavior:reduced?"auto":"smooth"});
 /* mobile menu */
 const burger=$("#burger"),links=$("#links");burger.onclick=()=>{const o=links.classList.toggle("open");burger.setAttribute("aria-expanded",o)};links.onclick=e=>{if(e.target.tagName==="A")links.classList.remove("open")};
+/* day / night */
+const themeBtn=$("#themeBtn");function setTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem("shardy-theme",t)}catch{}const light=t==="light";if(themeBtn){themeBtn.textContent=light?"☀":"☾";themeBtn.setAttribute("aria-pressed",light);themeBtn.setAttribute("aria-label",light?"Switch to dark mode":"Switch to light mode")}const mt=document.querySelector('meta[name="theme-color"]');if(mt)mt.content=light?"#EFE8FA":"#07030f"}
+let savedTheme="dark";try{savedTheme=localStorage.getItem("shardy-theme")||"dark"}catch{}setTheme(savedTheme);if(themeBtn)themeBtn.onclick=()=>setTheme(document.documentElement.dataset.theme==="light"?"dark":"light");
 /* cursor + magnetic */
 if(matchMedia("(hover:hover)").matches&&!reduced){const d=$("#cdot"),r=$("#cring");let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
 addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;d.style.left=mx+"px";d.style.top=my+"px";const t=e.target.closest("a,button,.proj,.chip,input,textarea");r.classList.toggle("big",!!t)});
