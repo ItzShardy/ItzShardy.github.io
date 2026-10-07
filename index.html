@@ -10,8 +10,7 @@
 <meta property="og:type" content="website"/>
 <meta name="theme-color" content="#07030f"/>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232a0a5e'/%3E%3Crect x='14' y='14' width='36' height='36' fill='%238b5cf6'/%3E%3Crect x='22' y='22' width='12' height='12' fill='%23ede9fe'/%3E%3C/svg%3E"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<!-- system fonts only: zero external font requests -->
 <style>
 /* ============ 0. TOKENS ============ */
 :root{
@@ -19,7 +18,7 @@
 --p900:#2a0a5e;--p700:#5b21b6;--p500:#8b5cf6;--p300:#c4b5fd;--p100:#ede9fe;
 --grad:linear-gradient(135deg,var(--p900),var(--p700) 35%,var(--p500) 70%,var(--p300));
 --spark:#e879f9;--ink:#f4f1ff;--mut:#b9aee0;--line:rgba(196,181,253,.22);
---r:18px;--font-p:'Press Start 2P',monospace;--font-b:'Space Grotesk',system-ui,sans-serif;
+--r:18px;--font-p:ui-monospace,'Cascadia Mono',Menlo,Consolas,monospace;--font-b:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
 }
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-b);line-height:1.65;overflow-x:hidden}
@@ -182,14 +181,10 @@ footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 
 #music.on{background:var(--grad);color:#fff;border-color:var(--p300);box-shadow:0 0 18px rgba(139,92,246,.6)}
 /* human touches: marker, tape, tilt, sticky notes, wobble */
 .marker{background:linear-gradient(transparent 55%,rgba(232,121,249,.45) 55%);padding:0 .1em}
-.hand{font-family:'Caveat',cursive}
 .proj:nth-child(odd){transform:rotate(-.4deg)}
 .proj:nth-child(even){transform:rotate(.35deg)}
 .proj:hover{transform:translateY(-6px) rotate(0);animation:wob .4s ease}
 @keyframes wob{25%{transform:translateY(-6px) rotate(-1deg)}60%{transform:translateY(-6px) rotate(.8deg)}}
-.sticky{background:linear-gradient(180deg,#f3e8ff,#e0ccff);color:#2a0a5e;border-radius:4px 4px 14px 4px;padding:14px 18px;transform:rotate(1.4deg);box-shadow:0 12px 24px rgba(42,10,94,.35);font-family:'Caveat',cursive;font-size:21px;line-height:1.4;margin:16px 0 4px}
-.sticky small{font-family:var(--font-b);font-size:12px;opacity:.65}
-.stamp{display:inline-block;border:3px solid var(--spark);color:var(--spark);font-family:var(--font-p);font-size:9px;padding:7px 11px;border-radius:10px;transform:rotate(-4deg);letter-spacing:.08em;vertical-align:middle}
 /* pack showdown slider */
 .mc-compare{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);box-shadow:0 0 40px rgba(139,92,246,.3);user-select:none;aspect-ratio:16/9;background:#150a2e}
 .mc-compare img.mc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
@@ -201,9 +196,7 @@ footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 
 .mc-knob::after{content:"◀ ▶";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--grad);color:#fff;font-size:11px;padding:9px 11px;border-radius:99px;white-space:nowrap;border:2px solid #fff}
 .mc-compare input{position:absolute;inset:0;width:100%;opacity:0;cursor:ew-resize;margin:0;z-index:4}
 .mc-fallback{display:none;padding:40px 24px;text-align:center}
-.pack-notes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
-.pack-notes .hand{font-size:21px;color:var(--p100);margin:0}
-@media(max-width:860px){.pack-notes{grid-template-columns:1fr}}
+
 .glyphs{position:absolute;inset:0;overflow:hidden;pointer-events:none;color:rgba(139,92,246,.16);font-size:26px}
 /* responsive */
 @media(max-width:960px){.hero{grid-template-columns:1fr}.skills,.grid{grid-template-columns:repeat(2,1fr)}.about-grid,.contact-grid{grid-template-columns:1fr}.counters{grid-template-columns:repeat(2,1fr)}}
@@ -235,8 +228,7 @@ footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 
 <p class="kicker">// MINECRAFT DEVELOPER — JAVA · FABRIC · PACKS · PVP</p>
 <h1 class="hero-name">MostCallMeShardy</h1>
 <p class="type"><span id="typed"></span><span class="caret">|</span></p>
-<p class="lede">I'm Shardy — I break YAML before breakfast and fix it by lunch. <strong>Paper plugins</strong>, <strong>Fabric mods</strong>, <strong>resource packs</strong>, <strong>PvP videos</strong>. If my status says I'm in <span class="marker">Shard Launcher</span>, I'm probably testing something that just exploded.</p>
-<p class="hand" style="color:var(--p300);font-size:23px;margin:-8px 0 0">← psst — that live status card is really me, say hi</p>
+<p class="lede">I'm Shardy — I break YAML before breakfast and fix it by lunch. <strong>Paper plugins</strong>, <strong>Fabric mods</strong>, <strong>resource packs</strong>, <strong>PvP videos</strong>. If my status says I'm in <span class="marker"></p>
 <div class="cta">
 <a class="btn btn-p magnetic" href="#projects">View my work</a>
 <a class="btn btn-g magnetic" href="#contact">Contact me</a>
@@ -263,12 +255,11 @@ footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 
 <div class="avatar rv" role="img" aria-label="Pixel avatar placeholder for MostCallMeShardy"><span>🟪</span></div>
 <div class="glass rv" style="--d:.15s;padding:24px">
 <p>Hey — I'm <strong>MostCallMeShardy</strong>. I write custom <strong>Paper plugins (Java)</strong>, tinker with <strong>Fabric client-side mods</strong>, merge and version <strong>resource packs</strong>, build small <strong>launcher/client tools</strong>, and cut <strong>PvP montages &amp; overlays</strong>. This site is my lab: every card links to code or video once it's public.</p>
-<aside class="sticky">today's note: cherry grove base is DONE, item wall built, pack v3 broke twice. worth it.<br/><small>— shardy, probably past midnight</small></aside>
 <div class="counters">
 <div class="counter glass"><b data-count="12">0</b><br/><small>projects</small></div>
 <div class="counter glass"><b data-count="8">0</b><br/><small>plugins</small></div>
 <div class="counter glass"><b data-count="6">0</b><br/><small>packs shipped</small></div>
-<div class="counter glass"><b data-count="3">0</b><br/><small>years building</small></div>
+<div class="counter glass"><b data-count="2">0</b><br/><small>months building</small></div>
 </div></div>
 </div></div></section>
 
@@ -308,22 +299,17 @@ footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 
 <span class="mc-tag left">VANILLA</span><span class="mc-tag right">MY PACK</span>
 <div class="mc-knob" id="mcKnob"></div>
 <input type="range" min="0" max="100" value="50" id="mcRange" aria-label="Compare vanilla versus my pack"/>
-<div class="mc-fallback" id="mcFallback"><p class="hand" style="font-size:25px;color:var(--p100)">screenshots are on their way here —<br/>the slider wakes up the second pack-on.png + pack-off.png land next to this file</p></div>
-</div>
-<div class="pack-notes">
-<div class="glass rv"><p class="hand">netherite went full crimson. no regrets.</p></div>
-<div class="glass rv" style="--d:.1s"><p class="hand">diamond kept its soul, just… angrier.</p></div>
-<div class="glass rv" style="--d:.2s"><p class="hand">gold finally looks like treasure. took 4 tries.</p></div>
+<div class="mc-fallback" id="mcFallback"><p style="font-size:19px;color:var(--p100);font-weight:600">screenshots go here — send me pack-on.png + pack-off.png and the slider wakes up</p></div>
 </div></div></section>
 
 <!-- JOURNEY -->
 <section id="journey"><div class="wrap">
 <h2 class="rv">Journey</h2><p class="sub rv" style="--d:.1s">The line draws as you scroll. Edit milestones in HTML.</p>
 <div class="tl" id="tl"><div class="tl-fill" id="tlfill"></div>
-<div class="tl-item glass rv"><b>2022 — FIRST SERVER</b><h3 style="margin:6px 0">Fell into plugins</h3><p style="color:var(--mut);margin:0">Ran a friend server, broke YAML daily, learned Java to fix it.</p></div>
-<div class="tl-item glass rv"><b>2023 — PAPER ERA</b><h3 style="margin:6px 0">First public plugins</h3><p style="color:var(--mut);margin:0">Commands, GUIs, economies. Started versioning everything.</p></div>
-<div class="tl-item glass rv"><b>2024 — FABRIC + PACKS</b><h3 style="margin:6px 0">Client-side era</h3><p style="color:var(--mut);margin:0">HUD mods, pack merges, PvP overlays and montages.</p></div>
-<div class="tl-item glass rv"><b>2025 — STUDIO POLISH</b><h3 style="margin:6px 0">This portfolio</h3><p style="color:var(--mut);margin:0">One-file site, honest labels, open DMs for collabs.</p></div>
+<div class="tl-item glass rv"><b>MONTH 1 — FIRST SERVER</b><h3 style="margin:6px 0">Started from zero</h3><p style="color:var(--mut);margin:0">Ran a friend server, broke YAML daily, learned Java to fix it.</p></div>
+<div class="tl-item glass rv"><b>MONTH 1 — PAPER BASICS</b><h3 style="margin:6px 0">First hello-plugin</h3><p style="color:var(--mut);margin:0">Commands and configs that survive a reload.</p></div>
+<div class="tl-item glass rv"><b>MONTH 2 — PACKS + LAUNCHER</b><h3 style="margin:6px 0">Crimson era</h3><p style="color:var(--mut);margin:0">Retextured the whole gear wall, started building Shard Launcher.</p></div>
+<div class="tl-item glass rv"><b>NOW — SHIPPING IN PUBLIC</b><h3 style="margin:6px 0">This portfolio</h3><p style="color:var(--mut);margin:0">Honest labels, real screenshots, open DMs for collabs.</p></div>
 </div></div></section>
 
 <!-- CONTACT -->
@@ -354,7 +340,7 @@ footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 
 </div></div></section>
 </main>
 
-<footer><div class="wrap">Built by <strong>MostCallMeShardy</strong> · Paper · Fabric · Packs · PvP <span class="stamp">100% human-made</span><br/><small>Fan project. Not affiliated with Mojang/Microsoft. · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="cookies.html">Cookies</a> · <a href="commissions.html">Commissions</a></small></div></footer>
+<footer><div class="wrap">Built by <strong>MostCallMeShardy</strong> · Paper · Fabric · Packs · PvP<br/><small>Fan project. Not affiliated with Mojang/Microsoft. · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="cookies.html">Cookies</a> · <a href="commissions.html">Commissions</a></small></div></footer>
 <audio id="theme" src="theme.mp3" loop preload="none"></audio>
 <button id="music" aria-label="Play site music" aria-pressed="false" title="Play music">♪</button>
 <button id="top" aria-label="Back to top">↑</button>
