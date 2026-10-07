@@ -158,6 +158,17 @@ h2{font-size:clamp(26px,4vw,40px);margin:0 0 8px;background:var(--grad);-webkit-
 .socials a{width:48px;height:48px;display:grid;place-items:center;border-radius:14px;border:1px solid var(--p500);background:rgba(139,92,246,.1);transition:transform .2s}
 .socials a:hover{transform:translateY(-4px) rotate(-4deg);box-shadow:0 0 18px rgba(139,92,246,.5)}
 .socials svg{width:22px;height:22px;fill:var(--p300)}
+.presence{background:rgba(7,3,15,.55);border:1px solid var(--p500);border-radius:14px;padding:14px;margin-bottom:6px}
+.p-head{display:flex;align-items:center;gap:12px}
+.p-ava{position:relative;flex:none}
+.p-ava img{width:56px;height:56px;border-radius:50%;border:2px solid transparent;background:var(--grad) border-box;display:block;object-fit:cover}
+#pDot{position:absolute;right:1px;bottom:1px;width:16px;height:16px;border-radius:50%;border:3px solid #0d0620}
+.dot-online{background:#43b581}.dot-idle{background:#faa61a}.dot-dnd{background:#f04747}.dot-offline{background:#747f8d}
+.p-who{display:flex;flex-direction:column;line-height:1.35}
+.p-who strong{font-size:17px}
+.p-who span{color:var(--mut);font-size:13px}
+.p-live{margin-left:auto;font-family:var(--font-p);font-size:9px;color:#fff;background:var(--grad);padding:6px 9px;border-radius:8px;animation:blink 1.6s ease infinite}
+.p-act{margin:10px 0 0;color:var(--p100);font-size:14px}
 footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 0 60px;color:var(--mut);text-align:center}
 #top{position:fixed;right:18px;bottom:18px;z-index:110;width:52px;height:52px;border-radius:16px;border:1px solid var(--p500);background:var(--grad);color:#fff;font-size:22px;cursor:pointer;display:none}
 #top.show{display:block}
@@ -283,6 +294,14 @@ footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 
 </form>
 <div class="glass rv" style="--d:.15s;padding:24px">
 <h3 style="margin-top:0">DM me directly</h3>
+<div class="presence" id="presence">
+<div class="p-head">
+<div class="p-ava"><img id="pAvatar" src="https://cdn.discordapp.com/embed/avatars/1.png" alt="Shardy Discord profile picture" width="56" height="56"/><span id="pDot" class="dot-offline" aria-hidden="true"></span></div>
+<div class="p-who"><strong id="pName">im_shardy</strong><span id="pStatus">connecting…</span></div>
+<span class="p-live" id="pLive" style="display:none">LIVE</span>
+</div>
+<p class="p-act" id="pActivity"></p>
+</div>
 <p style="color:var(--mut)">Fastest: Discord + email. No passwords or personal docs, please.</p>
 <p><strong>Discord:</strong> <span id="dhandle">im_shardy</span> <button class="chip" id="copyD" type="button">Copy</button></p>
 <p><strong>Email:</strong> <a id="memail" href="mailto:newspiderman72@gmail.com">newspiderman72@gmail.com</a></p>
@@ -311,7 +330,7 @@ footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 
 
 <script>
 /* ===== CONFIG — EDIT ME: name, links, form endpoint ===== */
-const CONFIG={name:"MostCallMeShardy",discord:"im_shardy",email:"newspiderman72@gmail.com",github:"https://github.com/ItzShardy",formspree:"" /* paste https://formspree.io/f/XXXX here to go live */};
+const CONFIG={name:"MostCallMeShardy",discord:"im_shardy",discordId:"" /* PASTE numeric Discord ID here (needs Developer Mode: profile -> Copy User ID). ALSO join https://discord.gg/lanyard or live status won't show */,email:"newspiderman72@gmail.com",github:"https://github.com/ItzShardy",formspree:"" /* paste https://formspree.io/f/XXXX here to go live */};
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
 /* preloader */
@@ -365,6 +384,19 @@ document.querySelectorAll(".glyphs,.enchant").forEach(()=>{});
 const ba=$("#ba");ba.querySelector("input").oninput=e=>{const v=e.target.value;$("#baAfter").style.clipPath=`inset(0 ${100-v}% 0 0)`;$("#baKnob").style.left=v+"%"};
 /* form */
 $("#copyD").onclick=async()=>{try{await navigator.clipboard.writeText(CONFIG.discord);$("#copyMsg").textContent="Copied Discord: "+CONFIG.discord}catch{$("#copyMsg").textContent="Discord: "+CONFIG.discord}};
+/* live Discord presence via Lanyard (guns.lol-style). Needs CONFIG.discordId + user in lanyard server */
+async function presence(){const st=$("#pStatus"),act=$("#pActivity"),dot=$("#pDot"),img=$("#pAvatar"),nm=$("#pName"),live=$("#pLive");if(!st)return;
+if(!CONFIG.discordId){st.textContent="live status needs my Discord ID — DMs open anyway";return}
+try{const r=await fetch("https://api.lanyard.rest/v1/users/"+CONFIG.discordId);const j=await r.json();if(!j.success)throw 0;
+const u=j.data.discord_user,s=j.data.discord_status;
+img.src=u.avatar?`https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=128`:`https://cdn.discordapp.com/embed/avatars/${(+u.discriminator||0)%5}.png`;
+nm.textContent=u.global_name||u.username;st.textContent="@"+u.username+" · "+s;dot.className="dot-"+s;live.style.display=s==="offline"?"none":"";
+const sp=j.data.listening_to_spotify&&j.data.spotify,game=(j.data.activities||[]).find(a=>a.type===0);
+if(sp)act.textContent="♪ "+j.data.spotify.song+" — "+j.data.spotify.artist;
+else if(game)act.textContent="▶ "+game.name+(game.details?" — "+game.details:"");
+else act.textContent=s==="offline"?"Offline — DMs still open, I reply fast.":"Online — say hi.";
+}catch{st.textContent="status unavailable";act.textContent="Discord DMs still open: "+CONFIG.discord;dot.className="dot-offline"}}
+presence();setInterval(presence,30000);
 const theme=$("#theme"),mus=$("#music");mus.onclick=()=>{if(theme.paused){theme.play().catch(()=>{});mus.classList.add("on");mus.setAttribute("aria-pressed","true");mus.setAttribute("aria-label","Pause site music");mus.title="Pause music"}else{theme.pause();mus.classList.remove("on");mus.setAttribute("aria-pressed","false");mus.setAttribute("aria-label","Play site music");mus.title="Play music"}};
 $("#form").onsubmit=async e=>{e.preventDefault();let ok=true;
 const v=(id,eid,test)=>{const val=$(id).value.trim();$(eid).textContent=test(val)?"":"⚠ "+$(eid).id.replace("e-","")+" needs attention";if(test(val)){}else ok=false};
