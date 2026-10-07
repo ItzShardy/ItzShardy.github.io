@@ -1,7 +1,7 @@
-// Shardy portfolio — no tracking, no analytics, no cookies set by this script
-// Choice for the notice is stored only in your own browser (localStorage).
+// Shardy workbench — no tracking, no cookies set here.
+// Reveal is JS-gated: content is visible by default; JS only adds polish.
 const skills = {
-  paper: { title: "Paper / Spigot plugins — learning", body: "Hello-world commands, events and configs I can edit without crashing on reload. First public release is still coming soon.", tags: ["Java 17", "Paper API", "Coming soon"] },
+  paper: { title: "Paper / Spigot plugins — learning", body: "Hello-world commands, events and configs that survive a reload. First public release is still coming soon.", tags: ["Java 17", "Paper API", "Coming soon"] },
   java: { title: "Java — learning for plugins", body: "Classes, methods, events and reading stacktraces. Enough to follow Paper docs and fix small bugs.", tags: ["OOP basics", "Events", "Stacktraces"] },
   yaml: { title: "YAML / Config design", body: "Clean config files with comments and safe defaults. If reload breaks, I fix the YAML first.", tags: ["Shop ideas", "Messages", "Safe reloads"] },
   web: { title: "HTML / CSS", body: "Enough to build this site and a simple server homepage. Semantic HTML, responsive layout, GitHub Pages.", tags: ["This portfolio", "Server pages"] },
@@ -12,7 +12,6 @@ const slots = document.querySelectorAll(".slot");
 const titleEl = document.getElementById("skill-title");
 const bodyEl = document.getElementById("skill-body");
 const tagsEl = document.getElementById("skill-tags");
-
 slots.forEach((btn) => {
   btn.addEventListener("click", () => {
     slots.forEach((b) => { b.classList.remove("selected"); b.setAttribute("aria-selected", "false"); });
@@ -26,67 +25,70 @@ slots.forEach((btn) => {
   });
 });
 
-// Filter builds
 const chips = document.querySelectorAll(".chip");
-const servers = document.querySelectorAll(".server");
+const cards = document.querySelectorAll(".blueprint");
 chips.forEach((chip) => {
   chip.addEventListener("click", () => {
     chips.forEach((c) => c.classList.remove("active"));
     chip.classList.add("active");
     const f = chip.dataset.filter;
-    servers.forEach((s) => {
+    cards.forEach((s) => {
       const cats = (s.dataset.cat || "").split(" ");
-      s.style.display = f === "all" || cats.includes(f) ? "" : "none";
+      const show = f === "all" || cats.includes(f);
+      s.style.display = show ? "" : "none";
+      if (show) { s.classList.remove("visible"); requestAnimationFrame(() => requestAnimationFrame(() => s.classList.add("visible"))); }
     });
   });
 });
 
-// Glide-in on scroll — respects reduced motion via CSS
+// Scroll reveal with safety: force-show everything after 2.5s no matter what
+function showAll() { document.querySelectorAll(".reveal").forEach((el) => el.classList.add("visible")); }
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const revealEls = document.querySelectorAll(".reveal");
-if ("IntersectionObserver" in window && !reduceMotion) {
+if ("IntersectionObserver" in window && !reduceMotion && revealEls.length) {
   const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) {
-        e.target.classList.add("visible");
-        io.unobserve(e.target);
-        if (e.target.classList.contains("hero-build")) {
-          const bar = e.target.querySelector(".xp-bar span");
-          if (bar) requestAnimationFrame(() => { bar.style.width = "32%"; });
-        }
-      }
-    });
-  }, { threshold: 0.12 });
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
   revealEls.forEach((el) => io.observe(el));
-} else {
-  revealEls.forEach((el) => el.classList.add("visible"));
-  const bar = document.querySelector(".xp-bar span");
-  if (bar) bar.style.width = "32%";
-}
+  setTimeout(showAll, 2500);
+} else { showAll(); }
 
-// Cookie notice — this site sets no cookies itself
+// Build meter fills when visible
+function fillMeters() {
+  const xp = document.getElementById("xp-fill");
+  if (xp) requestAnimationFrame(() => { xp.style.width = "32%"; });
+}
+window.addEventListener("load", fillMeters);
+setTimeout(fillMeters, 800);
+
+// Scroll progress bar
+const fill = document.getElementById("progress-fill");
+function onScroll() {
+  if (!fill) return;
+  const h = document.documentElement;
+  const max = h.scrollHeight - h.clientHeight;
+  fill.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
+}
+window.addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+
+// Cookie notice — sets nothing, remembers choice locally only
 const bar = document.getElementById("cookie-bar");
 const okBtn = document.getElementById("cookie-ok");
 try {
-  const choice = localStorage.getItem("shardy-cookie-choice");
-  if (!choice && bar) bar.hidden = false;
+  if (!localStorage.getItem("shardy-cookie-choice") && bar) bar.hidden = false;
 } catch { if (bar) bar.hidden = false; }
 if (okBtn) okBtn.addEventListener("click", () => {
   try { localStorage.setItem("shardy-cookie-choice", "acknowledged"); } catch {}
   if (bar) bar.hidden = true;
 });
 
-// Copy Discord handle — no data leaves your device
+// Copy Discord — stays on device
 const copyBtn = document.getElementById("copy-discord");
 const copyStatus = document.getElementById("copy-status");
 if (copyBtn) copyBtn.addEventListener("click", async () => {
-  const handle = "im_shardy";
-  try {
-    await navigator.clipboard.writeText(handle);
-    if (copyStatus) copyStatus.textContent = "Copied Discord handle: im_shardy — paste it in Discord to DM me.";
-  } catch {
-    if (copyStatus) copyStatus.textContent = "Copy didn't work — my handle is: im_shardy";
-  }
+  try { await navigator.clipboard.writeText("im_shardy"); if (copyStatus) copyStatus.textContent = "Copied: im_shardy — paste it in Discord to DM me."; }
+  catch { if (copyStatus) copyStatus.textContent = "Copy didn't work — my handle is: im_shardy"; }
 });
 
 const yearEl = document.getElementById("year");

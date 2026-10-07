@@ -3,28 +3,30 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Shardy — Minecraft developer (projects coming soon)</title>
-<meta name="description" content="Shardy (ItzShardy) is a Minecraft developer. Plugins, minigames and servers — all projects currently marked honestly as Coming Soon. No tracking, no cookies." />
-<meta name="theme-color" content="#0a0c10" />
+<title>Shardy — Minecraft builds in progress</title>
+<meta name="description" content="Shardy (ItzShardy) is a Minecraft developer. Plugins, minigames and servers — everything honestly marked coming soon. No tracking, no cookies." />
+<meta name="theme-color" content="#F7F2E7" />
+<script>document.documentElement.classList.add('js');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%236BC24A'/><rect x='3' y='3' width='10' height='4' fill='%230A0C10'/><rect x='3' y='9' width='4' height='4' fill='%23FFC53D'/></svg>" />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%232F9E33'/><rect x='3' y='3' width='10' height='4' fill='%2317150F'/><rect x='3' y='9' width='4' height='4' fill='%23FFB300'/></svg>" />
 </head>
 <body>
 <a class="skip" href="#builds">Skip to builds</a>
+<div class="progress" aria-hidden="true"><span id="progress-fill"></span></div>
 
 <header class="topbar">
   <div class="wrap topbar-inner">
     <a class="logo" href="#top" aria-label="Shardy home">
       <span class="logo-cube" aria-hidden="true"></span>
-      <span>shardy.log</span>
+      <span>shardy.workbench</span>
     </a>
     <nav aria-label="Sections">
-      <a href="#skills">Skills</a>
+      <a href="#skills">Tools</a>
       <a href="#builds">Builds</a>
-      <a href="#quest">Learning</a>
+      <a href="#quest">Roadmap</a>
       <a href="#contact">Contact</a>
     </nav>
     <a class="status" href="https://github.com/ItzShardy" target="_blank" rel="noreferrer">
@@ -34,68 +36,70 @@
 </header>
 
 <main id="top">
-  <!-- HERO -->
+  <!-- HERO: pure-CSS entrance, shows even if script fails -->
   <section class="hero wrap">
-    <div class="hero-text reveal">
-      <p class="kicker"><span class="kicker-block" aria-hidden="true"></span> Spawn point — Minecraft developer</p>
-      <h1>I build Minecraft stuff. Coming soon.</h1>
-      <p class="lede">I'm <strong>Shardy</strong>. I'm learning Paper / Spigot plugins, minigames and server setup. Nothing here is finished yet — every project below is honestly marked <strong>coming soon</strong>. No fake player counts, no fake downloads, no reviews.</p>
-      <div class="cta-row">
-        <a class="btn primary" href="#builds">See coming-soon builds</a>
+    <div class="hero-text">
+      <p class="sticker load-1"><span aria-hidden="true">✦</span> Workbench open — Minecraft developer</p>
+      <h1 class="load-2">Minecraft builds <span class="marker">in progress.</span></h1>
+      <p class="lede load-3">I'm <strong>Shardy</strong>. I'm learning Paper plugins, minigames and server setup. Nothing is released yet — everything below says <strong>coming soon</strong> and means it. No fake players, no fake downloads, no reviews.</p>
+      <div class="cta-row load-4">
+        <a class="btn primary shine" href="#builds">See coming-soon builds</a>
         <a class="btn ghost" href="mailto:newspiderman72@gmail.com?subject=Hi%20Shardy%20—%20Minecraft%20question">Email me to chat</a>
       </div>
-      <dl class="stats" aria-label="Quick facts">
-        <div><dt>Minecraft focus</dt><dd>Plugins · minigames · config</dd></div>
+      <dl class="fact-cards load-5" aria-label="Quick facts">
+        <div><dt>Focus</dt><dd>Plugins · minigames · config</dd></div>
         <div><dt>Status</dt><dd>All builds in development</dd></div>
-        <div><dt>Live site</dt><dd><a href="https://itzshardy.github.io/">itzshardy.github.io</a></dd></div>
+        <div><dt>Proof</dt><dd><a href="https://github.com/ItzShardy" target="_blank" rel="noreferrer">Code on GitHub</a></dd></div>
       </dl>
-      <p class="honest">Honest labels only: if it says coming soon, it is not released. Code previews link to GitHub work in progress.</p>
     </div>
 
-    <div class="hero-build reveal" aria-hidden="true">
-      <div class="iso-scene">
-        <div class="cube c1"><i class="top"></i><i class="left"></i><i class="right"></i></div>
-        <div class="cube c2"><i class="top"></i><i class="left"></i><i class="right"></i></div>
-        <div class="cube c3"><i class="top"></i><i class="left"></i><i class="right"></i></div>
-        <div class="cube c4"><i class="top"></i><i class="left"></i><i class="right"></i></div>
-        <div class="shadow"></div>
+    <div class="bench-card load-3" aria-label="Workbench status">
+      <div class="bench-head"><span class="lamp" aria-hidden="true"></span><strong>First release</strong><span class="pct">32%</span></div>
+      <div class="bench-art" aria-hidden="true">
+        <div class="big-block"><i></i></div>
+        <div class="small-block b1"></div>
+        <div class="small-block b2"></div>
       </div>
-      <div class="xp-wrap" aria-hidden="true">
-        <div class="xp-label"><span>Build XP</span><span>lvl 1</span></div>
-        <div class="xp-bar"><span></span></div>
-        <p>Currently: Paper basics + server config</p>
-      </div>
+      <div class="xp-bar" role="img" aria-label="Build progress: 32 percent"><span id="xp-fill"></span></div>
+      <p class="bench-note">Right now: Paper basics + safe-reload configs</p>
+      <p class="bench-note dim">Honest meter — moves when code ships, not before.</p>
     </div>
   </section>
 
-  <!-- SKILLS -->
+  <div class="tape" aria-hidden="true"><div class="tape-track">
+    <span>coming soon ✦ minecraft ✦ coming soon ✦ plugins ✦ coming soon ✦ minigames ✦&nbsp;</span><span>coming soon ✦ minecraft ✦ coming soon ✦ plugins ✦ coming soon ✦ minigames ✦&nbsp;</span>
+  </div></div>
+
+  <!-- TOOLS -->
   <section id="skills" class="section wrap reveal">
     <div class="section-head">
-      <h2>Loadout</h2>
-      <p>What I'm actually practising. Green bar is comfort level, not a certificate. No Roblox here — removed until I have real work to show.</p>
+      <p class="eyebrow">01 — Toolbox</p>
+      <h2>Tools I'm actually practising</h2>
+      <p>Tap a tool. The bar is comfort level, not a certificate.</p>
     </div>
 
-    <div class="hotbar" role="tablist" aria-label="Skills hotbar">
-      <button role="tab" aria-selected="true" data-skill="paper" class="slot selected"><span class="slot-key">1</span><span class="slot-icon" aria-hidden="true">⛏</span><span class="slot-name">Paper / Spigot</span><span class="xp" aria-hidden="true"><i style="width:45%"></i></span></button>
-      <button role="tab" aria-selected="false" data-skill="java" class="slot"><span class="slot-key">2</span><span class="slot-icon" aria-hidden="true">☕</span><span class="slot-name">Java</span><span class="xp" aria-hidden="true"><i style="width:40%"></i></span></button>
-      <button role="tab" aria-selected="false" data-skill="yaml" class="slot"><span class="slot-key">3</span><span class="slot-icon" aria-hidden="true">≡</span><span class="slot-name">YAML / Config</span><span class="xp" aria-hidden="true"><i style="width:60%"></i></span></button>
-      <button role="tab" aria-selected="false" data-skill="web" class="slot"><span class="slot-key">4</span><span class="slot-icon" aria-hidden="true">&lt;&gt;</span><span class="slot-name">HTML / CSS</span><span class="xp" aria-hidden="true"><i style="width:55%"></i></span></button>
-      <button role="tab" aria-selected="false" data-skill="git" class="slot"><span class="slot-key">5</span><span class="slot-icon" aria-hidden="true">⑂</span><span class="slot-name">Git + GitHub</span><span class="xp" aria-hidden="true"><i style="width:50%"></i></span></button>
+    <div class="hotbar" role="tablist" aria-label="Skills toolbox">
+      <button role="tab" aria-selected="true" data-skill="paper" class="slot selected"><span class="slot-icon" aria-hidden="true">⛏</span><span class="slot-name">Paper / Spigot</span><span class="xp" aria-hidden="true"><i style="width:45%"></i></span></button>
+      <button role="tab" aria-selected="false" data-skill="java" class="slot"><span class="slot-icon" aria-hidden="true">☕</span><span class="slot-name">Java</span><span class="xp" aria-hidden="true"><i style="width:40%"></i></span></button>
+      <button role="tab" aria-selected="false" data-skill="yaml" class="slot"><span class="slot-icon" aria-hidden="true">≡</span><span class="slot-name">YAML / Config</span><span class="xp" aria-hidden="true"><i style="width:60%"></i></span></button>
+      <button role="tab" aria-selected="false" data-skill="web" class="slot"><span class="slot-icon" aria-hidden="true">&lt;&gt;</span><span class="slot-name">HTML / CSS</span><span class="xp" aria-hidden="true"><i style="width:55%"></i></span></button>
+      <button role="tab" aria-selected="false" data-skill="git" class="slot"><span class="slot-icon" aria-hidden="true">⑂</span><span class="slot-name">Git + GitHub</span><span class="xp" aria-hidden="true"><i style="width:50%"></i></span></button>
     </div>
 
     <div class="loadout-detail" id="skill-detail" role="tabpanel" tabindex="0" aria-live="polite">
       <h3 id="skill-title">Paper / Spigot plugins — learning</h3>
-      <p id="skill-body">Hello-world commands, events and configs I can edit without crashing on reload. First public release is still coming soon.</p>
+      <p id="skill-body">Hello-world commands, events and configs that survive a reload. First public release is still coming soon.</p>
       <ul id="skill-tags" class="tags"><li>Java 17</li><li>Paper API</li><li>Coming soon</li></ul>
     </div>
   </section>
 
-  <!-- PROJECTS -->
+  <!-- BUILDS -->
   <section id="builds" class="section wrap reveal">
     <div class="section-head split">
       <div>
-        <h2>Coming soon</h2>
-        <p>Minecraft projects in progress. Status means exactly what it says — nothing is released or for sale.</p>
+        <p class="eyebrow">02 — Builds</p>
+        <h2>Coming soon, for real</h2>
+        <p>Nothing released or for sale. Each card shows a build meter, not player counts.</p>
       </div>
       <div class="filter-row" role="group" aria-label="Filter builds">
         <button class="chip active" data-filter="all">Show all builds</button>
@@ -105,54 +109,38 @@
     </div>
 
     <div class="server-list">
-      <article class="server" data-cat="minecraft">
-        <div class="server-icon mc" aria-hidden="true">S</div>
-        <div class="server-main">
-          <div class="server-top"><h3>Shardwork — survival + minigame kit</h3><span class="ping soon"><i></i><i></i><i class="off"></i><i class="off"></i> coming soon</span></div>
-          <p class="motd">Planned Paper kit: join kit, quests, shop GUI. Code preview only — no server to join yet.</p>
-          <div class="meta"><span>Java · Paper</span><span>Not released</span></div>
-        </div>
-        <div class="server-join">
-          <span class="players">no server yet</span>
-          <a href="https://github.com/ItzShardy/Shardwork" target="_blank" rel="noreferrer" aria-label="View Shardwork code preview on GitHub">View code preview</a>
-        </div>
+      <article class="blueprint" data-cat="minecraft">
+        <span class="bolt tl" aria-hidden="true"></span><span class="bolt tr" aria-hidden="true"></span><span class="bolt bl" aria-hidden="true"></span><span class="bolt br" aria-hidden="true"></span>
+        <div class="bp-top"><h3>Shardwork — survival + minigame kit</h3><span class="badge">coming soon</span></div>
+        <p>Planned Paper kit: join kit, quests, shop GUI. Code preview only — no server to join yet.</p>
+        <div class="meter" role="img" aria-label="Shardwork progress: 30 percent"><span style="width:30%"></span></div>
+        <div class="bp-foot"><span>Java · Paper · not released</span><a href="https://github.com/ItzShardy/Shardwork" target="_blank" rel="noreferrer" aria-label="View Shardwork code preview on GitHub">View code preview</a></div>
       </article>
 
-      <article class="server" data-cat="web minecraft">
-        <div class="server-icon web" aria-hidden="true">W</div>
-        <div class="server-main">
-          <div class="server-top"><h3>shardworks-site — server website</h3><span class="ping soon"><i></i><i></i><i class="off"></i><i class="off"></i> coming soon</span></div>
-          <p class="motd">Simple rules / ranks page in plain HTML and CSS. Template in progress.</p>
-          <div class="meta"><span>HTML · CSS</span><span>Template — not finished</span></div>
-        </div>
-        <div class="server-join">
-          <span class="players">template</span>
-          <a href="https://github.com/ItzShardy/shardworks-site" target="_blank" rel="noreferrer" aria-label="View shardworks site code on GitHub">View code preview</a>
-        </div>
+      <article class="blueprint" data-cat="web minecraft">
+        <span class="bolt tl" aria-hidden="true"></span><span class="bolt tr" aria-hidden="true"></span><span class="bolt bl" aria-hidden="true"></span><span class="bolt br" aria-hidden="true"></span>
+        <div class="bp-top"><h3>shardworks-site — server website</h3><span class="badge">coming soon</span></div>
+        <p>Simple rules and ranks page in plain HTML and CSS. Template in progress.</p>
+        <div class="meter" role="img" aria-label="Website progress: 45 percent"><span style="width:45%"></span></div>
+        <div class="bp-foot"><span>HTML · CSS · template</span><a href="https://github.com/ItzShardy/shardworks-site" target="_blank" rel="noreferrer" aria-label="View shardworks site code on GitHub">View code preview</a></div>
       </article>
 
-      <article class="server" data-cat="minecraft">
-        <div class="server-icon both" aria-hidden="true">+</div>
-        <div class="server-main">
-          <div class="server-top"><h3>Blocky utils — practice snippets</h3><span class="ping soon"><i></i><i></i><i class="off"></i><i class="off"></i> coming soon</span></div>
-          <p class="motd">Tiny practice systems: coins, shops, daily rewards. Learning repo, expect messy commits.</p>
-          <div class="meta"><span>Java</span><span>Learning — no download</span></div>
-        </div>
-        <div class="server-join">
-          <span class="players">learning</span>
-          <a href="https://github.com/ItzShardy?tab=repositories" target="_blank" rel="noreferrer" aria-label="Browse all Shardy repositories on GitHub">Browse all repos</a>
-        </div>
+      <article class="blueprint" data-cat="minecraft">
+        <span class="bolt tl" aria-hidden="true"></span><span class="bolt tr" aria-hidden="true"></span><span class="bolt bl" aria-hidden="true"></span><span class="bolt br" aria-hidden="true"></span>
+        <div class="bp-top"><h3>Blocky utils — practice snippets</h3><span class="badge">coming soon</span></div>
+        <p>Tiny practice systems: coins, shops, daily rewards. Learning repo, expect messy commits.</p>
+        <div class="meter" role="img" aria-label="Practice repo progress: 20 percent"><span style="width:20%"></span></div>
+        <div class="bp-foot"><span>Java · learning · no download</span><a href="https://github.com/ItzShardy?tab=repositories" target="_blank" rel="noreferrer" aria-label="Browse all Shardy repositories on GitHub">Browse all repos</a></div>
       </article>
     </div>
   </section>
 
-  <!-- LEARNING + CONTACT -->
+  <!-- ROADMAP + CONTACT -->
   <section id="quest" class="section wrap two-col">
     <div class="reveal">
-      <div class="section-head">
-        <h2>Minecraft roadmap</h2>
-        <p>Checked means I did it in code, not just watched a video.</p>
-      </div>
+      <p class="eyebrow">03 — Roadmap</p>
+      <h2 class="h2">Minecraft roadmap</h2>
+      <p class="sub">Checked means I did it in code, not just watched a video.</p>
       <ol class="quest">
         <li class="done"><span class="qbox" aria-hidden="true"></span><div><strong>Java basics for plugins</strong><span>Classes, events, reading stacktraces</span></div></li>
         <li class="done"><span class="qbox" aria-hidden="true"></span><div><strong>First Paper hello-plugin</strong><span>Command + config that reloads safely</span></div></li>
@@ -160,20 +148,21 @@
         <li><span class="qbox" aria-hidden="true"></span><div><strong>Playtest with friends</strong><span>Fix spawn and permission bugs first</span></div></li>
         <li><span class="qbox" aria-hidden="true"></span><div><strong>First public release</strong><span>Versioned download + setup guide here</span></div></li>
       </ol>
-      <p class="honest">No reviews shown. I will only add reviews with a real name, date and proof they played it.</p>
+      <p class="honest">No reviews shown. Reviews only go up with a real name, date and proof.</p>
     </div>
 
     <div id="contact" class="contact-card reveal">
-      <h2>DM me</h2>
-      <p>Fastest way to reach me. I have no contact form, so nothing you send is stored on this site.</p>
+      <p class="eyebrow">04 — Contact</p>
+      <h2 class="h2">DM me</h2>
+      <p>No contact form here, so nothing you send is stored on this site.</p>
       <ul class="contact-list">
         <li><span>Discord</span><span><strong>im_shardy</strong> <button class="mini-btn" id="copy-discord" type="button">Copy handle</button></span></li>
         <li><span>Email</span><a href="mailto:newspiderman72@gmail.com?subject=Hi%20Shardy">newspiderman72@gmail.com</a></li>
         <li><span>GitHub</span><a href="https://github.com/ItzShardy" target="_blank" rel="noreferrer">github.com/ItzShardy</a></li>
       </ul>
       <p class="small" id="copy-status" role="status" aria-live="polite"></p>
-      <a class="btn primary block" href="mailto:newspiderman72@gmail.com?subject=Hi%20Shardy%20—%20Minecraft%20question">Send an email</a>
-      <p class="small">Please don't send passwords or personal documents. Just describe your server version and what you need.</p>
+      <a class="btn primary block shine" href="mailto:newspiderman72@gmail.com?subject=Hi%20Shardy%20—%20Minecraft%20question">Send an email</a>
+      <p class="small">Don't send passwords or personal documents. Just your server version and what you need.</p>
     </div>
   </section>
 
@@ -181,8 +170,8 @@
   <section class="section wrap reveal" aria-label="Privacy and honesty notes">
     <div class="trust">
       <div><strong>No tracking.</strong><span>No analytics, no pixels, no sign-ups. GitHub Pages may keep basic server logs — see Privacy.</span></div>
-      <div><strong>No cookies.</strong><span>This site sets no cookies. Only third party is Google Fonts to load text.</span></div>
-      <div><strong>No sales.</strong><span>No shop, no checkout, nothing to refund. Commissions are agreed by email first.</span></div>
+      <div><strong>No cookies.</strong><span>This site sets none. Only third party is Google Fonts to load text.</span></div>
+      <div><strong>No sales.</strong><span>No shop or checkout. Commissions are agreed by email first.</span></div>
     </div>
   </section>
 </main>
@@ -204,13 +193,15 @@
 </footer>
 
 <div class="cookie-bar" id="cookie-bar" role="dialog" aria-live="polite" aria-label="Cookie notice" hidden>
-  <p><strong>No cookie banner spam needed:</strong> this site sets no cookies and runs no tracking. Google Fonts loads text and may see your IP (see Cookies page). OK?</p>
+  <p><strong>No cookie spam:</strong> this site sets no cookies and runs no tracking. Google Fonts may see your IP (see Cookies page). OK?</p>
   <div>
     <button class="btn primary" id="cookie-ok" type="button">Got it</button>
     <a class="btn ghost" href="cookies.html">Read cookies page</a>
   </div>
 </div>
 
-<script src="script.js"></script>
+<noscript><style>.reveal{opacity:1 !important;transform:none !important}.cookie-bar{display:none !important}</style></noscript>
+<script src="script.js?v=3"></script>
 </body>
 </html>
+
