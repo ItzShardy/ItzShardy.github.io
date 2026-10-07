@@ -32,6 +32,17 @@ a{color:var(--p300)}a:focus-visible,button:focus-visible,input:focus-visible,tex
 .ld-box{text-align:center}.ld-box p{font-family:var(--font-p);font-size:11px;color:var(--p300);letter-spacing:.1em}
 .ld-bar{width:min(320px,70vw);height:16px;border:2px solid var(--p500);border-radius:99px;overflow:hidden;margin:16px auto 0;background:#14092b}
 .ld-bar i{display:block;height:100%;width:0;background:var(--grad);animation:load 1.4s ease forwards}
+@property --ring{syntax:'<angle>';inherits:false;initial-value:0deg}
+.grad-border:hover{background:conic-gradient(from var(--ring),var(--p900),var(--p500),var(--p300),var(--p500),var(--p900));animation:ringspin 2.4s linear infinite}
+@keyframes ringspin{to{--ring:360deg}}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.28s}
+.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mtrack{display:flex;width:max-content;padding:12px 0;font-family:var(--font-p);font-size:10px;letter-spacing:.1em;color:var(--mut);animation:mscroll 28s linear infinite}
+.marquee:hover .mtrack{animation-play-state:paused}
+@keyframes mscroll{to{transform:translateX(-50%)}}
+.grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wordmark{font-weight:700;font-size:clamp(64px,17vw,220px);letter-spacing:-.04em;line-height:.9;margin-top:26px;background:linear-gradient(180deg,rgba(244,241,255,.4),rgba(244,241,255,.02));-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none}
+.ld-status{font-size:12px;color:var(--mut);margin:10px 0 0;min-height:1.2em}
 @keyframes load{to{width:100%}}
 #progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:120;background:rgba(139,92,246,.15)}
 #progress i{display:block;height:100%;width:0;background:var(--grad)}
@@ -61,10 +72,13 @@ header.small .nav{padding:10px 20px}
 .burger{display:none;margin-left:auto;background:none;border:2px solid var(--line);border-radius:10px;color:#fff;font-size:20px;padding:4px 10px;cursor:pointer}
 /* ============ 3. HERO ============ */
 .hero{min-height:100svh;display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center;position:relative;padding:40px 20px 70px;max-width:1160px;margin:0 auto;z-index:1}
-.kicker{font-family:var(--font-p);font-size:10px;color:var(--p300);letter-spacing:.12em}
-h1.hero-name{font-size:clamp(34px,6vw,66px);line-height:1.02;margin:14px 0 6px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(139,92,246,.45))}
+.kicker{font-family:var(--font-p);font-size:10px;color:var(--p300);letter-spacing:.12em;display:inline-block;border:1px solid var(--p500);border-radius:99px;padding:9px 18px;background:rgba(139,92,246,.08)}
+h1.hero-name{font-size:clamp(34px,6vw,66px);line-height:1.02;margin:14px 0 6px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(139,92,246,.45));background-size:220% auto;animation:hshine 9s ease-in-out infinite alternate}
+@keyframes hshine{to{background-position:100% 50%}}
 .type{font-family:var(--font-p);font-size:12px;color:var(--p100);min-height:2.2em}
-.type .caret{display:inline-block;width:.6em;background:var(--spark);animation:blink 1s steps(1) infinite;color:transparent}
+.role-cycle{display:inline-block;height:1.7em;overflow:hidden;vertical-align:bottom}
+.role-cycle ul{list-style:none;margin:0;padding:0;transition:transform .65s cubic-bezier(.16,1,.3,1)}
+.role-cycle li{height:1.7em;display:flex;align-items:center;white-space:nowrap}
 @keyframes blink{50%{opacity:0}}
 .lede{color:var(--mut);max-width:52ch}
 .cta{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}
@@ -102,7 +116,7 @@ h1.hero-name{font-size:clamp(34px,6vw,66px);line-height:1.02;margin:14px 0 6px;b
 /* ============ 4. SECTIONS / CARDS ============ */
 section{padding:70px 0;position:relative;z-index:1}
 .divider{height:2px;background:var(--grad);opacity:.6;border-radius:99px;margin:0 auto;max-width:1160px}
-h2{font-size:clamp(26px,4vw,40px);margin:0 0 8px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:clamp(26px,4vw,40px);margin:0 0 8px;background:var(--grad);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:hshine 9s ease-in-out infinite alternate}
 .sub{color:var(--mut);margin:0 0 26px}
 .glass{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);backdrop-filter:blur(14px);box-shadow:0 0 30px rgba(139,92,246,.18)}
 .grad-border{position:relative;border-radius:var(--r);padding:1px;background:var(--grad);background-size:220% 220%;animation:gshift 6s ease infinite}
@@ -221,7 +235,8 @@ footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 
 <script>document.documentElement.classList.add('js')</script>
 <a class="skip" href="#about">Skip to content</a>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
-<div id="loader" role="status" aria-label="Loading"><div class="ld-box"><p>LOADING WORLD…</p><div class="ld-bar"><i></i></div></div></div>
+<div class="grain" aria-hidden="true"></div>
+<div id="loader" role="status" aria-label="Loading"><div class="ld-box"><p>LOADING WORLD…</p><p class="ld-status" id="ldStatus">Loading chunks…</p><div class="ld-bar"><i></i></div></div></div>
 <div id="progress" aria-hidden="true"><i id="pfill"></i></div>
 <div class="cursor" id="cdot" aria-hidden="true"></div><div class="ring" id="cring" aria-hidden="true"></div>
 
@@ -240,7 +255,7 @@ footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 
 <div>
 <p class="kicker">// MINECRAFT DEVELOPER — JAVA · FABRIC · PACKS · PVP</p>
 <h1 class="hero-name">MostCallMeShardy</h1>
-<p class="type"><span id="typed"></span><span class="caret">|</span></p>
+<p class="type"><span class="role-cycle"><ul id="roleList"><li>Plugin Developer</li><li>Mod Developer</li><li>Resource Pack Creator</li><li>PvP Content Creator</li></ul></span></p>
 <p class="lede">I build things that do something.</p>
 <p class="lede2">Paper plugins, Fabric mods, resource packs, PvP videos — two months in, one developer, no interest in looking bigger than I am. If my status says <span class="marker">Shard Launcher</span>, I'm testing something that just exploded.</p>
 <div class="cta">
@@ -261,6 +276,7 @@ footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 
 <div class="scrolldown">scroll<i></i></div>
 </section>
 <div class="divider wrap" aria-hidden="true"></div>
+<div class="marquee" aria-hidden="true"><div class="mtrack"><span>Java 17 ✦ Paper API ✦ Fabric ✦ Resource Packs ✦ PvP Content ✦ Shard Launcher ✦ Git ✦ YAML ✦&nbsp;</span><span>Java 17 ✦ Paper API ✦ Fabric ✦ Resource Packs ✦ PvP Content ✦ Shard Launcher ✦ Git ✦ YAML ✦&nbsp;</span></div></div>
 
 <!-- ABOUT -->
 <section id="about"><div class="wrap">
@@ -376,7 +392,7 @@ footer{border-top:2px solid transparent;border-image:var(--grad) 1;padding:26px 
 </div></div></section>
 </main>
 
-<footer><div class="wrap">Built by <strong>MostCallMeShardy</strong> · Paper · Fabric · Packs · PvP<br/><small>Fan project. Not affiliated with Mojang/Microsoft. · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="cookies.html">Cookies</a> · <a href="commissions.html">Commissions</a></small></div></footer>
+<footer><div class="wrap">Built by <strong>MostCallMeShardy</strong> · Paper · Fabric · Packs · PvP<br/><small>Fan project. Not affiliated with Mojang/Microsoft. · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="cookies.html">Cookies</a> · <a href="commissions.html">Commissions</a></small><div class="wordmark" aria-hidden="true">SHARDY</div></div></footer>
 <audio id="theme" src="theme.mp3" loop preload="none"></audio>
 <button id="music" aria-label="Play site music" aria-pressed="false" title="Play music">♪</button>
 <button id="top" aria-label="Back to top">↑</button>
@@ -394,6 +410,7 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
 /* preloader */
 addEventListener("load",()=>setTimeout(()=>$("#loader").classList.add("done"),900));setTimeout(()=>$("#loader").classList.add("done"),3200);
+const ldMsgs=["Loading chunks…","Brewing potions…","Pinging Discord…","Polishing pixels…"];let ldI=0;const ldT=setInterval(()=>{const e=$("#ldStatus");if(!e||$("#loader").classList.contains("done")){clearInterval(ldT);return}e.textContent=ldMsgs[++ldI%ldMsgs.length]},450);
 /* progress + nav + top */
 const fill=$("#pfill"),topBtn=$("#top"),nav=$("#nav"),secs=["about","skills","projects","services","packs","journey","faq","contact"].map(id=>document.getElementById(id));
 function onScroll(){const h=document.documentElement,m=h.scrollHeight-h.clientHeight;fill.style.width=(m?h.scrollTop/m*100:0)+"%";nav.classList.toggle("small",scrollY>30);topBtn.classList.toggle("show",scrollY>600);
@@ -417,10 +434,12 @@ addEventListener("mousemove",e=>{px=e.clientX/innerWidth-.5;py=e.clientY/innerHe
 let confetti=[];function burst(){for(let i=0;i<160;i++)confetti.push({x:W/2,y:H/3,vx:(Math.random()-.5)*9,vy:Math.random()*-7-2,l:80});if(confetti.length&&!burst.run){burst.run=true;(function cl(){cx.fillStyle="#8b5cf6";confetti.forEach(c=>{c.x+=c.vx;c.y+=c.vy;c.vy+=.3;c.l--;cx.globalAlpha=Math.max(0,c.l/80);cx.fillRect(c.x%W,(c.y+H)%H,5,5)});confetti=confetti.filter(c=>c.l>0);if(confetti.length)requestAnimationFrame(cl);else burst.run=false})( )}}
 let seq=[];addEventListener("keydown",e=>{seq.push(e.key);seq=seq.slice(-10);if(seq.join(",").includes("ArrowUp,ArrowUp,ArrowDown,ArrowDown,ArrowLeft,ArrowRight,ArrowLeft,ArrowRight,b,a")){burst();seq=[]}});
 /* typewriter */
-const words=["Plugin Developer","Mod Developer","Resource Pack Creator","PvP Content Creator"];let wi=0,ci=0,del=false;const te=$("#typed");
-(function type(){if(reduced){te.textContent=words[0];return}const w=words[wi];te.textContent=w.slice(0,ci);ci+=del?-1:1;
-if(!del&&ci>w.length+8)del=true;else if(del&&ci<0){del=false;wi=(wi+1)%words.length}
-setTimeout(type,del?40:70)})();
+/* role cycler (Morphext-style vertical rotator, vanilla, seamless loop) */
+(function(){const list=$("#roleList");if(!list||reduced)return;list.appendChild(list.children[0].cloneNode(true));const n=list.children.length-1;let i=0;
+setInterval(()=>{i++;const h=list.children[0].getBoundingClientRect().height;list.style.transform=`translateY(${-i*h}px)`;
+if(i===n){list.addEventListener("transitionend",function rst(){list.removeEventListener("transitionend",rst);list.style.transition="none";list.style.transform="translateY(0)";i=0;requestAnimationFrame(()=>{list.style.transition=""})},{once:true})}},2200)})();
+/* view transitions wrapper (gallery-style morphs, instant fallback elsewhere) */
+const vt=fn=>{if(document.startViewTransition&&!reduced){document.startViewTransition(fn)}else{fn()}};
 /* reveal + counters + xp */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);
 if(e.target.querySelector("[data-count]")||e.target.hasAttribute("data-count")){};
@@ -434,9 +453,9 @@ $$("[data-count]").forEach(b=>cio.observe(b));
 if(matchMedia("(hover:hover)").matches&&!reduced)$$(".tilt").forEach(c=>{c.addEventListener("mousemove",e=>{const q=c.getBoundingClientRect(),x=(e.clientX-q.left)/q.width-.5,y=(e.clientY-q.top)/q.height-.5;c.style.transform=`perspective(700px) rotateY(${x*10}deg) rotateX(${-y*10}deg)`;c.style.setProperty("--gx",(x+.5)*100+"%");c.style.setProperty("--gy",(y+.5)*100+"%")});c.addEventListener("mouseleave",()=>c.style.transform="")});
 /* filters + modal */
 $$(".chip[data-f]").forEach(ch=>ch.onclick=()=>{$$(".chip[data-f]").forEach(c=>c.classList.remove("on"));ch.classList.add("on");const f=ch.dataset.f;
-$$("#grid .proj").forEach(p=>{const s=f==="all"||p.dataset.cat===f;p.style.display=s?"":"none";if(s&&!reduced){p.style.animation="none";void p.offsetWidth;p.style.animation=""}} )});
-const modal=$("#modal");function openM(t,d,g){$("#mTitle").textContent=t;$("#mDesc").textContent=d;$("#mTags").textContent=g;modal.classList.add("open");$("#mClose").focus()}
-function closeM(){modal.classList.remove("open")}$$("#grid .proj").forEach(p=>{p.tabIndex=0;p.setAttribute("role","button");p.onclick=()=>openM(p.dataset.title,p.dataset.desc,p.dataset.tags);p.onkeydown=e=>{if(e.key==="Enter")openM(p.dataset.title,p.dataset.desc,p.dataset.tags)}});
+vt(()=>{$$("#grid .proj").forEach(p=>{p.style.display=(f==="all"||p.dataset.cat===f)?"":"none"})})});
+const modal=$("#modal");function openM(t,d,g){$("#mTitle").textContent=t;$("#mDesc").textContent=d;$("#mTags").textContent=g;vt(()=>modal.classList.add("open"));$("#mClose").focus()}
+function closeM(){vt(()=>modal.classList.remove("open"))}$$("#grid .proj").forEach(p=>{p.tabIndex=0;p.setAttribute("role","button");p.onclick=()=>openM(p.dataset.title,p.dataset.desc,p.dataset.tags);p.onkeydown=e=>{if(e.key==="Enter")openM(p.dataset.title,p.dataset.desc,p.dataset.tags)}});
 $("#mClose").onclick=closeM;modal.onclick=e=>{if(e.target===modal)closeM()};addEventListener("keydown",e=>{if(e.key==="Escape"){closeM();links.classList.remove("open")}});
 document.querySelectorAll(".glyphs,.enchant").forEach(()=>{});
 /* before/after */
