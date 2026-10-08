@@ -19,9 +19,7 @@ const burger=$("#burger"),links=$("#links");burger.onclick=()=>{const o=links.cl
 /* day / night */
 const themeBtn=$("#themeBtn");function setTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem("shardy-theme",t)}catch{}const light=t==="light";if(themeBtn){themeBtn.textContent=light?"☀":"☾";themeBtn.setAttribute("aria-pressed",light);themeBtn.setAttribute("aria-label",light?"Switch to dark mode":"Switch to light mode")}const mt=document.querySelector('meta[name="theme-color"]');if(mt)mt.content=light?"#EFE8FA":"#07030f"}
 let savedTheme="dark";try{savedTheme=localStorage.getItem("shardy-theme")||"dark"}catch{}setTheme(savedTheme);if(themeBtn)themeBtn.onclick=()=>setTheme(document.documentElement.dataset.theme==="light"?"dark":"light");
-/* cursor + magnetic */
-if(matchMedia("(hover:hover)").matches&&!reduced){const d=$("#cdot");
-addEventListener("mousemove",e=>{d.style.left=e.clientX+"px";d.style.top=e.clientY+"px"})}
+/* magnetic buttons */
 $$(".magnetic").forEach(b=>{b.addEventListener("mousemove",e=>{const q=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-q.left-q.width/2)*.12}px,${(e.clientY-q.top-q.height/2)*.18}px)`});b.addEventListener("mouseleave",()=>b.style.transform="")})}
 /* canvas particles + parallax + confetti */
 const cv=$("#stars"),cx=cv.getContext("2d");let W,H,ps=[],px=0,py=0;

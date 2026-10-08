@@ -70,9 +70,7 @@ html[data-theme="light"] .cookie-bar{background:#fff;color:var(--ink)}
 @keyframes load{to{width:100%}}
 #progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:120;background:rgba(139,92,246,.15)}
 #progress i{display:block;height:100%;width:0;background:var(--grad)}
-.cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:150;border-radius:50%;transform:translate(-50%,-50%)}
-.cursor{width:10px;height:10px;background:var(--p300);box-shadow:0 0 14px var(--p500)}
-@media(hover:none){.cursor{display:none}}
+
 .blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.5;z-index:0;pointer-events:none;animation:drift 16s ease-in-out infinite alternate}
 .b1{width:480px;height:480px;left:-140px;top:-120px;background:radial-gradient(circle,#5b21b6,transparent 65%)}
 .b2{width:520px;height:520px;right:-160px;top:30%;background:radial-gradient(circle,#2a0a5e,transparent 65%);animation-delay:-6s}
@@ -282,4 +280,4 @@ html[data-theme="light"] .soon-badge{background:#5b21b6}
 @media(max-width:960px){.hero-grid{grid-template-columns:1fr}.skills,.grid{grid-template-columns:repeat(2,1fr)}.about-grid,.contact-grid{grid-template-columns:1fr}.counters{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.links{display:none;position:absolute;top:64px;left:12px;right:12px;flex-direction:column;background:#0d0620;border:1px solid var(--line);border-radius:14px;padding:14px}.links.open{display:flex}.burger{display:block}.skills,.grid{grid-template-columns:1fr}}
 @media(max-width:600px){html[data-theme="light"] .links{background:#fff}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1}#stars,.cursor,.blob{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1}#stars,.blob{display:none}}
