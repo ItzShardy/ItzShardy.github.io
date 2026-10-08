@@ -95,7 +95,8 @@ html[data-theme="light"] .links a.on,html[data-theme="light"] .links a:hover{col
 .hero{min-height:100svh;position:relative;overflow:hidden;padding:56px 0 70px;z-index:1}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center;position:relative;z-index:1}
 .kicker{font-family:var(--font-p);font-size:10px;color:var(--p300);letter-spacing:.12em;display:inline-block;border:1px solid var(--p500);border-radius:99px;padding:9px 18px;background:rgba(139,92,246,.08)}
-h1.hero-name{font-family:var(--font-s);letter-spacing:-.01em;font-size:clamp(30px,6vw,66px);line-height:1.04;margin:14px 0 6px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(139,92,246,.45));background-size:220% auto;animation:hshine 9s ease-in-out infinite alternate;overflow-wrap:anywhere;min-width:0}
+h1.hero-name{font-family:var(--font-s);letter-spacing:-.01em;font-size:clamp(30px,6vw,66px);line-height:1.04;margin:14px 0 6px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(139,92,246,.45));background-size:220% auto;animation:hshine 9s ease-in-out infinite alternate;min-width:0}
+.hero-name .n1,.hero-name .n2{display:inline}
 .ch{display:inline-block;white-space:pre}
 .hero-name .ch{opacity:0;animation:charIn .55s cubic-bezier(.22,.9,.28,1) both;animation-delay:calc(var(--i)*30ms + .35s)}
 .js .rv .ch{opacity:0}

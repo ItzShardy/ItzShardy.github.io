@@ -38,7 +38,7 @@ if(i===n){list.addEventListener("transitionend",function rst(){list.removeEventL
 const vt=fn=>{if(document.startViewTransition&&!reduced){document.startViewTransition(fn)}else{fn()}};
 /* reveal + counters + xp */
 /* split-text reveals (chars cascade when their heading scrolls in; skipped under reduced motion) */
-function split(el){const t=el.textContent;el.setAttribute("aria-label",t);el.textContent="";[...t].forEach((c,i)=>{const s=document.createElement("span");s.className="ch";s.style.setProperty("--i",i);s.textContent=c;s.setAttribute("aria-hidden","true");el.appendChild(s)})}
+function split(el){const label=el.textContent;el.setAttribute("aria-label",label);let i=0;const mk=c=>{const s=document.createElement("span");s.className="ch";s.style.setProperty("--i",i++);s.textContent=c;s.setAttribute("aria-hidden","true");return s};const kids=[...el.childNodes];el.textContent="";kids.forEach(n=>{if(n.nodeType===3){[...n.textContent].forEach(c=>el.appendChild(c===" "?document.createTextNode(" "):mk(c)))}else if(n.nodeType===1){const w=document.createElement("span");if(n.className)w.className=n.className;[...n.textContent].forEach(c=>w.appendChild(mk(c)));el.appendChild(w)}})}
 if(!reduced){const heroH=document.querySelector(".hero-name");if(heroH)split(heroH)}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){if(e.target.tagName==="H2"&&!e.target.dataset.split&&!reduced){split(e.target);e.target.dataset.split=1}e.target.classList.add("in");io.unobserve(e.target);
 if(e.target.querySelector("[data-count]")||e.target.hasAttribute("data-count")){};
