@@ -4,7 +4,7 @@
 --p900:#2a0a5e;--p700:#5b21b6;--p500:#8b5cf6;--p300:#c4b5fd;--p100:#ede9fe;
 --grad:linear-gradient(135deg,var(--p900),var(--p700) 35%,var(--p500) 70%,var(--p300));
 --spark:#e879f9;--ink:#f4f1ff;--mut:#b9aee0;--line:rgba(196,181,253,.22);
---r:18px;--font-p:ui-monospace,'Cascadia Mono',Menlo,Consolas,monospace;--font-b:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+--r:18px;--font-p:ui-monospace,'Cascadia Mono',Menlo,Consolas,monospace;--font-b:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-s:Georgia,'Times New Roman',serif;
 }
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-b);line-height:1.65;overflow-x:hidden}
@@ -70,11 +70,9 @@ html[data-theme="light"] .cookie-bar{background:#fff;color:var(--ink)}
 @keyframes load{to{width:100%}}
 #progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:120;background:rgba(139,92,246,.15)}
 #progress i{display:block;height:100%;width:0;background:var(--grad)}
-.cursor,.ring{position:fixed;top:0;left:0;pointer-events:none;z-index:150;border-radius:50%;transform:translate(-50%,-50%)}
+.cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:150;border-radius:50%;transform:translate(-50%,-50%)}
 .cursor{width:10px;height:10px;background:var(--p300);box-shadow:0 0 14px var(--p500)}
-.ring{width:36px;height:36px;border:2px solid rgba(196,181,253,.6);transition:width .2s,height .2s,border-color .2s}
-.ring.big{width:58px;height:58px;border-color:var(--spark)}
-@media(hover:none){.cursor,.ring{display:none}}
+@media(hover:none){.cursor{display:none}}
 .blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.5;z-index:0;pointer-events:none;animation:drift 16s ease-in-out infinite alternate}
 .b1{width:480px;height:480px;left:-140px;top:-120px;background:radial-gradient(circle,#5b21b6,transparent 65%)}
 .b2{width:520px;height:520px;right:-160px;top:30%;background:radial-gradient(circle,#2a0a5e,transparent 65%);animation-delay:-6s}
@@ -99,7 +97,7 @@ html[data-theme="light"] .links a.on,html[data-theme="light"] .links a:hover{col
 .hero{min-height:100svh;position:relative;overflow:hidden;padding:56px 0 70px;z-index:1}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center;position:relative;z-index:1}
 .kicker{font-family:var(--font-p);font-size:10px;color:var(--p300);letter-spacing:.12em;display:inline-block;border:1px solid var(--p500);border-radius:99px;padding:9px 18px;background:rgba(139,92,246,.08)}
-h1.hero-name{font-size:clamp(30px,6vw,66px);line-height:1.04;margin:14px 0 6px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(139,92,246,.45));background-size:220% auto;animation:hshine 9s ease-in-out infinite alternate;overflow-wrap:anywhere;min-width:0}
+h1.hero-name{font-family:var(--font-s);letter-spacing:-.01em;font-size:clamp(30px,6vw,66px);line-height:1.04;margin:14px 0 6px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(139,92,246,.45));background-size:220% auto;animation:hshine 9s ease-in-out infinite alternate;overflow-wrap:anywhere;min-width:0}
 .ch{display:inline-block;white-space:pre}
 .hero-name .ch{opacity:0;animation:charIn .55s cubic-bezier(.22,.9,.28,1) both;animation-delay:calc(var(--i)*30ms + .35s)}
 .js .rv .ch{opacity:0}
@@ -152,7 +150,7 @@ h1.hero-name{font-size:clamp(30px,6vw,66px);line-height:1.04;margin:14px 0 6px;b
 /* ============ 4. SECTIONS / CARDS ============ */
 section{padding:70px 0;position:relative;z-index:1}
 .divider{height:2px;background:var(--grad);opacity:.6;border-radius:99px;margin:0 auto;max-width:1160px}
-h2{font-size:clamp(26px,4vw,40px);margin:0 0 8px;background:var(--grad);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:hshine 9s ease-in-out infinite alternate}
+h2{font-family:var(--font-s);letter-spacing:-.01em;font-size:clamp(26px,4vw,40px);margin:0 0 8px;background:var(--grad);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:hshine 9s ease-in-out infinite alternate}
 .sub{color:var(--mut);margin:0 0 26px}
 .glass{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);backdrop-filter:blur(14px);box-shadow:0 0 30px rgba(139,92,246,.18)}
 .grad-border{position:relative;border-radius:var(--r);padding:1px;background:var(--grad);background-size:220% 220%;animation:gshift 6s ease infinite}
@@ -176,7 +174,9 @@ h2{font-size:clamp(26px,4vw,40px);margin:0 0 8px;background:var(--grad);backgrou
 .skill:hover .glare{opacity:1}
 .skill h3{margin:6px 0 4px;font-size:17px}
 .skill p{color:var(--mut);font-size:14px;margin:0 0 12px}
-.px-ico{font-size:26px;filter:drop-shadow(0 0 8px var(--p500))}
+.px-ico{font-size:26px;color:var(--p300);filter:drop-shadow(0 0 8px var(--p500))}
+.px-ico svg{width:28px;height:28px;display:block}
+html[data-theme="light"] .px-ico{color:#5b21b6}
 .xp{height:12px;border:1px solid var(--p500);border-radius:99px;background:#150a2e;overflow:hidden}
 .xp i{display:block;height:100%;width:0;background:var(--grad);transition:width 1.3s cubic-bezier(.22,.9,.28,1)}
 /* projects */
@@ -282,4 +282,4 @@ html[data-theme="light"] .soon-badge{background:#5b21b6}
 @media(max-width:960px){.hero-grid{grid-template-columns:1fr}.skills,.grid{grid-template-columns:repeat(2,1fr)}.about-grid,.contact-grid{grid-template-columns:1fr}.counters{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.links{display:none;position:absolute;top:64px;left:12px;right:12px;flex-direction:column;background:#0d0620;border:1px solid var(--line);border-radius:14px;padding:14px}.links.open{display:flex}.burger{display:block}.skills,.grid{grid-template-columns:1fr}}
 @media(max-width:600px){html[data-theme="light"] .links{background:#fff}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1}#stars,.cursor,.ring,.blob{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1}#stars,.cursor,.blob{display:none}}

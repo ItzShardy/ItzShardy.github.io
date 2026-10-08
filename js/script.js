@@ -20,9 +20,8 @@ const burger=$("#burger"),links=$("#links");burger.onclick=()=>{const o=links.cl
 const themeBtn=$("#themeBtn");function setTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem("shardy-theme",t)}catch{}const light=t==="light";if(themeBtn){themeBtn.textContent=light?"☀":"☾";themeBtn.setAttribute("aria-pressed",light);themeBtn.setAttribute("aria-label",light?"Switch to dark mode":"Switch to light mode")}const mt=document.querySelector('meta[name="theme-color"]');if(mt)mt.content=light?"#EFE8FA":"#07030f"}
 let savedTheme="dark";try{savedTheme=localStorage.getItem("shardy-theme")||"dark"}catch{}setTheme(savedTheme);if(themeBtn)themeBtn.onclick=()=>setTheme(document.documentElement.dataset.theme==="light"?"dark":"light");
 /* cursor + magnetic */
-if(matchMedia("(hover:hover)").matches&&!reduced){const d=$("#cdot"),r=$("#cring");let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
-addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;d.style.left=mx+"px";d.style.top=my+"px";const t=e.target.closest("a,button,.proj,.chip,input,textarea");r.classList.toggle("big",!!t)});
-(function loop(){rx+=(mx-rx)*.16;ry+=(my-ry)*.16;r.style.left=rx+"px";r.style.top=ry+"px";requestAnimationFrame(loop)})();
+if(matchMedia("(hover:hover)").matches&&!reduced){const d=$("#cdot");
+addEventListener("mousemove",e=>{d.style.left=e.clientX+"px";d.style.top=e.clientY+"px"})}
 $$(".magnetic").forEach(b=>{b.addEventListener("mousemove",e=>{const q=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-q.left-q.width/2)*.12}px,${(e.clientY-q.top-q.height/2)*.18}px)`});b.addEventListener("mouseleave",()=>b.style.transform="")})}
 /* canvas particles + parallax + confetti */
 const cv=$("#stars"),cx=cv.getContext("2d");let W,H,ps=[],px=0,py=0;
@@ -82,7 +81,7 @@ else act.textContent=s==="offline"?"Offline — DMs still open, I reply fast.":"
 presence();setInterval(presence,30000);
 const theme=$("#theme"),mus=$("#music");mus.onclick=()=>{if(theme.paused){theme.play().catch(()=>{});mus.classList.add("on");mus.setAttribute("aria-pressed","true");mus.setAttribute("aria-label","Pause site music");mus.title="Pause music"}else{theme.pause();mus.classList.remove("on");mus.setAttribute("aria-pressed","false");mus.setAttribute("aria-label","Play site music");mus.title="Play music"}};
 $("#form").onsubmit=async e=>{e.preventDefault();let ok=true;
-const v=(id,eid,test)=>{const val=$(id).value.trim();$(eid).textContent=test(val)?"":"⚠ "+$(eid).id.replace("e-","")+" needs attention";if(test(val)){}else ok=false};
+const v=(id,eid,test)=>{const val=$(id).value.trim();$(eid).textContent=test(val)?"":"! "+$(eid).id.replace("e-","")+" needs attention";if(test(val)){}else ok=false};
 v("#fname","#e-name",x=>x.length>1);v("#fmail","#e-mail",x=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(x));v("#fmsg","#e-msg",x=>x.length>9);
 if(!ok)return;if(!CONFIG.formspree){$("#formOk").style.display="block";return}
 const r=await fetch(CONFIG.formspree,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},body:JSON.stringify({name:$("#fname").value,email:$("#fmail").value,message:$("#fmsg").value})});
