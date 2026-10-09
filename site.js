@@ -1,7 +1,7 @@
 (function(){
 var d=document,w=window,$=function(i){return d.getElementById(i)},de=d.documentElement;
 var SH=w.SH={extra:0,calm:false,boost:0,ticks:[]};
-var FORMSPREE=""; /* <-- paste your endpoint here, e.g. "https://formspree.io/f/mxyzabcd" */
+var FORMSPREE="https://formspree.io/f/mppqragj"; /* live contact endpoint */
 /* ---------- page transition ---------- */
 requestAnimationFrame(function(){requestAnimationFrame(function(){de.classList.remove("wp")})});
 w.addEventListener("pageshow",function(e){if(e.persisted)de.classList.remove("wp","lv")});
