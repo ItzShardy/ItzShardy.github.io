@@ -75,7 +75,19 @@ if(nm.length<2||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(ml)||ms.length<10){ok.style.d
 if(!FORMSPREE){ok.style.display="block";ok.textContent="Looks good! Hook up Formspree to actually deliver this.";return}
 ok.style.display="block";ok.textContent="Sending…";
 fetch(FORMSPREE,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},body:JSON.stringify({name:nm,email:ml,message:ms,server:sv,players:pl,feel:fl})}).then(function(r){ok.textContent=r.ok?"Sent! I reply fast.":"Send failed — email me directly instead."}).catch(function(){ok.textContent="Send failed — email me directly instead."})}};
-$("copy").onclick=function(){var b=this;try{navigator.clipboard.writeText("im_shardy")}catch(e){}b.textContent="Copied";setTimeout(function(){b.textContent="Copy"},1400)}
+if($("copy"))$("copy").onclick=function(){var b=this;try{navigator.clipboard.writeText("im_shardy")}catch(e){}b.textContent="Copied";setTimeout(function(){b.textContent="Copy"},1400)}
+/* ---------- DISCORD presence (Lanyard) ---------- */
+(function(){var st=$("pStatus");if(!st)return;var act=$("pActivity"),dot=$("pDot"),img=$("pAvatar"),nm=$("pName"),live=$("pLive");
+function show(){var r=new XMLHttpRequest();r.open("GET","https://api.lanyard.rest/v1/users/1126831477783527434",true);r.onload=function(){try{var j=JSON.parse(r.responseText);if(!j.success)throw 0;
+var u=j.data.discord_user,s=j.data.discord_status;
+img.src=u.avatar?("https://cdn.discordapp.com/avatars/"+u.id+"/"+u.avatar+".png?size=128"):("https://cdn.discordapp.com/embed/avatars/"+((+u.discriminator||0)%5)+".png");
+nm.textContent=u.global_name||u.username;st.textContent="@"+u.username+" · "+s;dot.className="dot-"+s;live.style.display=s==="offline"?"none":"";
+var sp=j.data.listening_to_spotify&&j.data.spotify,gm=null,i,ac=j.data.activities||[];
+for(i=0;i<ac.length;i++){if(ac[i].type===0){gm=ac[i];break}}
+if(sp)act.textContent="♪ "+j.data.spotify.song+" — "+j.data.spotify.artist;
+else if(gm)act.textContent="▶ "+gm.name+(gm.details?" — "+gm.details:"");
+else act.textContent=s==="offline"?"Offline — DMs still open.":"Online — say hi."}catch(e){st.textContent="status unavailable";act.textContent="DMs open: im_shardy"}};r.onerror=function(){st.textContent="status unavailable";act.textContent="DMs open: im_shardy"};r.send()}
+show();setInterval(show,30000)})();
 /* ---------- WORK: 3D tunnel gallery ---------- */
 if($("tun")){var tun=$("tun"),tc=[].slice.call($("cam").children),NC=tc.length,tunTop=0,tunH=0,pp=0,lastpp=-1,lastIdx=-1;
 function tunLayout(){tunTop=tun.getBoundingClientRect().top+scrollY;tunH=tun.offsetHeight-innerHeight}
