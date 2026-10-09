@@ -70,10 +70,11 @@ c.addEventListener("pointerdown",function(e){dr=true;mv(e.clientX)});w.addEventL
 /* ---------- CONTACT ---------- */
 if($("form")){$("form").onsubmit=function(e){e.preventDefault();var f=e.target,ok=$("ok");
 var nm=f.elements.name.value.trim(),ml=f.elements.email.value.trim(),ms=f.elements.message.value.trim();
+var sv=f.elements.server?f.elements.server.value.trim():"",pl=f.elements.players?f.elements.players.value.trim():"",fl=f.elements.feel?f.elements.feel.value.trim():"";
 if(nm.length<2||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(ml)||ms.length<10){ok.style.display="block";ok.textContent="Please fill your name, a valid email and 10+ characters.";return}
 if(!FORMSPREE){ok.style.display="block";ok.textContent="Looks good! Hook up Formspree to actually deliver this.";return}
 ok.style.display="block";ok.textContent="Sending…";
-fetch(FORMSPREE,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},body:JSON.stringify({name:nm,email:ml,message:ms})}).then(function(r){ok.textContent=r.ok?"Sent! I reply fast.":"Send failed — email me directly instead."}).catch(function(){ok.textContent="Send failed — email me directly instead."})}};
+fetch(FORMSPREE,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},body:JSON.stringify({name:nm,email:ml,message:ms,server:sv,players:pl,feel:fl})}).then(function(r){ok.textContent=r.ok?"Sent! I reply fast.":"Send failed — email me directly instead."}).catch(function(){ok.textContent="Send failed — email me directly instead."})}};
 $("copy").onclick=function(){var b=this;try{navigator.clipboard.writeText("im_shardy")}catch(e){}b.textContent="Copied";setTimeout(function(){b.textContent="Copy"},1400)}
 /* ---------- WORK: 3D tunnel gallery ---------- */
 if($("tun")){var tun=$("tun"),tc=[].slice.call($("cam").children),NC=tc.length,tunTop=0,tunH=0,pp=0,lastpp=-1,lastIdx=-1;
