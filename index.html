@@ -1,237 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>MostCallMeShardy — Minecraft Plugin, Mod & Pack Developer</title>
-<meta name="description" content="MostCallMeShardy builds Paper plugins, Fabric mods, resource packs and PvP content. Dark purple premium portfolio."/>
-<meta property="og:title" content="MostCallMeShardy — Minecraft Developer"/>
-<meta property="og:description" content="Paper plugins · Fabric mods · Resource packs · PvP content"/>
-<meta property="og:type" content="website"/>
-<meta name="theme-color" content="#07030f"/>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232a0a5e'/%3E%3Crect x='14' y='14' width='36' height='36' fill='%238b5cf6'/%3E%3Crect x='22' y='22' width='12' height='12' fill='%23ede9fe'/%3E%3C/svg%3E"/>
-<!-- system fonts only: zero external font requests -->
-<link rel="stylesheet" href="css/style.css?v=26" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Minecraft Plugin, Mod &amp; Pack Developer — MostCallMeShardy</title>
+<meta name="description" content="Spin it, freeze it, break it. Paper plugins, Fabric mods, resource packs and PvP content.">
+<meta name="theme-color" content="#06000d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>try{if(sessionStorage.getItem("wp")){document.documentElement.classList.add("wp");sessionStorage.removeItem("wp")}}catch(e){}</script>
 </head>
 <body>
-<script>document.documentElement.classList.add('js')</script>
-<a class="skip" href="#about">Skip to content</a>
-<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
-<div class="grain" aria-hidden="true"></div>
-<div class="scroll-bg" id="scrollBg" aria-hidden="true"><img src="assets/second.jpg" alt="" onerror="this.remove()"/><img class="day-img" src="assets/day-mountain.jpg" alt="" loading="lazy" onerror="this.remove()"/></div>
-<div id="loader" role="status" aria-label="Loading"><div class="ld-box"><p>LOADING WORLD…</p><p class="ld-status" id="ldStatus">Loading chunks…</p><div class="ld-bar"><i></i></div></div></div>
-<div id="progress" aria-hidden="true"><i id="pfill"></i></div>
-
-
-<header id="nav"><nav class="nav wrap" aria-label="Main">
-<a class="logo" href="#top-hero"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><defs><linearGradient id="crownG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c3aed"/><stop offset="1" stop-color="#c4b5fd"/></linearGradient></defs><path d="M4 16.5 2.6 8.5l4.2 2.8L12 4.5l5.2 6.8 4.2-2.8L20 16.5z" fill="url(#crownG)"/><rect x="4" y="17.5" width="16" height="2.6" rx="1.3" fill="url(#crownG)"/><circle cx="12" cy="4" r="1" fill="#ede9fe"/><circle cx="2.6" cy="8" r="1" fill="#ede9fe"/><circle cx="21.4" cy="8" r="1" fill="#ede9fe"/><path d="M17 3.2l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="#fff"/></svg><b>SHARDY</b></a>
-<div class="links" id="links">
-<a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#services">Services</a><a href="#packs">Packs</a><a href="#videos">Videos</a><a href="#journey">Journey</a><a href="#contact">Contact</a>
+<img class="bg" id="bgi" src="assets/bg-stars.jpg" alt="">
+<canvas id="bgfx"></canvas><div class="vig"></div><div id="wipe"></div>
+<canvas id="fx"></canvas><div id="flash"></div>
+<div id="gate"><div><b class="neon">SHARDY</b><p>Best experienced with sound.</p><div class="bt"><button class="pill" id="gs">Enter with sound</button><button class="pill" id="gn">Enter without sound</button></div></div></div>
+<div id="photo"><img id="pimg" alt="Your broken crystal"><p><span>Crystal <b id="pnum">#1</b></span><span>Shardy</span></p></div>
+<div class="pbtn" id="pbtn"><button class="pill" id="padd">＋ Add to album</button><button class="pill" id="pskip" style="opacity:.7">Skip</button></div>
+<div id="alb"><button class="pill" id="close">✕ Close</button><div class="in"><h2 class="neon">Album</h2><p class="mono">Saved on this device</p><div class="tabs"><button class="pill on" data-t="new">Newest</button><button class="pill" data-t="liked">Liked</button></div><div class="grid" id="grid"></div></div></div>
+<header>
+<a class="logo neon" href="index.html">SHARDY</a>
+<nav id="nav"><ul><li><a href="index.html" class="on">Home</a></li><li><a href="about.html">About</a></li><li><a href="work.html">Work</a></li><li><a href="packs.html">Packs</a></li><li><a href="videos.html">Videos</a></li><li><a href="services.html">Services</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+<div class="hd"><button class="pill" id="snd">Sound Off</button><button class="pill" id="albBtn">Album <span id="cnt">0</span></button><button class="pill" id="menu" aria-label="Menu">☰</button></div>
+</header>
+<div id="hero">
+<div class="rows" id="rows" aria-hidden="true"></div>
+<div class="fl l"><small>Paper · Java 17</small>Plugins</div><div class="fl r"><small>16x–32x · PvP</small>Packs</div>
+<div class="title"><h1>MostCallMeShardy</h1><span class="mono">Minecraft developer · Java · Fabric · Packs · PvP</span></div>
+<div id="stage"><img id="star" src="assets/star-glow.jpg" alt="A glowing star crystal you can spin, freeze and break" draggable="false"></div>
+<div class="ui"><p id="hint">Growing…</p><div class="meter"><div id="mf"></div></div><button class="pill" id="brk">Break it</button><div class="scroll">SCROLL OR PICK A PAGE →</div></div>
 </div>
-<button class="chip" id="themeBtn" type="button" aria-pressed="false" aria-label="Switch to light mode" title="Day / night">☾</button>
-<button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">☰</button>
-</nav></header>
-
-<main id="top-hero">
-<div class="announce" id="announce" role="status"><span>Shard Launcher releasing soon</span><button id="announceX" type="button" aria-label="Dismiss announcement">✕</button></div>
-<!-- HERO -->
-<section class="hero" aria-label="Intro">
-<div class="space-bg" id="spaceBg" aria-hidden="true"><img id="spaceImg" src="assets/space-bg.png" alt="" onerror="this.remove()"/><img class="day-img" src="assets/day-sky.jpg" alt="" loading="lazy" onerror="this.remove()"/></div>
-<div class="space-veil" id="spaceVeil" aria-hidden="true"></div>
-<canvas id="stars" aria-hidden="true"></canvas>
-<div class="wrap hero-grid">
-<div>
-<p class="kicker">// MINECRAFT DEVELOPER — JAVA · FABRIC · PACKS · PVP</p>
-<h1 class="hero-name"><span class="n1">MostCallMe</span> <span class="n2">Shardy</span></h1>
-<p class="type"><span class="role-cycle" style="display:inline-block;height:1.7em;overflow:hidden;vertical-align:bottom"><ul id="roleList" style="list-style:none;margin:0;padding:0"><li>Plugin Developer</li><li>Mod Developer</li><li>Resource Pack Creator</li><li>PvP Content Creator</li></ul></span></p>
-<p class="lede">My work may not change the world, but it changed something in me.</p>
-<p class="lede2">Paper plugins, Fabric mods, resource packs, PvP videos — two months in, one developer, no interest in looking bigger than I am. If my status says <span class="marker">Shard Launcher</span>, I'm testing something that just exploded.</p>
-<div class="cta">
-<a class="btn btn-p magnetic" href="#projects">View my work</a>
-<a class="btn btn-g magnetic" href="#contact">Contact me</a>
-</div>
-<div class="mini-stats"><span><b>Writes</b> Java 17 · Paper API</span><span><b>Also</b> configs · Git · HTML/CSS</span><span><b>Built</b> 2 months · one dev</span><span><b>Reach me</b> Discord im_shardy</span></div>
-</div>
-<div class="presence hero-p load-3" id="presence">
-<div class="p-head">
-<div class="p-ava"><img id="pAvatar" src="https://cdn.discordapp.com/embed/avatars/1.png" alt="Shardy Discord profile picture" width="72" height="72"/><span id="pDot" class="dot-offline" aria-hidden="true"></span></div>
-<div class="p-who"><strong id="pName">im_shardy</strong><span id="pStatus">connecting…</span></div>
-<span class="p-live" id="pLive" style="display:none">LIVE</span>
-</div>
-<p class="p-act" id="pActivity"></p>
-<div class="p-cta"><a class="btn btn-p" href="https://discord.com/users/1126831477783527434" target="_blank" rel="noreferrer">Open Discord profile</a></div>
-</div>
-</div>
-<div class="scrolldown">scroll<i></i></div>
-</section>
-<div class="divider wrap" aria-hidden="true"></div>
-<div class="marquee" aria-hidden="true"><div class="mtrack"><span>Java 17 · Paper API · Fabric · Resource Packs · PvP Content · Shard Launcher · Git · YAML ·&nbsp;</span><span>Java 17 · Paper API · Fabric · Resource Packs · PvP Content · Shard Launcher · Git · YAML ·&nbsp;</span></div></div>
-
-<!-- ABOUT -->
-<section id="about"><div class="wrap">
-<h2 class="rv">About me</h2><p class="sub rv" style="--d:.1s">Plugin dev by day, BAD txt pack maker and PvP editor.</p>
-<div class="about-grid">
-<div class="avatar rv" role="img" aria-label="MostCallMeShardy profile picture"><img src="assets/pfp.png" alt="MostCallMeShardy profile picture" width="280" height="280" loading="lazy"/></div>
-<div class="glass rv" style="--d:.15s;padding:24px">
-<p>Hey — I'm <strong>MostCallMeShardy</strong>. I write custom <strong>Paper plugins (Java)</strong>, tinker with <strong>Fabric client-side mods</strong>, merge and version <strong>resource packs</strong>, build small <strong>launcher/client tools</strong>, and cut <strong>PvP montages &amp; overlays</strong>. This site is my lab: every card links to code or video once it's public.</p>
-<div class="counters">
-<div class="counter glass"><b data-count="12">0</b><br/><small>projects</small></div>
-<div class="counter glass"><b data-count="8">0</b><br/><small>plugins</small></div>
-<div class="counter glass"><b data-count="6">0</b><br/><small>packs shipped</small></div>
-<div class="counter glass"><b data-count="3">0</b><br/><small>months building</small></div>
-</div></div>
-</div></div></section>
-
-<!-- SKILLS -->
-<section id="skills"><div class="wrap">
-<h2 class="rv">Skills — XP bars included</h2><p class="sub rv" style="--d:.1s">Hover a card: it tilts toward your cursor. Bars fill when you scroll here.</p>
-<div class="skills">
-<div class="skill glass rv tilt" style="--d:0s"><div class="glare"></div><div class="px-ico" aria-hidden="true"></div><h3>Java</h3><p>Events, schedulers, configs, clean reloads.</p><div class="xp"><i data-w="85"></i></div></div>
-<div class="skill glass rv tilt" style="--d:.08s"><div class="glare"></div><div class="px-ico" aria-hidden="true"></div><h3>Paper API</h3><p>Commands, GUIs, persistence, minigames.</p><div class="xp"><i data-w="80"></i></div></div>
-<div class="skill glass rv tilt" style="--d:.16s"><div class="glare"></div><div class="px-ico" aria-hidden="true"></div><h3>Fabric</h3><p>Client mixins, HUDs, keybinds, toggles.</p><div class="xp"><i data-w="62"></i></div></div>
-<div class="skill glass rv tilt" style="--d:.24s"><div class="glare"></div><div class="px-ico" aria-hidden="true"></div><h3>Resource Packs</h3><p>Merges, versioning, custom textures.</p><div class="xp"><i data-w="74"></i></div></div>
-<div class="skill glass rv tilt" style="--d:.32s"><div class="glare"></div><div class="px-ico" aria-hidden="true"></div><h3>Git &amp; Tooling</h3><p>Repos, releases, launcher scripts.</p><div class="xp"><i data-w="70"></i></div></div>
-<div class="skill glass rv tilt" style="--d:.4s"><div class="glare"></div><div class="px-ico" aria-hidden="true"></div><h3>Video Editing</h3><p>Montages, replays, overlays, thumbnails.</p><div class="xp"><i data-w="66"></i></div></div>
-</div></div></section>
-
-<!-- PROJECTS -->
-<section id="projects"><div class="wrap">
-<h2 class="rv">Selected work</h2><p class="sub rv" style="--d:.1s">Filter, then click any card for details. Replace text via the CONFIG at the bottom.</p>
-<div class="filters rv" role="group" aria-label="Filter projects">
-<button class="chip on" data-f="all">All</button><button class="chip" data-f="mod">Mods</button><button class="chip" data-f="tool">Tools</button><button class="chip" data-f="content">Content</button>
-</div>
-<div class="grid" id="grid">
-<div class="grad-border proj rv" data-cat="mod" style="--d:.24s" data-title="AmethystHUD" data-desc="Client-side Fabric mod: FPS-friendly HUD, toggles, keybinds. Learning mixins — first goal is a clean armor + potion HUD that doesn't tank frames." data-tags="Fabric · Client · HUD"><div><h3>AmethystHUD <span class="soon-badge">soon</span></h3><p>Fabric utility mod — HUD + toggles.</p><div class="tags"><span>Fabric</span><span>Client</span><span>Mod</span></div></div></div>
-<div class="grad-border proj rv" data-cat="content" style="--d:.4s" data-title="PvP Montages & Overlays" data-desc="Replays, overlays and montage edits. New videos on YouTube: @itz_DevShardy and TikTok: @mc_shardy." data-tags="Replays · Edits · Overlays"><div><h3>PvP Montages</h3><p>Replays, overlays, edits.</p><div class="tags"><span>Video</span><span>PvP</span><span>Content</span></div></div></div>
-<div class="grad-border proj rv" data-cat="tool" style="--d:.48s" data-title="Shard Launcher" data-desc="My own Minecraft launcher: versions, profiles, and Discord RPC — the reason my status says 'Shard Launcher'. Built to learn how the game actually boots." data-tags="Java · Launcher · RPC"><div><h3>Shard Launcher <span class="soon-badge">soon</span></h3><p>Custom launcher + Discord RPC.</p><div class="tags"><span>Java</span><span>Launcher</span><span>Tool</span></div></div></div>
-</div></div></section>
-
-<!-- SERVICES -->
-<section id="services"><div class="wrap">
-<h2 class="rv">Built to order</h2><p class="sub rv" style="--d:.1s">Most of what's on this site started as someone asking for something that didn't exist yet. Small jobs, agreed in writing, priced before I start.</p>
-<div class="svc-grid">
-<div class="glass svc rv"><h3>Mini plugins</h3><p>Commands, GUIs, configs that survive reloads.</p><span class="tags"><span>Java 17 · Paper</span></span><br/><a href="commissions.html">How commissions work →</a></div>
-<div class="glass svc rv" style="--d:.08s"><h3>Pack work</h3><p>Retextures, merges, versioning. See the slider for proof.</p><span class="tags"><span>16x–32x · PvP</span></span><br/><a href="#packs">See the showdown →</a></div>
-<div class="glass svc rv" style="--d:.16s"><h3>Server setup</h3><p>Configs, permissions, ranks — the unglamorous stuff that holds a server together.</p><span class="tags"><span>Paper · LuckPerms</span></span><br/><a href="commissions.html">How commissions work →</a></div>
-<div class="glass svc rv" style="--d:.24s"><h3>Overlays &amp; edits</h3><p>PvP overlays, thumbnails, montage cuts.</p><span class="tags"><span>Video · Design</span></span><br/><a href="#contact">Contact me →</a></div>
-</div></div></section>
-
-<!-- PACKS -->
-<section id="packs"><div class="wrap">
-<h2 class="rv">My pack, with receipts</h2><p class="sub rv" style="--d:.1s">Same wall, same shaders. Drag the handle — left is vanilla, right is <span class="marker">my retexture</span>. Every sword, every armor piece, redrawn pixel by pixel.</p>
-<div class="mc-compare rv" id="mcCompare">
-<img class="mc-img" id="mcOff" src="assets/pack-off.png" alt="Item frame wall in vanilla Minecraft — default swords and armor"/>
-<div class="mc-top" id="mcTop"><img id="mcOn" src="assets/pack-on.png" alt="Same wall with Shardy's resource pack — crimson swords and dark armor"/></div>
-<span class="mc-tag left">VANILLA</span><span class="mc-tag right">MY PACK</span>
-<div class="mc-knob" id="mcKnob"></div>
-<input type="range" min="0" max="100" value="50" id="mcRange" aria-label="Compare vanilla versus my pack"/>
-<div class="mc-fallback" id="mcFallback"><p style="font-size:19px;color:var(--p100);font-weight:600">screenshots go here — send me pack-on.png + pack-off.png and the slider wakes up</p></div>
-</div></div></section>
-
-<!-- VIDEOS -->
-<section id="videos"><div class="wrap">
-<h2 class="rv">Videos</h2><p class="sub rv" style="--d:.1s">Montages, pack showcases, launcher clips — straight from my TikTok. Full archive lives on the profile.</p>
-<div class="vids">
-<!-- TO FEATURE A VIDEO: set data-vid to its TikTok link, replace h3/p, and put its thumbnail in assets/ as noted -->
-<article class="glass vid rv" data-vid="https://www.tiktok.com/@mc_shardy/video/7693619983271644438">
-<a class="vid-thumb" href="https://www.tiktok.com/@mc_shardy/video/7693619983271644438" target="_blank" rel="noreferrer" aria-label="Watch Slop edit mace montage on TikTok"><img src="assets/vid1.jpg" alt="First-person mace swing under a purple galaxy sky" loading="lazy"/><span class="vid-play" aria-hidden="true">▶</span></a>
-<div class="vid-meta"><h3>Slop edit — mace montage</h3><p>Boredom cut · Kino Red Ribbon pack · spearmace PvP.</p></div>
-</article>
-<article class="glass vid rv" style="--d:.1s" data-vid="https://www.tiktok.com/@mc_shardy/video/7691047410767908118">
-<a class="vid-thumb" href="https://www.tiktok.com/@mc_shardy/video/7691047410767908118" target="_blank" rel="noreferrer" aria-label="Watch FFA servers montage on TikTok"><img src="assets/vid2.jpg" alt="MostCallMeShardy holding a mace on cherry blossom blocks" loading="lazy"/><span class="vid-play" aria-hidden="true">▶</span></a>
-<div class="vid-meta"><h3>Tuff edit — FFA servers</h3><p>Kyron · PigFFA · WildMC · Gabriel voice lines.</p></div>
-</article>
-<article class="glass vid rv" style="--d:.2s" data-vid="https://www.tiktok.com/@mc_shardy/video/7690204640935218454">
-<a class="vid-thumb" href="https://www.tiktok.com/@mc_shardy/video/7690204640935218454" target="_blank" rel="noreferrer" aria-label="Watch Kyron SMP edit on TikTok"><img src="assets/vid3.jpg" alt="Mid-fight combat HUD with timer" loading="lazy"/><span class="vid-play" aria-hidden="true">▶</span></a>
-<div class="vid-meta"><h3>Kyron SMP edit</h3><p>Unstable-SMP chaos · FFA · crates · events.</p></div>
-</article>
-</div>
-<div class="vid-cta rv"><a class="btn btn-p" href="https://www.tiktok.com/@mc_shardy" target="_blank" rel="noreferrer">All videos on TikTok</a><a class="btn btn-g" href="https://www.youtube.com/@itz_DevShardy/featured" target="_blank" rel="noreferrer">YouTube channel</a></div>
-</div></section>
-
-<!-- JOURNEY -->
-<section id="journey"><div class="wrap">
-<h2 class="rv">Journey</h2><p class="sub rv" style="--d:.1s">The line draws as you scroll. Edit milestones in HTML.</p>
-<div class="tl" id="tl"><div class="tl-fill" id="tlfill"></div>
-<div class="tl-item glass rv"><b>MONTH 1 — JOINED A SERVER</b><h3 style="margin:6px 0">It started with playing</h3><p style="color:var(--mut);margin:0">I joined a Minecraft server. That's where it all started.</p></div>
-<div class="tl-item glass rv"><b>MONTH 2 — SKRIPT ERA</b><h3 style="margin:6px 0">First scripts</h3><p style="color:var(--mut);margin:0">I started to make skripts with the Skript plugin. First taste of making the game do things.</p></div>
-<div class="tl-item glass rv"><b>MONTH 3 — ???</b><h3 style="margin:6px 0">idk what i did there</h3><p style="color:var(--mut);margin:0">Honestly? Neither do I. It counted anyway.</p></div>
-<div class="tl-item glass rv"><b>NOW — LATER MONTH 3</b><h3 style="margin:6px 0">Mods, plugins, etc.</h3><p style="color:var(--mut);margin:0">Im making mods/plugin ect… Paper, Fabric, packs — this portfolio is the proof.</p></div>
-</div></div></section>
-
-<!-- FAQ -->
-<section id="faq"><div class="wrap">
-<h2 class="rv">Asked, answered</h2><p class="sub rv" style="--d:.1s">The stuff people actually ask before DMing.</p>
-<div class="faq rv">
-<details><summary>How long have you been doing this?</summary><p>Two months. Everything here says exactly how finished it is — I'd rather show a real TODO list than a fake portfolio.</p></details>
-<details><summary>Can I pay you for work?</summary><p>Small jobs, yes. We agree scope and price in writing first, I fix my own bugs free within 7 days. Full terms on the <a href="commissions.html">commissions page</a>.</p></details>
-<details><summary>Will you join my server team?</summary><p>Probably not — I'm heads-down learning. Feedback swaps and small one-off jobs, always.</p></details>
-<details><summary>What versions do you build for?</summary><p>Paper 1.21 on Java 17. If your server runs something ancient, I'll tell you straight up if I can't help.</p></details>
-<details><summary>Do you share my server files around?</summary><p>No. Your files stay yours, DMs stay private, and there's no mailing list to end up on.</p></details>
-</div></div></section>
-
-<!-- CONTACT -->
-<section id="contact"><div class="wrap">
-<h2 class="rv">Contact</h2><p class="sub rv" style="--d:.1s">Form is front-end only — plug in Formspree (see CONFIG) to receive mail.</p>
-<div class="contact-grid">
-<form class="glass rv" id="form" style="padding:24px" novalidate>
-<div class="field"><input id="fname" placeholder=" " autocomplete="name"/><label for="fname">Your name</label><p class="err" id="e-name"></p></div>
-<div class="field"><input id="fmail" type="email" placeholder=" " autocomplete="email"/><label for="fmail">Email</label><p class="err" id="e-mail"></p></div>
-<div class="field"><textarea id="fmsg" rows="5" placeholder=" "></textarea><label for="fmsg">Message — server version + what you need</label><p class="err" id="e-msg"></p></div>
-<button class="btn btn-p magnetic" type="submit" style="border:0;cursor:pointer;width:100%">Send message</button>
-<p class="ok" id="formOk">✓ Looks good! Hook up Formspree in CONFIG to actually deliver this.</p>
-</form>
-<div class="glass rv" style="--d:.15s;padding:24px">
-<h3 style="margin-top:0">DM me directly</h3>
-<p style="color:var(--mut)">See my live status up top — or reach me here. No passwords or personal docs, please.</p>
-<p><strong>Discord:</strong> <span id="dhandle">im_shardy</span> <button class="chip" id="copyD" type="button">Copy</button></p>
-<p><strong>Email:</strong> <a id="memail" href="mailto:newspiderman72@gmail.com">newspiderman72@gmail.com</a></p>
-<p><strong>GitHub:</strong> <a href="https://github.com/ItzShardy" target="_blank" rel="noreferrer">github.com/ItzShardy</a></p>
-<div class="socials">
-<a href="https://github.com/ItzShardy" aria-label="GitHub" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.2-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.4.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg></a>
-<a href="mailto:newspiderman72@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M2 5h20v14H2z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m2 7 10 7L22 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
-<a href="https://www.youtube.com/@itz_DevShardy/featured" aria-label="YouTube — itz_DevShardy" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24"><path d="M23 12s0-3.4-.4-5A2.8 2.8 0 0 0 20.6 5C18.9 4.5 12 4.5 12 4.5s-6.9 0-8.6.5A2.8 2.8 0 0 0 1.4 7C1 8.6 1 12 1 12s0 3.4.4 5a2.8 2.8 0 0 0 2 2c1.7.5 8.6.5 8.6.5s6.9 0 8.6-.5a2.8 2.8 0 0 0 2-2c.4-1.6.4-5 .4-5zM9.8 15.5v-7l6 3.5z"/></svg></a>
-<a href="https://www.tiktok.com/@mc_shardy" aria-label="TikTok — mc_shardy" target="_blank" rel="noreferrer"><svg viewBox="0 0 448 512"><path d="M448 209.9a210.1 210.1 0 0 1-122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2 122.2 122.2 0 0 0 54.2 45.2 121.5 121.5 0 0 0 66.7 20.2z"/></svg></a>
-</div>
-<p style="color:var(--mut);font-size:13px" id="copyMsg" role="status"></p>
-</div>
-</div></div></section>
-</main>
-
-<footer><div class="wrap">Built by <strong>MostCallMeShardy</strong> · Paper · Fabric · Packs · PvP <span class="vtag">v7</span><br/><small>Fan project. Not affiliated with Mojang/Microsoft. · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="cookies.html">Cookies</a> · <a href="commissions.html">Commissions</a></small><div class="wordmark" aria-hidden="true">SHARDY</div></div></footer>
-<audio id="theme" src="assets/theme.mp3" loop preload="none"></audio>
-<button id="music" aria-label="Play site music" aria-pressed="false" title="Play music">♪</button>
-<button id="top" aria-label="Back to top">↑</button>
-
-<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="modal-card glass">
-<h3 id="mTitle"></h3><p id="mDesc" style="color:var(--mut)"></p><p id="mTags" style="color:var(--p300)"></p>
-<button class="btn btn-g" id="mClose">Close (Esc)</button>
-</div></div>
-<noscript><style>.js .rv{opacity:1}#loader{display:none}</style></noscript>
-
-<script src="js/script.js?v=15"></script>
+<main class="exp"><div class="wrap"><span class="mono">Explore</span><div class="ex"><a class="exc rv" href="about.html"><i>◈</i><span class="mono">01</span><div><h3>About</h3><p>Who I am and what I work with.</p></div></a><a class="exc rv" href="work.html"><i>◈</i><span class="mono">02</span><div><h3>Work</h3><p>Fly through my projects in 3D.</p></div></a><a class="exc rv" href="packs.html"><i>◈</i><span class="mono">03</span><div><h3>Packs</h3><p>Drag to compare vanilla and my pack.</p></div></a><a class="exc rv" href="videos.html"><i>◈</i><span class="mono">04</span><div><h3>Videos</h3><p>PvP montages and pack showcases.</p></div></a><a class="exc rv" href="services.html"><i>◈</i><span class="mono">05</span><div><h3>Services</h3><p>Plugins, packs, server setup, edits.</p></div></a><a class="exc rv" href="contact.html"><i>◈</i><span class="mono">06</span><div><h3>Contact</h3><p>Discord, email, or the form.</p></div></a></div></div></main>
+<footer><div class="wrap"><span>Built by MostCallMeShardy · Fan project, not affiliated with Mojang/Microsoft.</span><span><a href="https://itzshardy.github.io/privacy.html">Privacy</a><a href="https://itzshardy.github.io/terms.html">Terms</a><a href="https://itzshardy.github.io/cookies.html">Cookies</a><a href="https://itzshardy.github.io/commissions.html">Commissions</a></span></div></footer>
+<script src="site.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
