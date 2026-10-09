@@ -1,6 +1,7 @@
 (function(){
 var d=document,w=window,$=function(i){return d.getElementById(i)},de=d.documentElement;
 var SH=w.SH={extra:0,calm:false,boost:0,ticks:[]};
+var FORMSPREE=""; /* <-- paste your endpoint here, e.g. "https://formspree.io/f/mxyzabcd" */
 /* ---------- page transition ---------- */
 requestAnimationFrame(function(){requestAnimationFrame(function(){de.classList.remove("wp")})});
 w.addEventListener("pageshow",function(e){if(e.persisted)de.classList.remove("wp","lv")});
@@ -67,8 +68,13 @@ if($("cmp")){var c=$("cmp"),t2=$("top2"),hb=$("hb"),dr=false;
 function mv(x){var b=c.getBoundingClientRect(),p=Math.max(0,Math.min(100,(x-b.left)/b.width*100));t2.style.clipPath="inset(0 0 0 "+p+"%)";hb.style.left=p+"%"}
 c.addEventListener("pointerdown",function(e){dr=true;mv(e.clientX)});w.addEventListener("pointermove",function(e){if(dr)mv(e.clientX)});w.addEventListener("pointerup",function(){dr=false})}
 /* ---------- CONTACT ---------- */
-if($("form")){$("form").onsubmit=function(e){e.preventDefault();$("ok").style.display="block"};
-$("copy").onclick=function(){var b=this;try{navigator.clipboard.writeText("im_shardy")}catch(e){}b.textContent="Copied";setTimeout(function(){b.textContent="Copy"},1400)}}
+if($("form")){$("form").onsubmit=function(e){e.preventDefault();var f=e.target,ok=$("ok");
+var nm=f.elements.name.value.trim(),ml=f.elements.email.value.trim(),ms=f.elements.message.value.trim();
+if(nm.length<2||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(ml)||ms.length<10){ok.style.display="block";ok.textContent="Please fill your name, a valid email and 10+ characters.";return}
+if(!FORMSPREE){ok.style.display="block";ok.textContent="Looks good! Hook up Formspree to actually deliver this.";return}
+ok.style.display="block";ok.textContent="Sending…";
+fetch(FORMSPREE,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},body:JSON.stringify({name:nm,email:ml,message:ms})}).then(function(r){ok.textContent=r.ok?"Sent! I reply fast.":"Send failed — email me directly instead."}).catch(function(){ok.textContent="Send failed — email me directly instead."})}};
+$("copy").onclick=function(){var b=this;try{navigator.clipboard.writeText("im_shardy")}catch(e){}b.textContent="Copied";setTimeout(function(){b.textContent="Copy"},1400)}
 /* ---------- WORK: 3D tunnel gallery ---------- */
 if($("tun")){var tun=$("tun"),tc=[].slice.call($("cam").children),NC=tc.length,tunTop=0,tunH=0,pp=0,lastpp=-1,lastIdx=-1;
 function tunLayout(){tunTop=tun.getBoundingClientRect().top+scrollY;tunH=tun.offsetHeight-innerHeight}
