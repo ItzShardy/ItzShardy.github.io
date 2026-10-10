@@ -134,7 +134,7 @@ if(w.ResizeObserver)new ResizeObserver(tunLayout).observe(d.body);if(d.fonts&&d.
 SH.ticks.push(function(now,dt){if(tunH<=0)return;var tp=Math.max(0,Math.min(1,(scrollY-tunTop)/tunH));pp+=(tp-pp)*Math.min(1,dt*7);if(Math.abs(tp-pp)<.0004)pp=tp;
 if(pp!==lastpp&&scrollY>tunTop-innerHeight&&scrollY<tunTop+tunH+innerHeight){tunnel(pp);lastpp=pp}})}
 /* ---------- HOME: spin, freeze, break ---------- */
-if($("hero")){
+if($("hero")&&$("star")){
 var hero=$("hero"),star=$("star"),hint=$("hint"),mf=$("mf"),fx=$("fx"),cx=fx.getContext("2d");
 var ang=0,vel=0,en=0,frozen=false,state="wait",sc=0,t0=performance.now(),parts=[],cur="",N=0,dirty=false;
 var H={grow:"Growing…",play:"Use the arrow keys or drag to spin the crystal. Keep spinning to freeze it, then press Enter to break it.",frozen:"Frozen. Press Enter to break it and take a photo.",photo:"Swipe the photo up, or press ↑, to add it to the album."};
@@ -188,4 +188,11 @@ var px=null;hero.addEventListener("pointerdown",function(e){if(e.target.closest(
 w.addEventListener("pointermove",function(e){if(px===null)return;spin((e.clientX-px)*.35);px=e.clientX});
 w.addEventListener("pointerup",function(){px=null;hero.style.cursor=""});
 var py=null;$("photo").addEventListener("pointerdown",function(e){py=e.clientY});w.addEventListener("pointerup",function(e){if(py!==null&&py-e.clientY>60)add();py=null})}
+
+if($("hero")&&!$("star")){
+var R2=$("rows"),r2,s2,j2,k2;for(k2=0;k2<8;k2++){r2=d.createElement("div");r2.className="row";r2.style.animationDuration=(46+k2*7)+"s";for(j2=0;j2<12;j2++){s2=d.createElement("span");s2.textContent="SHARDY";r2.appendChild(s2)}R2.appendChild(r2)}
+var enter2=function(v){$("gate").classList.add("off");try{sessionStorage.setItem("gate","1")}catch(e){}if(v!==null)setSnd(v)};
+$("gs").onclick=function(){enter2(true)};$("gn").onclick=function(){enter2(false)};
+try{if(sessionStorage.getItem("gate")==="1")enter2(null)}catch(e){}
+}
 })();

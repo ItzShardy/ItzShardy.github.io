@@ -17,33 +17,43 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="vfx.css">
+<link rel="stylesheet" href="shardgame.css">
 <script>try{if(sessionStorage.getItem("wp")){document.documentElement.classList.add("wp");sessionStorage.removeItem("wp")}}catch(e){}try{var th=localStorage.getItem("theme");if(!th)th=matchMedia("(prefers-color-scheme:light)").matches?"light":"dark";document.documentElement.dataset.theme=th}catch(e){document.documentElement.dataset.theme="dark"}</script>
 </head>
 <body>
 <img class="bg" id="bgi" src="assets/bg-stars.jpg" alt="">
 <canvas id="bgfx"></canvas><div class="vig"></div><div id="wipe"></div>
-<canvas id="fx"></canvas><div id="flash"></div>
 <div id="gate"><div><b class="neon">SHARDY</b><p>Best experienced with sound.</p><div class="bt"><button class="pill" id="gs">Enter with sound</button><button class="pill" id="gn">Enter without sound</button></div></div></div>
-<div id="photo"><img id="pimg" alt="Your broken crystal"><p><span>Crystal <b id="pnum">#1</b></span><span>Shardy</span></p></div>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"MostCallMeShardy","url":"https://itzshardy.github.io/","jobTitle":"Minecraft plugin, mod and resource pack developer","sameAs":["https://github.com/ItzShardy","https://www.tiktok.com/@mc_shardy","https://www.youtube.com/@itz_DevShardy"]}</script>
-<div class="pbtn" id="pbtn"><button class="pill" id="padd">↑ Add to album</button><button class="pill" id="pskip" style="opacity:.7">Skip</button></div>
-<div id="alb"><button class="pill" id="close">✕ Close</button><div class="in"><h2 class="neon">Album</h2><p class="mono">Saved on this device</p><div class="tabs"><button class="pill on" data-t="new">Newest</button><button class="pill" data-t="liked">Liked</button></div><div class="grid" id="grid"></div></div></div>
 <header>
 <a class="logo neon" href="index.html">SHARDY</a>
 <nav id="nav"><ul><li><a href="index.html" class="on">Home</a></li><li><a href="about.html">About</a></li><li><a href="work.html">Work</a></li><li><a href="downloads.html">Downloads</a></li><li><a href="devlog.html">Devlog</a></li><li><a href="estimate.html">Estimate</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
-<div class="hd"><button class="pill" id="thm">☀ Day</button><button class="pill" id="snd">♪ Off</button><button class="pill" id="albBtn">★ Album <span id="cnt">0</span></button><button class="pill" id="menu" aria-label="Menu">≡</button></div>
+<div class="hd"><button class="pill" id="thm">☀ Day</button><button class="pill" id="snd">♪ Off</button><button class="pill" id="menu" aria-label="Menu">≡</button></div>
 </header>
 <div id="hero">
 <div class="rows" id="rows" aria-hidden="true"></div>
-<div class="fl l"><small>Paper, Java 17</small>Plugins</div><div class="fl r"><small>16x–32x, PvP</small>Packs</div>
 <div class="title"><h1>MostCallMeShardy</h1><span class="mono">Minecraft developer — Java, Fabric, Packs, PvP</span></div>
-<div id="stage"><img id="star" src="assets/star-glow.jpg" alt="A glowing star crystal you can spin, freeze and break" draggable="false"></div>
-<div class="ui"><p id="hint">Growing…</p><div class="meter"><div id="mf"></div></div><button class="pill" id="brk">Break it</button><div class="scroll">Scroll or pick a page below</div></div>
+<div class="vx-stage" id="vxs">
+<div class="vx-card" id="vxc">
+<div class="vx-bar"><span class="vx-dots"><i></i><i></i><i></i></span><span class="vx-fn" id="vxf">ShardyPlugin.java</span><span class="vx-live"><em></em>live</span></div>
+<div class="vx-body" id="vxb"></div>
+<div class="vx-ok" id="vxk"></div>
+<div class="vx-sheen"></div>
+</div>
+<a class="vx-chip c1" href="work.html" data-z="46"><b>Paper 1.21</b> Java 17</a>
+<a class="vx-chip c2" href="downloads.html" data-z="70"><b>Fabric</b> client mods</a>
+<a class="vx-chip c3" href="packs.html" data-z="58"><b>16x–32x</b> PvP packs</a>
+<a class="vx-chip c4" href="videos.html" data-z="38"><b>60 fps</b> montages</a>
+</div>
+<div class="ui"><div class="scroll">Scroll or pick a page below</div></div>
 </div>
 <main class="exp"><div class="wrap"><div class="ex"><a class="exc" href="about.html"><h3>About</h3><p>Who I am and what I work with.</p></a><a class="exc" href="work.html"><h3>Work</h3><p>Fly through my projects in 3D.</p></a><a class="exc" href="packs.html"><h3>Packs</h3><p>Drag to compare vanilla and my pack.</p></a><a class="exc" href="videos.html"><h3>Videos</h3><p>PvP montages and pack showcases.</p></a><a class="exc" href="services.html"><h3>Services</h3><p>Plugins, packs, server setup, edits.</p></a><a class="exc" href="estimate.html"><h3>Estimate</h3><p>Pick what you need, see a price.</p></a><a class="exc" href="downloads.html"><h3>Downloads</h3><p>Packs, mods and launchers.</p></a><a class="exc" href="devlog.html"><h3>Devlog</h3><p>What I am building right now.</p></a><a class="exc" href="contact.html"><h3>Contact</h3><p>Discord, email, or the form.</p></a></div></div><div class="wrap live"><h2 class="sh">Right now</h2><div class="g3"><div class="item"><span class="mono">Status</span><p data-stat></p><p>Get a rough price on the <a href="estimate.html" style="color:var(--link)">estimator</a>.</p></div><div class="item" id="vid"></div><div class="item" id="gh"></div></div></div></main>
 <footer><div class="wrap"><span>Built by MostCallMeShardy, Fan project, not affiliated with Mojang/Microsoft.</span><span><a href="https://itzshardy.github.io/privacy.html">Privacy</a><a href="https://itzshardy.github.io/terms.html">Terms</a><a href="https://itzshardy.github.io/cookies.html">Cookies</a><a href="https://itzshardy.github.io/commissions.html">Commissions</a></span></div></footer>
 <div class="ver" role="group" aria-label="Choose version"><a href="shardy-world.html">3D</a><a href="index.html" class="on" aria-current="true">Classic</a></div>
 <script src="config.js"></script>
 <script src="site.js"></script>
+<script src="vfx.js" defer></script>
+<script src="shardgame.js" defer></script>
 </body>
 </html>
