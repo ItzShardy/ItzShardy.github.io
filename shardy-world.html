@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Shardy — plugins, packs and mods for Minecraft</title>
 <meta name="description" content="Fly through a crystal world to see what Shardy builds: Paper plugins, resource packs, Fabric mods and PvP edits.">
+<link rel="canonical" href="https://itzshardy.github.io/shardy-world.html">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#07020f">
+<meta property="og:type" content="website"><meta property="og:site_name" content="MostCallMeShardy">
+<meta property="og:title" content="Shardy: crystal world (3D)"><meta property="og:description" content="Fly through a crystal world to see what Shardy builds: Paper plugins, resource packs, Fabric mods and PvP edits.">
+<meta property="og:url" content="https://itzshardy.github.io/shardy-world.html"><meta property="og:image" content="https://itzshardy.github.io/assets/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -45,22 +52,25 @@ padding:calc(90px + env(safe-area-inset-top)) max(64px,env(safe-area-inset-right
 #cr.hold{width:120px;height:120px;margin:-60px 0 0 -60px;border-color:#fff}
 #cd{width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:#fff}
 .hascur,.hascur a,.hascur button{cursor:none}
-#ld{position:fixed;inset:0;z-index:100;background:var(--bg);display:grid;place-items:center;transition:opacity 1s,visibility 1s}
+#ld{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity 1s,visibility 1s}
+#ldb{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
 #ld.off{opacity:0;visibility:hidden}
 #ld b{font:800 clamp(80px,22vw,260px)/1 var(--disp);letter-spacing:-.06em;font-variant-numeric:tabular-nums}
-.hr{display:flex;align-items:center;gap:18px;pointer-events:auto}
+.hr{display:flex;align-items:center;gap:12px;pointer-events:auto}
+.vb{background:none;border:1px solid rgba(255,255,255,.18);border-radius:999px;color:var(--mute);font:500 13px var(--sans);padding:9px 16px;cursor:pointer}
+.vb:hover{color:var(--ink)}.vb[hidden]{display:none}
 .ver{display:flex;padding:4px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(7,2,15,.6)}
 .ver a{padding:8px 16px;border-radius:999px;font:500 13px var(--sans);text-decoration:none;color:var(--mute)}
 .ver a:hover{color:var(--ink)}.ver a.on{background:var(--a);color:#12082a}
 .nogl #gl,.nogl #sp,.nogl #rail,.nogl #hint{display:none}
 .nogl .ch{position:relative;visibility:visible;pointer-events:auto;min-height:100svh}
-@media(max-width:700px){#hint{display:none}#rail b{display:none}.ch{padding-right:28px}}
+@media(max-width:700px){#hint{display:none}.hr{gap:8px}.vb,.ver a{padding:8px 11px}#rail b{display:none}.ch{padding-right:28px}}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01s!important}}
 </style>
 </head>
 <body>
 <canvas id="gl" aria-hidden="true"></canvas><div id="sl"></div><div class="vg"></div><div class="gr"></div>
-<header><a class="logo" href="#top" id="top">Shardy</a><div class="hr"><span id="hint">Hold anywhere to warp</span><div class="ver" role="group" aria-label="Choose version"><a href="shardy-world.html" class="on" aria-current="true">3D</a><a href="index.html">Classic site</a></div></div></header>
+<header><a class="logo" href="#top" id="top">Shardy</a><div class="hr"><span id="hint">Hold anywhere to warp</span><button class="vb" id="snd3" type="button">Sound off</button><button class="vb" id="tilt" type="button" hidden>Tilt to steer</button><div class="ver" role="group" aria-label="Choose version"><a href="shardy-world.html" class="on" aria-current="true">3D</a><a href="index.html">Classic site</a></div></div></header>
 <nav id="rail" aria-label="Chapters"></nav>
 <main>
 <section class="ch hero" data-name="Start"><h2>Shardy</h2><p>I build plugins, packs and mods for Minecraft. Scroll to fly in.</p></section>
@@ -72,7 +82,7 @@ padding:calc(90px + env(safe-area-inset-top)) max(64px,env(safe-area-inset-right
 </main>
 <div id="sp"></div>
 <div id="cr"></div><div id="cd"></div>
-<div id="ld"><b id="ln">0</b></div>
+<div id="ld"><b id="ln">0</b><div id="ldb"><button class="vb" id="ys" type="button">Enter with sound</button><button class="vb" id="ns" type="button">Enter without sound</button></div></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function(){
@@ -127,6 +137,30 @@ addEventListener("pointermove",function(e){mx=e.clientX/innerWidth-.5;my=e.clien
 var b=e.target.closest&&e.target.closest(".mag");$$(".mag").forEach(function(m){if(m!==b)m.style.transform=""});if(b){var r=b.getBoundingClientRect();b.style.transform="translate("+(e.clientX-r.left-r.width/2)*.25+"px,"+(e.clientY-r.top-r.height/2)*.35+"px)"}},{passive:true});
 addEventListener("pointerdown",function(e){if(e.target.closest("a,button"))return;hold=true;cr.classList.add("hold");$("#hint").style.opacity=0});
 ["pointerup","pointercancel","blur"].forEach(function(n){addEventListener(n,function(){hold=false;cr.classList.remove("hold")})});
+/* ---------- sound: generative pad that grows with depth ---------- */
+var AUD={on:false,ctx:null,g:null,f:null,o:[],i:-1,
+start:function(){var C=window.AudioContext||window.webkitAudioContext;if(!C)return false;var a=this.ctx=this.ctx||new C();if(a.state==="suspended")a.resume();if(this.g)return true;
+var g=this.g=a.createGain();g.gain.value=0;var f=this.f=a.createBiquadFilter();f.type="lowpass";f.frequency.value=300;f.Q.value=2;f.connect(g);g.connect(a.destination);
+this.o=[["sawtooth",1,.22],["sawtooth",1.004,.22],["sine",2,.5],["triangle",3,.18]].map(function(p){var o=a.createOscillator(),og=a.createGain();o.type=p[0];og.gain.value=p[2];o.connect(og);og.connect(f);o.frequency.value=55*p[1];o.start();o._m=p[1];return o});
+var l=a.createOscillator(),lg=a.createGain();l.frequency.value=.12;lg.gain.value=120;l.connect(lg);lg.connect(f.frequency);l.start();return true},
+root:function(r){var a=this.ctx;this.o.forEach(function(o){o.frequency.setTargetAtTime(r*o._m,a.currentTime,1.2)})},
+update:function(p,w){if(!this.on)return;var a=this.ctx,t=a.currentTime;this.g.gain.setTargetAtTime(.04+.22*Math.pow(p,1.15)+w*.05,t,.3);this.f.frequency.setTargetAtTime(260+p*2200+w*1500,t,.3);
+var k=Math.round(p*(N-1));if(k!==this.i){this.i=k;this.root([55,61.74,65.41,73.42,82.41,55][k]);this.whoosh()}},
+whoosh:function(){if(!this.on)return;var a=this.ctx,t=a.currentTime,n=a.createBuffer(1,Math.floor(a.sampleRate*.7),a.sampleRate),d=n.getChannelData(0),k;for(k=0;k<d.length;k++)d[k]=Math.random()*2-1;
+var s=a.createBufferSource(),b=a.createBiquadFilter(),g=a.createGain();s.buffer=n;b.type="bandpass";b.Q.value=.9;b.frequency.setValueAtTime(300,t);b.frequency.exponentialRampToValueAtTime(3200,t+.55);
+g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.14,t+.15);g.gain.exponentialRampToValueAtTime(.0001,t+.62);s.connect(b);b.connect(g);g.connect(a.destination);s.start(t)},
+toggle:function(){var b=$("#snd3");if(!this.on){if(!this.start())return;this.on=true;this.i=-1;b.textContent="Sound on"}else{this.on=false;this.g.gain.setTargetAtTime(0,this.ctx.currentTime,.15);b.textContent="Sound off"}}};
+AUD.loadStart=function(){var a=this.ctx,o=a.createOscillator(),f=a.createBiquadFilter(),g=a.createGain();o.type="sawtooth";o.frequency.value=110;f.type="lowpass";f.frequency.value=300;f.Q.value=6;g.gain.value=.0001;g.gain.setTargetAtTime(.05,a.currentTime,.1);o.connect(f);f.connect(g);g.connect(a.destination);o.start();this.lo=o;this.lf=f;this.lg=g};
+AUD.loadProgress=function(p){if(!this.lo)return;var t=this.ctx.currentTime;this.lo.frequency.setTargetAtTime(110+p*p*740,t,.05);this.lf.frequency.setTargetAtTime(300+p*3200,t,.05);this.lg.gain.setTargetAtTime(.04+.05*p,t,.05)};
+AUD.blip=function(fr){if(!this.on)return;var a=this.ctx,t=a.currentTime,o=a.createOscillator(),g=a.createGain();o.type="sine";o.frequency.value=fr;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.07,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+.12);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+.14)};
+AUD.done=function(){if(!this.on)return;var a=this.ctx,t=a.currentTime;if(this.lo){this.lg.gain.setTargetAtTime(.0001,t,.08);this.lo.stop(t+.5);this.lo=null}
+[880,1318.5,1760].forEach(function(fr,k){var o=a.createOscillator(),g=a.createGain(),s=t+.05+k*.09;o.type="sine";o.frequency.value=fr;g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.13,s+.02);g.gain.exponentialRampToValueAtTime(.0001,s+1.3);o.connect(g);g.connect(a.destination);o.start(s);o.stop(s+1.4)});this.whoosh()};
+$("#snd3").onclick=function(){AUD.toggle()};
+/* ---------- tilt to steer on phones ---------- */
+var tiltBtn=$("#tilt");
+if(window.DeviceOrientationEvent&&matchMedia("(pointer:coarse)").matches)tiltBtn.hidden=false;
+tiltBtn.onclick=function(){function go(){addEventListener("deviceorientation",function(e){if(e.gamma==null)return;mx=Math.max(-.5,Math.min(.5,e.gamma/45));my=Math.max(-.5,Math.min(.5,(e.beta-45)/60))});tiltBtn.textContent="Tilt on"}
+if(typeof DeviceOrientationEvent.requestPermission==="function"){DeviceOrientationEvent.requestPermission().then(function(r){if(r==="granted")go()}).catch(function(){})}else go()};
 /* ---------- loop ---------- */
 var cur=0,prev=0,warp=0,intro=RM?1:0,ready=false,last=performance.now(),fovOld=0,sl=$("#sl");
 function frame(now){var dt=Math.min(.05,(now-last)/1000);last=now;
@@ -148,14 +182,18 @@ el.style.visibility=o>.01?"visible":"hidden";el.style.pointerEvents=o>.5?"auto":
 el._w.forEach(function(w,j){var k=Math.max(0,Math.min(1,o*1.7-j*(el.classList.contains("hero")?.09:.14)));w.style.opacity=k;w.style.transform="translate3d(0,"+(1-k)*dir*80+"px,0) rotateX("+(1-k)*-dir*55+"deg)";w.style.filter=k<1?"blur("+(1-k)*12+"px)":"none"});
 el._x.forEach(function(x){x.style.opacity=Math.max(0,o*1.5-.5);x.style.transform="translate3d(0,"+(1-Math.min(1,o*1.5))*dir*30+"px,0)"});
 el._b.classList.toggle("on",Math.abs(d)<.5)});
-de.style.setProperty("--a","hsl("+(285+cur*80)+" 95% 72%)");sl.style.opacity=Math.min(.7,warp*.7+Math.max(0,vel-.3)*.25);
+de.style.setProperty("--a","hsl("+(285+cur*80)+" 95% 72%)");AUD.update(cur,warp);sl.style.opacity=Math.min(.7,warp*.7+Math.max(0,vel-.3)*.25);
 if(fine){rx+=(cx-rx)*(1-Math.exp(-dt*14));ry+=(cy-ry)*(1-Math.exp(-dt*14));cd.style.transform="translate3d("+cx+"px,"+cy+"px,0)";cr.style.transform="translate3d("+rx+"px,"+ry+"px,0)"}
 requestAnimationFrame(frame)}
 requestAnimationFrame(frame);
 /* ---------- loader ---------- */
-function load(){var lp=0,ln=$("#ln");(function tick(){lp+=(1-lp)*.07+.004;if(lp>.995)lp=1;ln.textContent=Math.round(lp*100);
-if(lp<1)requestAnimationFrame(tick);else setTimeout(function(){$("#ld").classList.add("off");ready=true},300)})()}
-Promise.race([document.fonts?document.fonts.ready:Promise.resolve(),new Promise(function(r){setTimeout(r,2500)})]).then(load);
+var withSound=false,choose,choice=new Promise(function(res){choose=res});
+$("#ys").onclick=function(){withSound=true;AUD.toggle();AUD.i=0;AUD.loadStart();$("#ldb").style.display="none";choose()};
+$("#ns").onclick=function(){$("#ldb").style.display="none";choose()};
+function load(){var lp=0,ln=$("#ln"),nx=.1;(function tick(){lp+=(1-lp)*.07+.004;if(lp>.995)lp=1;ln.textContent=Math.round(lp*100);
+if(withSound){AUD.loadProgress(lp);if(lp>=nx&&nx<1){AUD.blip(300+lp*900);nx+=.1}}
+if(lp<1)requestAnimationFrame(tick);else{if(withSound)AUD.done();setTimeout(function(){$("#ld").classList.add("off");ready=true},300)}})()}
+Promise.all([Promise.race([document.fonts?document.fonts.ready:Promise.resolve(),new Promise(function(res){setTimeout(res,2500)})]),choice]).then(load);
 })();
 </script>
 </body>
