@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Services — MostCallMeShardy</title>
-<meta name="description" content="Mini plugins, pack work, server setup, overlays and edits — built to order.">
+<title>Price estimator — MostCallMeShardy</title>
+<meta name="description" content="Pick what you need and how big it is to get a rough price and timeline for a Minecraft plugin, resource pack, server setup or video edit.">
 <meta name="theme-color" content="#0b0713">
-<link rel="canonical" href="https://itzshardy.github.io/services.html">
+<link rel="canonical" href="https://itzshardy.github.io/estimate.html">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website"><meta property="og:site_name" content="MostCallMeShardy">
-<meta property="og:title" content="Services — MostCallMeShardy"><meta property="og:description" content="Mini plugins, pack work, server setup, overlays and edits — built to order.">
-<meta property="og:url" content="https://itzshardy.github.io/services.html"><meta property="og:image" content="https://itzshardy.github.io/assets/og.png">
+<meta property="og:title" content="Price estimator — MostCallMeShardy"><meta property="og:description" content="Pick what you need and how big it is to get a rough price and timeline for a Minecraft plugin, resource pack, server setup or video edit.">
+<meta property="og:url" content="https://itzshardy.github.io/estimate.html"><meta property="og:image" content="https://itzshardy.github.io/assets/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Shardy: plugins, packs and mods for Minecraft">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,20 @@
 <nav id="nav"><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="work.html">Work</a></li><li><a href="downloads.html">Downloads</a></li><li><a href="devlog.html">Devlog</a></li><li><a href="estimate.html" class="on">Estimate</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
 <div class="hd"><button class="pill" id="thm">☀ Day</button><button class="pill" id="snd">♪ Off</button><button class="pill" id="menu" aria-label="Menu">≡</button></div>
 </header>
-<div class="top wrap"><h1>Built <span class="neon">to order</span>.</h1><p>Most of what's on this site started as someone asking for something that didn't exist yet. Small jobs, agreed in writing, priced before I start.</p></div><main><section><div class="wrap"><div class="g2 rv"><div class="item"><span class="mono">Java 17, Paper</span><h3 class="t">Mini plugins</h3><p>Commands, GUIs and configs that survive reloads.</p><a href="https://itzshardy.github.io/commissions.html">How commissions work</a></div><div class="item"><span class="mono">16x–32x, PvP</span><h3 class="t">Pack work</h3><p>Retextures, merges, versioning. The slider is the proof.</p><a href="packs.html">See the comparison</a></div><div class="item"><span class="mono">Paper, LuckPerms</span><h3 class="t">Server setup</h3><p>Configs, permissions, ranks — the unglamorous stuff that holds a server together.</p><a href="https://itzshardy.github.io/commissions.html">How commissions work</a></div><div class="item"><span class="mono">Video, Design</span><h3 class="t">Overlays &amp; edits</h3><p>PvP overlays, thumbnails, montage cuts.</p><a href="contact.html">Contact me</a></div></div></div></section><a class="nx wrap" href="estimate.html"><span class="mono">Next</span><b>Estimate</b></a></main>
+<div class="top wrap"><h1>Get a rough price <span class="neon">in a minute</span>.</h1><p>Pick what you need and how big it is. The estimate updates as you go, then you can send it to me.</p></div><main><section><div class="wrap est">
+<div>
+<fieldset><legend>What do you need?</legend><div class="opts" id="o-svc"></div></fieldset>
+<fieldset><legend>How big is it?</legend><div class="opts" id="o-size"></div></fieldset>
+<fieldset><legend>Extras</legend><div class="opts" id="o-ext"></div></fieldset>
+<label class="f"><span class="mono">Your Discord name or email</span><input id="who" autocomplete="off"></label>
+<label class="f"><span class="mono">Server version and details</span><textarea id="det" rows="4"></textarea></label>
+<input class="hp" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+</div>
+<aside class="card out" aria-live="polite"><span class="mono">Estimated price</span><div class="big" id="price"></div><span class="mono">Timeline</span><div class="big" id="time" style="font-size:34px"></div>
+<p class="sm" id="sample" hidden>Sample prices. My final prices haven't been set yet.</p>
+<p class="sm">A rough guide only. We agree the final price and scope in writing before I start.</p>
+<button class="btn" id="send" type="button">Send request</button><p id="emsg"></p><p class="sm" style="margin-top:16px"><span data-stat></span></p></aside>
+</div></section><a class="nx wrap" href="downloads.html"><span class="mono">Next</span><b>Downloads</b></a></main>
 <footer><div class="wrap"><span>Built by MostCallMeShardy, Fan project, not affiliated with Mojang/Microsoft.</span><span><a href="https://itzshardy.github.io/privacy.html">Privacy</a><a href="https://itzshardy.github.io/terms.html">Terms</a><a href="https://itzshardy.github.io/cookies.html">Cookies</a><a href="https://itzshardy.github.io/commissions.html">Commissions</a></span></div></footer>
 <div class="ver" role="group" aria-label="Choose version"><a href="shardy-world.html">3D</a><a href="index.html" class="on" aria-current="true">Classic</a></div>
 <script src="config.js"></script>
