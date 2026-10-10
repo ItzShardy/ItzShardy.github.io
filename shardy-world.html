@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Shardy — plugins, packs and mods for Minecraft</title>
+<meta name="description" content="Fly through a crystal world to see what Shardy builds: Paper plugins, resource packs, Fabric mods and PvP edits.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#07020f;--ink:#f6efff;--mute:#b3a6cf;--a:hsl(285 95% 72%);
+--disp:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;--sans:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box;margin:0}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block}
+#sp{height:700vh}
+.vg{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 35%,rgba(7,2,15,.78) 100%)}
+.gr{position:fixed;inset:0;pointer-events:none;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+#sl{position:fixed;inset:0;pointer-events:none;opacity:0;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,255,255,.1) 0 .5deg,transparent .5deg 5deg);-webkit-mask-image:radial-gradient(circle,transparent 25%,#000 95%);mask-image:radial-gradient(circle,transparent 25%,#000 95%)}
+header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:calc(18px + env(safe-area-inset-top)) max(28px,env(safe-area-inset-right)) 0 max(28px,env(safe-area-inset-left));pointer-events:none}
+.logo{pointer-events:auto;font:800 24px var(--disp);letter-spacing:-.03em;color:var(--ink);text-decoration:none}
+#hint{font-size:14px;color:var(--mute);transition:opacity .6s}
+#rail{position:fixed;right:max(18px,env(safe-area-inset-right));top:50%;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+#rail button{background:none;border:0;color:var(--mute);font:500 13px var(--sans);display:flex;align-items:center;gap:12px;padding:6px 0;cursor:pointer}
+#rail b{font-weight:500;opacity:0;transform:translateX(8px);transition:.35s;pointer-events:none}
+#rail i{display:block;width:10px;height:2px;border-radius:2px;background:currentColor;transition:width .4s,background .4s}
+#rail button:hover b,#rail button.on b{opacity:1;transform:none}
+#rail button.on{color:var(--ink)}#rail button.on i{width:34px;background:var(--a);box-shadow:0 0 14px var(--a)}
+.ch{position:fixed;inset:0;display:flex;flex-direction:column;justify-content:flex-end;visibility:hidden;pointer-events:none;
+padding:calc(90px + env(safe-area-inset-top)) max(64px,env(safe-area-inset-right)) calc(52px + env(safe-area-inset-bottom)) max(28px,env(safe-area-inset-left))}
+.ch h2{font:800 clamp(46px,10.5vw,170px)/.9 var(--disp);letter-spacing:-.045em;max-width:11ch;text-wrap:balance;perspective:900px;text-shadow:0 0 70px color-mix(in srgb,var(--a) 45%,transparent)}
+.ch.hero h2{font-size:clamp(96px,26vw,420px);max-width:none;letter-spacing:-.07em;line-height:.8}
+.w{display:inline-block;will-change:transform,opacity,filter;transform-origin:50% 100%}
+.ch p{max-width:46ch;color:var(--mute);font-size:clamp(16px,1.5vw,20px);margin-top:24px}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{pointer-events:auto;display:inline-flex;align-items:center;padding:13px 24px;border:1px solid color-mix(in srgb,var(--a) 70%,transparent);border-radius:999px;color:var(--ink);background:color-mix(in srgb,var(--a) 14%,transparent);font:500 15px var(--sans);text-decoration:none;cursor:pointer;transition:background .3s,box-shadow .3s;will-change:transform}
+.btn:hover{background:color-mix(in srgb,var(--a) 40%,transparent);box-shadow:0 0 34px color-mix(in srgb,var(--a) 60%,transparent)}
+:focus-visible{outline:2px solid #fff;outline-offset:3px}
+#cr,#cd{position:fixed;left:0;top:0;pointer-events:none;z-index:50;display:none}
+.hascur #cr,.hascur #cd{display:block}
+#cr{width:38px;height:38px;margin:-19px 0 0 -19px;border:1px solid color-mix(in srgb,var(--a) 80%,#fff);border-radius:50%;transition:width .3s,height .3s,margin .3s,background .3s}
+#cr.big{width:76px;height:76px;margin:-38px 0 0 -38px;background:color-mix(in srgb,var(--a) 18%,transparent)}
+#cr.hold{width:120px;height:120px;margin:-60px 0 0 -60px;border-color:#fff}
+#cd{width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:#fff}
+.hascur,.hascur a,.hascur button{cursor:none}
+#ld{position:fixed;inset:0;z-index:100;background:var(--bg);display:grid;place-items:center;transition:opacity 1s,visibility 1s}
+#ld.off{opacity:0;visibility:hidden}
+#ld b{font:800 clamp(80px,22vw,260px)/1 var(--disp);letter-spacing:-.06em;font-variant-numeric:tabular-nums}
+.hr{display:flex;align-items:center;gap:18px;pointer-events:auto}
+.ver{display:flex;padding:4px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(7,2,15,.6)}
+.ver a{padding:8px 16px;border-radius:999px;font:500 13px var(--sans);text-decoration:none;color:var(--mute)}
+.ver a:hover{color:var(--ink)}.ver a.on{background:var(--a);color:#12082a}
+.nogl #gl,.nogl #sp,.nogl #rail,.nogl #hint{display:none}
+.nogl .ch{position:relative;visibility:visible;pointer-events:auto;min-height:100svh}
+@media(max-width:700px){#hint{display:none}#rail b{display:none}.ch{padding-right:28px}}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas><div id="sl"></div><div class="vg"></div><div class="gr"></div>
+<header><a class="logo" href="#top" id="top">Shardy</a><div class="hr"><span id="hint">Hold anywhere to warp</span><div class="ver" role="group" aria-label="Choose version"><a href="shardy-world.html" class="on" aria-current="true">3D</a><a href="index.html">Classic site</a></div></div></header>
+<nav id="rail" aria-label="Chapters"></nav>
+<main>
+<section class="ch hero" data-name="Start"><h2>Shardy</h2><p>I build plugins, packs and mods for Minecraft. Scroll to fly in.</p></section>
+<section class="ch" data-name="Plugins"><h2>Plugins that survive a reload.</h2><p>Paper plugins on Java 17: commands, menus and configs that still behave after /reload. Every job starts with a written scope and price.</p><div class="row"><button class="btn mag" data-go="5">Ask for a plugin</button></div></section>
+<section class="ch" data-name="Packs"><h2>Packs drawn pixel by pixel.</h2><p>Retextures, merges and versioned releases for PvP. My crimson and dark pack redraws swords and armor so they read at a glance.</p><div class="row"><a class="btn mag" href="https://itzshardy.github.io/">See the pack</a></div></section>
+<section class="ch" data-name="Mods"><h2>Mods that live in your HUD.</h2><p>AmethystHUD is my first Fabric client mod: a clean HUD with toggles. Shard Launcher, a custom launcher with Discord presence, comes next. Both are still in progress.</p></section>
+<section class="ch" data-name="Edits"><h2>Edits cut to the hit.</h2><p>PvP montages, overlays and thumbnails. New cuts land on TikTok first, with longer ones on YouTube.</p><div class="row"><a class="btn mag" href="https://www.tiktok.com/@mc_shardy">Watch on TikTok</a><a class="btn mag" href="https://www.youtube.com/@itz_DevShardy/featured">Open YouTube</a></div></section>
+<section class="ch" data-name="Contact"><h2>Say hi.</h2><p>Tell me your server version and what you need. I'll reply with scope and price.</p><div class="row"><button class="btn mag" id="dc">Copy Discord: im_shardy</button><a class="btn mag" href="mailto:newspiderman72@gmail.com">Email me</a><a class="btn mag" href="https://github.com/ItzShardy">GitHub</a></div></section>
+</main>
+<div id="sp"></div>
+<div id="cr"></div><div id="cd"></div>
+<div id="ld"><b id="ln">0</b></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)},$$=function(s){return [].slice.call(document.querySelectorAll(s))},de=document.documentElement;
+var RM=matchMedia("(prefers-reduced-motion:reduce)").matches,sm=function(a,b,x){x=Math.max(0,Math.min(1,(x-a)/(b-a)));return x*x*(3-2*x)};
+var R;try{R=new THREE.WebGLRenderer({canvas:$("#gl"),antialias:true,powerPreference:"high-performance"})}catch(e){}
+if(!R){de.classList.add("nogl");$("#ld").style.display="none";return}
+/* ---------- text ---------- */
+function split(el,chars){var t=el.textContent.trim(),ps=chars?t.split(""):t.split(" "),out=[];el.setAttribute("aria-label",t);el.textContent="";
+ps.forEach(function(p,i){var s=document.createElement("span");s.className="w";s.setAttribute("aria-hidden","true");s.textContent=p;el.appendChild(s);out.push(s);if(!chars&&i<ps.length-1)el.appendChild(document.createTextNode(" "))});return out}
+var chs=$$(".ch"),N=chs.length,rail=$("#rail");
+chs.forEach(function(el,i){el._w=split(el.querySelector("h2"),el.classList.contains("hero"));el._x=[].slice.call(el.querySelectorAll("p,.row"));
+var b=document.createElement("button");b.innerHTML="<b>"+el.dataset.name+"</b><i></i>";b.setAttribute("aria-label","Go to "+el.dataset.name);b.onclick=function(){go(i)};rail.appendChild(b);el._b=b});
+function go(i){var max=de.scrollHeight-innerHeight;scrollTo({top:i/(N-1)*max,behavior:"smooth"})}
+$$("[data-go]").forEach(function(b){b.onclick=function(){go(+b.dataset.go)}});
+$("#top").onclick=function(e){e.preventDefault();go(0)};
+$("#dc").onclick=function(){var b=this;try{navigator.clipboard.writeText("im_shardy")}catch(e){}b.textContent="Copied. See you on Discord";setTimeout(function(){b.textContent="Copy Discord: im_shardy"},2200)};
+/* ---------- scene ---------- */
+var sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(60,1,.1,260);
+R.setPixelRatio(Math.min(devicePixelRatio,1.75));R.setClearColor(0x07020f);
+function size(){R.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix()}size();addEventListener("resize",size);
+var pts=[[0,0,0],[4,2,-30],[-6,-3,-62],[7,4,-98],[-5,2,-134],[6,-3,-170],[-4,3,-206],[2,0,-240]].map(function(a){return new THREE.Vector3(a[0],a[1],a[2])});
+var curve=new THREE.CatmullRomCurve3(pts,false,"catmullrom",.5),L=curve.getLength(),tMax=1-14/L;
+var U={uTime:{value:0},uScroll:{value:0},uWarp:{value:0}};
+var vs="attribute float aSeed;varying vec3 vWP;varying float vS;uniform float uTime;void main(){vS=aSeed;\n#ifdef USE_INSTANCING\nmat4 m=modelMatrix*instanceMatrix;\n#else\nmat4 m=modelMatrix;\n#endif\nvec4 w=m*vec4(position,1.);w.y+=sin(uTime*.6+aSeed*40.)*.3;vWP=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}";
+var fs="precision highp float;uniform float uTime,uScroll,uOpacity;varying vec3 vWP;varying float vS;vec3 pal(float t){return .5+.5*cos(6.28318*(vec3(0.,.33,.67)+t));}void main(){vec3 n=normalize(cross(dFdx(vWP),dFdy(vWP)));vec3 v=normalize(cameraPosition-vWP);float f=pow(1.-abs(dot(n,v)),1.8);vec3 c=pal(f*.9+vS+uTime*.04+uScroll*1.2);c=mix(vec3(.12,.03,.3),c,.25+f*.9);float d=length(cameraPosition-vWP);float a=(.2+f*.75)*smoothstep(80.,6.,d)*smoothstep(.4,4.,d)*uOpacity;gl_FragColor=vec4(c*1.3,a);}";
+function mat(o){var u={uOpacity:{value:o}};for(var k in U)u[k]=U[k];return new THREE.ShaderMaterial({uniforms:u,vertexShader:vs,fragmentShader:fs,transparent:true,depthWrite:false,side:THREE.DoubleSide,blending:THREE.AdditiveBlending})}
+/* shards */
+var SN=240,sg=new THREE.OctahedronGeometry(1,0),inst=new THREE.InstancedMesh(sg,mat(.9),SN),seed=new Float32Array(SN),m4=new THREE.Matrix4(),q=new THREE.Quaternion(),eu=new THREE.Euler(),v3=new THREE.Vector3(),s3=new THREE.Vector3(),i;
+for(i=0;i<SN;i++){var c=curve.getPoint(Math.random()),a=Math.random()*6.283,r=3.4+Math.pow(Math.random(),.7)*16,k=.35+Math.random()*1.3;
+v3.set(c.x+Math.cos(a)*r,c.y+Math.sin(a)*r*.7,c.z+(Math.random()-.5)*8);eu.set(Math.random()*6,Math.random()*6,Math.random()*6);q.setFromEuler(eu);
+s3.set(k,k*(1.6+Math.random()*3.5),k);m4.compose(v3,q,s3);inst.setMatrixAt(i,m4);seed[i]=Math.random()}
+sg.setAttribute("aSeed",new THREE.InstancedBufferAttribute(seed,1));inst.frustumCulled=false;sc.add(inst);
+/* stars */
+var sh=new THREE.Shape();for(i=0;i<10;i++){var rr=i%2?1.25:3,aa=-Math.PI/2+i*Math.PI/5;i?sh.lineTo(Math.cos(aa)*rr,Math.sin(aa)*rr):sh.moveTo(Math.cos(aa)*rr,Math.sin(aa)*rr)}sh.closePath();
+var stG=new THREE.ExtrudeGeometry(sh,{depth:.9,bevelEnabled:true,bevelThickness:.35,bevelSize:.3,bevelSegments:1});stG.center();
+var stM=mat(1),sA=new THREE.Mesh(stG,stM),sB=new THREE.Mesh(stG,stM),P=new THREE.Vector3(),T=new THREE.Vector3(),Lk=new THREE.Vector3();
+curve.getPoint(0,P);curve.getTangent(0,T);sA.position.copy(P).addScaledVector(T,11);sA.scale.setScalar(1.6);
+curve.getPoint(1,P);sB.position.copy(P);sB.scale.setScalar(2.4);sc.add(sA,sB);
+/* dust */
+var DN=1800,dp=new Float32Array(DN*3),ds=new Float32Array(DN);
+for(i=0;i<DN;i++){var c2=curve.getPoint(Math.random()),a2=Math.random()*6.283,r2=1+Math.random()*22;dp[i*3]=c2.x+Math.cos(a2)*r2;dp[i*3+1]=c2.y+Math.sin(a2)*r2;dp[i*3+2]=c2.z+(Math.random()-.5)*10;ds[i]=Math.random()}
+var pg=new THREE.BufferGeometry();pg.setAttribute("position",new THREE.BufferAttribute(dp,3));pg.setAttribute("aSeed",new THREE.BufferAttribute(ds,1));
+var pm=new THREE.ShaderMaterial({uniforms:U,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,
+vertexShader:"attribute float aSeed;varying float vA;uniform float uTime,uWarp;void main(){vec4 mv=modelViewMatrix*vec4(position,1.);gl_Position=projectionMatrix*mv;float tw=.5+.5*sin(uTime*2.+aSeed*50.);gl_PointSize=(2.5+aSeed*4.+uWarp*5.)*(40./-mv.z);vA=(.25+.75*tw)*smoothstep(80.,5.,-mv.z);}",
+fragmentShader:"varying float vA;void main(){float d=length(gl_PointCoord-.5);if(d>.5)discard;gl_FragColor=vec4(.85,.7,1.,vA*smoothstep(.5,0.,d));}"});
+var dust=new THREE.Points(pg,pm);dust.frustumCulled=false;sc.add(dust);
+/* ---------- input ---------- */
+var mx=0,my=0,smx=0,smy=0,cx=-99,cy=-99,rx=-99,ry=-99,hold=false,fine=matchMedia("(pointer:fine)").matches,cr=$("#cr"),cd=$("#cd");
+if(fine)de.classList.add("hascur");
+addEventListener("pointermove",function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;cx=e.clientX;cy=e.clientY;cr.classList.toggle("big",!!(e.target.closest&&e.target.closest("a,button")));
+var b=e.target.closest&&e.target.closest(".mag");$$(".mag").forEach(function(m){if(m!==b)m.style.transform=""});if(b){var r=b.getBoundingClientRect();b.style.transform="translate("+(e.clientX-r.left-r.width/2)*.25+"px,"+(e.clientY-r.top-r.height/2)*.35+"px)"}},{passive:true});
+addEventListener("pointerdown",function(e){if(e.target.closest("a,button"))return;hold=true;cr.classList.add("hold");$("#hint").style.opacity=0});
+["pointerup","pointercancel","blur"].forEach(function(n){addEventListener(n,function(){hold=false;cr.classList.remove("hold")})});
+/* ---------- loop ---------- */
+var cur=0,prev=0,warp=0,intro=RM?1:0,ready=false,last=performance.now(),fovOld=0,sl=$("#sl");
+function frame(now){var dt=Math.min(.05,(now-last)/1000);last=now;
+var max=de.scrollHeight-innerHeight,tg=max>0?scrollY/max:0;cur+=(tg-cur)*(1-Math.exp(-dt*(RM?30:4.5)));
+var vel=Math.abs(cur-prev)/Math.max(dt,.001);prev=cur;
+warp+=((hold&&!RM?1:0)-warp)*(1-Math.exp(-dt*4));if(ready&&intro<1)intro=Math.min(1,intro+dt/3.2);
+var ie=1-Math.pow(1-intro,4),e=1-Math.exp(-dt*3);smx+=(mx-smx)*e;smy+=(my-smy)*e;
+U.uTime.value=now/1000;U.uScroll.value=cur;U.uWarp.value=warp;
+var t=cur*tMax;curve.getPoint(t,P);curve.getTangent(t,T);cam.position.copy(P).addScaledVector(T,-(1-ie)*30);cam.position.x+=smx*1.6;cam.position.y-=smy*1.1;
+curve.getPoint(Math.min(1,t+.02),Lk);cam.up.set(Math.sin(cur*7)*.12,1,0);cam.lookAt(Lk);
+var fov=60+Math.min(vel*55,22)+warp*28;if(Math.abs(fov-fovOld)>.05){cam.fov=fov;cam.updateProjectionMatrix();fovOld=fov}
+sA.rotation.set(smy*.4,now*.0004+smx*.8,now*.0002);sB.rotation.set(-smy*.4,-now*.0003+smx*.8,now*.00015);
+sA.scale.setScalar(.3+1.3*ie);inst.rotation.z=cur*.35;
+R.render(sc,cam);
+/* chapters */
+var show=Math.max(0,Math.min(1,intro*1.8-.4));
+chs.forEach(function(el,i){var d=cur*(N-1)-i,o=(1-sm(.15,.6,Math.abs(d)))*show,dir=d>0?-1:1;
+el.style.visibility=o>.01?"visible":"hidden";el.style.pointerEvents=o>.5?"auto":"none";
+el._w.forEach(function(w,j){var k=Math.max(0,Math.min(1,o*1.7-j*(el.classList.contains("hero")?.09:.14)));w.style.opacity=k;w.style.transform="translate3d(0,"+(1-k)*dir*80+"px,0) rotateX("+(1-k)*-dir*55+"deg)";w.style.filter=k<1?"blur("+(1-k)*12+"px)":"none"});
+el._x.forEach(function(x){x.style.opacity=Math.max(0,o*1.5-.5);x.style.transform="translate3d(0,"+(1-Math.min(1,o*1.5))*dir*30+"px,0)"});
+el._b.classList.toggle("on",Math.abs(d)<.5)});
+de.style.setProperty("--a","hsl("+(285+cur*80)+" 95% 72%)");sl.style.opacity=Math.min(.7,warp*.7+Math.max(0,vel-.3)*.25);
+if(fine){rx+=(cx-rx)*(1-Math.exp(-dt*14));ry+=(cy-ry)*(1-Math.exp(-dt*14));cd.style.transform="translate3d("+cx+"px,"+cy+"px,0)";cr.style.transform="translate3d("+rx+"px,"+ry+"px,0)"}
+requestAnimationFrame(frame)}
+requestAnimationFrame(frame);
+/* ---------- loader ---------- */
+function load(){var lp=0,ln=$("#ln");(function tick(){lp+=(1-lp)*.07+.004;if(lp>.995)lp=1;ln.textContent=Math.round(lp*100);
+if(lp<1)requestAnimationFrame(tick);else setTimeout(function(){$("#ld").classList.add("off");ready=true},300)})()}
+Promise.race([document.fonts?document.fonts.ready:Promise.resolve(),new Promise(function(r){setTimeout(r,2500)})]).then(load);
+})();
+</script>
+</body>
+</html>

@@ -10,18 +10,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<script>try{if(sessionStorage.getItem("wp")){document.documentElement.classList.add("wp");sessionStorage.removeItem("wp")}}catch(e){}</script>
+<script>try{if(sessionStorage.getItem("wp")){document.documentElement.classList.add("wp");sessionStorage.removeItem("wp")}}catch(e){}try{var th=localStorage.getItem("theme");if(!th)th=matchMedia("(prefers-color-scheme:light)").matches?"light":"dark";document.documentElement.dataset.theme=th}catch(e){document.documentElement.dataset.theme="dark"}</script>
 </head>
-<body data-bg="sky">
-<img class="bg" id="bgi" src="assets/bg-sky.jpg" alt="">
+<body>
+<img class="bg" id="bgi" src="assets/bg-stars.jpg" alt="">
 <canvas id="bgfx"></canvas><div class="vig"></div><div id="wipe"></div>
 
 <header>
 <a class="logo neon" href="index.html">SHARDY</a>
 <nav id="nav"><ul><li><a href="index.html">Home</a></li><li><a href="about.html" class="on">About</a></li><li><a href="work.html">Work</a></li><li><a href="packs.html">Packs</a></li><li><a href="videos.html">Videos</a></li><li><a href="services.html">Services</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
-<div class="hd"><button class="pill" id="snd">♪ Off</button><button class="pill" id="menu" aria-label="Menu">≡</button></div>
+<div class="hd"><button class="pill" id="thm">☀ Day</button><button class="pill" id="snd">♪ Off</button><button class="pill" id="menu" aria-label="Menu">≡</button></div>
 </header>
-<div class="top wrap"><span class="mono">01 — About</span><h1>Plugin dev by day, <span class="neon">pack maker</span> &amp; PvP editor.</h1></div><main>
+<div class="top wrap"><h1>Plugin dev by day, <span class="neon">pack maker</span> &amp; PvP editor.</h1></div><main>
 <section><div class="wrap about rv"><img src="assets/pfp.png" alt="MostCallMeShardy profile picture">
 <div><p>Hey, I'm <b>MostCallMeShardy</b>. I write custom <b>Paper plugins</b>, tinker with <b>Fabric client mods</b>, merge and version <b>resource packs</b>, build small launcher tools and cut PvP montages. This site is my lab: every card links to code or video once it's public.</p>
 <div class="nums"><div><strong class="neon" data-n="3">0</strong><span class="mono">Projects</span></div><div><strong class="neon" data-n="0">0</strong><span class="mono">Plugins</span></div><div><strong class="neon" data-n="1">0</strong><span class="mono">Packs shipped</span></div><div><strong class="neon" data-n="2">0</strong><span class="mono">Months</span></div></div></div></div></section>
@@ -37,8 +37,9 @@
 <details><summary>Will you join my server team?</summary><p>Probably not — I'm heads-down learning. Feedback swaps and small one-off jobs, always.</p></details>
 <details><summary>What versions do you build for?</summary><p>Paper 1.21 on Java 17. If your server runs something ancient, I'll tell you straight up if I can't help.</p></details>
 <details><summary>Do you share my server files around?</summary><p>No. Your files stay yours, DMs stay private, and there's no mailing list to end up on.</p></details></div></div></section>
-<a class="nx wrap" href="work.html"><span class="mono">Next page</span><b>Work →</b></a></main>
-<footer><div class="wrap"><span>Built by MostCallMeShardy · Fan project, not affiliated with Mojang/Microsoft.</span><span><a href="https://itzshardy.github.io/privacy.html">Privacy</a><a href="https://itzshardy.github.io/terms.html">Terms</a><a href="https://itzshardy.github.io/cookies.html">Cookies</a><a href="https://itzshardy.github.io/commissions.html">Commissions</a></span></div></footer>
+<a class="nx wrap" href="work.html"><span class="mono">Next</span><b>Work</b></a></main>
+<footer><div class="wrap"><span>Built by MostCallMeShardy, Fan project, not affiliated with Mojang/Microsoft.</span><span><a href="https://itzshardy.github.io/privacy.html">Privacy</a><a href="https://itzshardy.github.io/terms.html">Terms</a><a href="https://itzshardy.github.io/cookies.html">Cookies</a><a href="https://itzshardy.github.io/commissions.html">Commissions</a></span></div></footer>
+<div class="ver" role="group" aria-label="Choose version"><a href="shardy-world.html">3D</a><a href="index.html" class="on" aria-current="true">Classic</a></div>
 <script src="site.js"></script>
 </body>
 </html>

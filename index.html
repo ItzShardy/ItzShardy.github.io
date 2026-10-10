@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<script>try{if(sessionStorage.getItem("wp")){document.documentElement.classList.add("wp");sessionStorage.removeItem("wp")}}catch(e){}</script>
+<script>try{if(sessionStorage.getItem("wp")){document.documentElement.classList.add("wp");sessionStorage.removeItem("wp")}}catch(e){}try{var th=localStorage.getItem("theme");if(!th)th=matchMedia("(prefers-color-scheme:light)").matches?"light":"dark";document.documentElement.dataset.theme=th}catch(e){document.documentElement.dataset.theme="dark"}</script>
 </head>
 <body>
 <img class="bg" id="bgi" src="assets/bg-stars.jpg" alt="">
@@ -23,26 +23,18 @@
 <header>
 <a class="logo neon" href="index.html">SHARDY</a>
 <nav id="nav"><ul><li><a href="index.html" class="on">Home</a></li><li><a href="about.html">About</a></li><li><a href="work.html">Work</a></li><li><a href="packs.html">Packs</a></li><li><a href="videos.html">Videos</a></li><li><a href="services.html">Services</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
-<div class="hd"><button class="pill" id="snd">♪ Off</button><button class="pill" id="albBtn">★ Album <span id="cnt">0</span></button><button class="pill" id="menu" aria-label="Menu">≡</button></div>
+<div class="hd"><button class="pill" id="thm">☀ Day</button><button class="pill" id="snd">♪ Off</button><button class="pill" id="albBtn">★ Album <span id="cnt">0</span></button><button class="pill" id="menu" aria-label="Menu">≡</button></div>
 </header>
 <div id="hero">
 <div class="rows" id="rows" aria-hidden="true"></div>
-<div class="fl l"><small>Paper · Java 17</small>Plugins</div><div class="fl r"><small>16x–32x · PvP</small>Packs</div>
-<div class="title"><h1>MostCallMeShardy</h1><span class="mono">Minecraft developer — Java · Fabric · Packs · PvP</span></div>
+<div class="fl l"><small>Paper, Java 17</small>Plugins</div><div class="fl r"><small>16x–32x, PvP</small>Packs</div>
+<div class="title"><h1>MostCallMeShardy</h1><span class="mono">Minecraft developer — Java, Fabric, Packs, PvP</span></div>
 <div id="stage"><img id="star" src="assets/star-glow.jpg" alt="A glowing star crystal you can spin, freeze and break" draggable="false"></div>
-<div class="ui"><p id="hint">Growing…</p><div class="meter"><div id="mf"></div></div><button class="pill" id="brk">Break it</button><div class="scroll">SCROLL OR PICK A PAGE ↓</div></div>
+<div class="ui"><p id="hint">Growing…</p><div class="meter"><div id="mf"></div></div><button class="pill" id="brk">Break it</button><div class="scroll">Scroll or pick a page below</div></div>
 </div>
-<section class="presence" id="presence" aria-label="Live Discord status"><div class="in">
-<div class="p-row">
-<div class="p-ava"><img id="pAvatar" src="assets/pfp.png" alt="Shardy Discord profile picture" width="60" height="60"/><span id="pDot" class="dot-offline" aria-hidden="true"></span></div>
-<div class="p-who"><strong id="pName">im_shardy</strong><span id="pStatus">connecting…</span></div>
-<span class="p-live" id="pLive" style="display:none">LIVE</span>
-</div>
-<p class="p-act" id="pActivity"></p>
-<div class="p-links"><span class="mono">Discord · im_shardy</span><a class="pill" href="https://discord.com/users/1126831477783527434" target="_blank" rel="noreferrer">Open profile</a><a class="pill" href="contact.html">DM me</a></div>
-</div></section>
-<main class="exp"><div class="wrap"><span class="mono">Explore</span><div class="ex"><a class="exc rv" href="about.html"><i>↗</i><span class="mono">01</span><div><h3>About</h3><p>Who I am and what I work with.</p></div></a><a class="exc rv" href="work.html"><i>↗</i><span class="mono">02</span><div><h3>Work</h3><p>Fly through my projects in 3D.</p></div></a><a class="exc rv" href="packs.html"><i>↗</i><span class="mono">03</span><div><h3>Packs</h3><p>Drag to compare vanilla and my pack.</p></div></a><a class="exc rv" href="videos.html"><i>↗</i><span class="mono">04</span><div><h3>Videos</h3><p>PvP montages and pack showcases.</p></div></a><a class="exc rv" href="services.html"><i>↗</i><span class="mono">05</span><div><h3>Services</h3><p>Plugins, packs, server setup, edits.</p></div></a><a class="exc rv" href="contact.html"><i>↗</i><span class="mono">06</span><div><h3>Contact</h3><p>Discord, email, or the form.</p></div></a></div></div></main>
-<footer><div class="wrap"><span>Built by MostCallMeShardy · Fan project, not affiliated with Mojang/Microsoft.</span><span><a href="https://itzshardy.github.io/privacy.html">Privacy</a><a href="https://itzshardy.github.io/terms.html">Terms</a><a href="https://itzshardy.github.io/cookies.html">Cookies</a><a href="https://itzshardy.github.io/commissions.html">Commissions</a></span></div></footer>
+<main class="exp"><div class="wrap"><div class="ex"><a class="exc" href="about.html"><h3>About</h3><p>Who I am and what I work with.</p></a><a class="exc" href="work.html"><h3>Work</h3><p>Fly through my projects in 3D.</p></a><a class="exc" href="packs.html"><h3>Packs</h3><p>Drag to compare vanilla and my pack.</p></a><a class="exc" href="videos.html"><h3>Videos</h3><p>PvP montages and pack showcases.</p></a><a class="exc" href="services.html"><h3>Services</h3><p>Plugins, packs, server setup, edits.</p></a><a class="exc" href="contact.html"><h3>Contact</h3><p>Discord, email, or the form.</p></a></div></div></main>
+<footer><div class="wrap"><span>Built by MostCallMeShardy, Fan project, not affiliated with Mojang/Microsoft.</span><span><a href="https://itzshardy.github.io/privacy.html">Privacy</a><a href="https://itzshardy.github.io/terms.html">Terms</a><a href="https://itzshardy.github.io/cookies.html">Cookies</a><a href="https://itzshardy.github.io/commissions.html">Commissions</a></span></div></footer>
+<div class="ver" role="group" aria-label="Choose version"><a href="shardy-world.html">3D</a><a href="index.html" class="on" aria-current="true">Classic</a></div>
 <script src="site.js"></script>
 </body>
 </html>
