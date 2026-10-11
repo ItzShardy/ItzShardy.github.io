@@ -74,13 +74,13 @@ window.CFG = {
          into download, and add a changelog entry. ---- */
   products: {
     "pack": {
-      name: "My resource pack", type: "Resource pack", status: "released",
+      name: "Shardy's Red Soul", type: "Resource pack", status: "released",
       img: "https://itzshardy.github.io/assets/pack-on.png",
-      desc: "A crimson and dark retexture of swords and armor, redrawn so they read at a glance in PvP.",
-      requires: "Minecraft Java Edition, 16x to 32x",
-      download: "",
+      desc: "Red soul retexture with prismatic glint, tinted sky and custom icon, by MostCallMeShardy.",
+      requires: "Minecraft Java Edition",
+      download: "https://itzshardy.github.io/assets/downloads/Shardys-Red-Soul.zip",
       changelog: [
-        { label: "Current release", date: "", notes: ["Crimson and dark swords and armor", "Tuned for PvP clarity"] }
+        { label: "Current release", date: "2026-10-11", notes: ["Red soul swords and armor", "Prismatic glint", "Tinted sky and icon"] }
       ]
     },
     "amethysthud": {
