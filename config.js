@@ -85,7 +85,7 @@ window.CFG = {
     },
     "amethysthud": {
       name: "AmethystHUD", type: "Fabric mod", status: "released",
-      img: "",
+      img: "https://itzshardy.github.io/assets/amethysthud-logo.png",
       desc: "Crystal, anchor, armor, tools, fire and sky styles in one menu, with extras and cosmetics. Keeps itself up to date (switch it off in Extras). Sky styles use Skyboxify.",
       requires: "Minecraft Java 1.21.11, Fabric Loader 0.15+, Fabric API (ModMenu and Skyboxify suggested)",
       download: "https://itzshardy.github.io/assets/downloads/AmethystHUD-1.5.1-mc1.21.11.jar",
