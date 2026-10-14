@@ -61,7 +61,8 @@ window.CFG = {
 
   /* ---- Devlog: newest first. Replace these with real updates. ---- */
   devlog: [
-    { date: "2026-10-10", project: "Website", title: "New site: classic, 3D, estimator and downloads",
+    { date: "2026-10-14", project: "Echolis", title: "Echolis is out: $5.99, free version soon",
+      body: ["My Jarvis-like voice assistant is available now. A free version with fewer features lands in about 2 weeks — join the Discord so you don't miss it."] },    { date: "2026-10-10", project: "Website", title: "New site: classic, 3D, estimator and downloads",
       body: ["The portfolio now has a classic version and a 3D version, a price estimator, a downloads area and this devlog."] },
     { date: "2026-10-10", project: "AmethystHUD", title: "Status: in development",
       body: ["AmethystHUD is a Fabric client mod with a clean HUD and toggles. It's still being built and has no release date yet."] },
@@ -101,6 +102,16 @@ window.CFG = {
       requires: "Java 17 or newer",
       download: "",
       changelog: []
+    },
+    "echolis": {
+      name: "Echolis", type: "Voice assistant", status: "released",
+      img: "",
+      desc: "A Jarvis-like voice assistant: talk to it, open apps, run commands and automate your PC hands-free. Full version $5.99 via Discord — a free version with fewer features lands in about 2 weeks.",
+      requires: "Windows 10 or newer, microphone",
+      download: "https://discord.gg/vmqwFnN8Vz",
+      changelog: [
+        { label: "v1.0", date: "2026-10-14", notes: ["Voice commands and replies", "App opening and PC commands", "Free version with fewer features coming in ~2 weeks"] }
+      ]
     }
   }
 };
